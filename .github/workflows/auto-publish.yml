@@ -12,4 +12,5 @@ jobs:
       - uses: w3c/spec-prod@v2
         with:
           GH_PAGES_BRANCH: gh-pages
+          SOURCE: source-map.bs
           DESTINATION: index.html
