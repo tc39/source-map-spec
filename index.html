@@ -1,8 +1,8 @@
 <!doctype html><html lang="en">
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <title>Source Map</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Source Map</title>
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
  *
@@ -1488,8 +1488,8 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
-  <link href="https://source-map.github.io/source-map-rfc/" rel="canonical">
-  <meta content="7eb48616a188e92f4f19f9d6649680eb715b7ad7" name="document-revision">
+  <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
+  <meta content="af8c14bf7fa51836fd5237cb9dd48aa502ae9a99" name="document-revision">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2059,37 +2059,28 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Standard, <time class="dt-updated" datetime="2023-04-12">12 April 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-04-12">12 April 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
-     <dd><a class="u-url" href="https://source-map.github.io/source-map-rfc/">https://source-map.github.io/source-map-rfc/</a>
+     <dd><a class="u-url" href="https://source-map.github.io/source-map-spec/">https://source-map.github.io/source-map-spec/</a>
      <dt>Previous Versions:
      <dd><a href="https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit?pli=1#" rel="prev">https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit?pli=1#</a>
-     <dt>Issue Tracking:
-     <dd><a href="https://github.com/source-map/source-map-rfc/issues/">GitHub</a>
-     <dt class="editor">Editor:
+     <dt class="editor">Author:
      <dd class="editor p-author h-card vcard"><span class="p-name fn">Armin Ronacher</span> (<span class="p-org org">Sentry</span>)
-     <dt class="editor">Former Editors:
+     <dt class="editor">Former Authors:
      <dd class="editor p-author h-card vcard"><span class="p-name fn">Victor Porof</span> (<span class="p-org org">Google</span>)
      <dd class="editor p-author h-card vcard"><span class="p-name fn">John Lenz</span> (<span class="p-org org">Google</span>)
      <dd class="editor p-author h-card vcard"><span class="p-name fn">Nick Fitzgerald</span> (<span class="p-org org">Mozilla</span>)
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
-and related or neighboring rights to this work.
-In addition, as of 12 April 2023,
-the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
-which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
-Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>A specification for mapping transpiled source code (primarily JavaScript) back to the original sources.  This specification is a living document and describes a hardened version of the Source Map v3 specification.</p>
   </div>
-  <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
@@ -2122,7 +2113,6 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#language-neutral-stack-mapping-notes"><span class="secno">7</span> <span class="content">Language Neutral Stack Mapping Notes</span></a>
     <li><a href="#multi-level-mapping-notes"><span class="secno">8</span> <span class="content">Multi-level Mapping Notes</span></a>
     <li><a href="#json-over-http-transport"><span class="secno">9</span> <span class="content">JSON over HTTP Transport</span></a>
-    <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
@@ -2131,14 +2121,26 @@ Parts of this work may be from another specification document.  If so, those par
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
-      <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
       <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
      </ol>
    </ol>
   </nav>
   <main>
-   <p class="note" role="note"><span class="marker">Note:</span> <strong>Spec Editorial Modification:</strong> the sections "license" and "discussion"
-were remove from the regular text.</p>
+   <h3 class="heading settled" id="license"><span class="content">License</span></h3>
+   <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
+   <h3 class="heading settled" id="introduction"><span class="content">Introduction</span></h3>
+   <p>This document is a draft version of a hardened version of the Source Map v3
+specification.  It the current form it’s not a defined standard and subject to
+modifications.  If you want to get involved you will find more information under
+the following GitHub repositories:</p>
+   <ul>
+    <li data-md>
+     <p><a href="github.com/source-map/source-map-spec/">Spec Repository</a>: holds the different
+specifications (v1, v2, v3 and the hardened v3 draft you are looking at)</p>
+    <li data-md>
+     <p><a href="github.com/source-map/source-map-rfc/">RFC Repository</a>: meta
+repository for change suggestions to the specification.</p>
+   </ul>
    <h2 class="heading settled" data-level="1" id="background"><span class="secno">1. </span><span class="content">Background</span><a class="self-link" href="#background"></a></h2>
    <p>The original source map format (v1) was created by Joseph Schorr for use by
 Closure Inspector to enable source level debugging of optimized JavaScript code
@@ -2192,33 +2194,33 @@ following structure:</p>
    <p class="note" role="note"><span class="marker">Note:</span> Previous specification suggested an order to the keys in this file, but
 for practical reasons the order cannot be defined in many JSON generators and
 has never been enforced.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code>version</code></dfn> is the version field. <mark>The
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code class="highlight">version</code></dfn> is the version field. <mark>The
 original specification referred to this as "file version field" but it has been
-used in practice to version the source map specification. <code>3</code> refers to this
+used in practice to version the source map specification. <code class="highlight"><c- mf>3</c-></code> refers to this
 specification of the source map.</mark></p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="file"><code>file</code></dfn> an optional name of the generated code
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="file"><code class="highlight">file</code></dfn> an optional name of the generated code
 that this source map is associated with. <mark>It’s not specified if this can
 be a URL, relative path name or just a base name and as such has mostly informal
 character.</mark></p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sourceroot"><code>sourceRoot</code></dfn> an optional source root,
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sourceroot"><code class="highlight">sourceRoot</code></dfn> an optional source root,
 useful for relocating source files on a server or removing repeated values in
 the "sources" entry.  This value is prepended to the individual entries in the
 "source" field.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sources"><code>sources</code></dfn> is a list of original sources
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sources"><code class="highlight">sources</code></dfn> is a list of original sources
 used by the "mappings" entry.  Each entry is either a string that is a
-(potentially relative) URL or <code>null</code> if the source name is not known.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sourcescontent"><code>sourcesContent</code></dfn> an optional list
+(potentially relative) URL or <code class="highlight"><c- kc>null</c-></code> if the source name is not known.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sourcescontent"><code class="highlight">sourcesContent</code></dfn> an optional list
 of source content (that is the <a data-link-type="dfn" href="#original-source" id="ref-for-original-source">Original Source</a>), useful when the "source"
-can’t be hosted.  The contents are listed in the same order as the <a data-link-type="dfn" href="#sources" id="ref-for-sources">sources</a>. <code>null</code> may be used if some original sources should be retrieved by name.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="names"><code>names</code></dfn> a list of symbol names used by the <a data-link-type="dfn" href="#mappings" id="ref-for-mappings">mappings</a> entry.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="mappings"><code>mappings</code></dfn> a string with the encoded mapping data (see <a href="#mappings-structure">§ 4.1 Mappings Structure</a>).</p>
+can’t be hosted.  The contents are listed in the same order as the <a data-link-type="dfn" href="#sources" id="ref-for-sources">sources</a>. <code class="highlight"><c- kc>null</c-></code> may be used if some original sources should be retrieved by name.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="names"><code class="highlight">names</code></dfn> a list of symbol names used by the <a data-link-type="dfn" href="#mappings" id="ref-for-mappings">mappings</a> entry.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="mappings"><code class="highlight">mappings</code></dfn> a string with the encoded mapping data (see <a href="#mappings-structure">§ 4.1 Mappings Structure</a>).</p>
    <h3 class="heading settled" data-level="4.1" id="mappings-structure"><span class="secno">4.1. </span><span class="content">Mappings Structure</span><a class="self-link" href="#mappings-structure"></a></h3>
    <p>The <a data-link-type="dfn" href="#mappings" id="ref-for-mappings①">mappings</a> data is broken down as follows:</p>
    <ul>
     <li data-md>
-     <p>each group representing a line in the generated file is separated by a semicolon (<code>;</code>)</p>
+     <p>each group representing a line in the generated file is separated by a semicolon (<code class="highlight"><c- p>;</c-></code>)</p>
     <li data-md>
-     <p>each segment is separated by a comma (<code>,</code>)</p>
+     <p>each segment is separated by a comma (<code class="highlight"><c- p>,</c-></code>)</p>
     <li data-md>
      <p>each segment is made up of 1, 4, or 5 variable length fields.</p>
    </ul>
@@ -2227,7 +2229,7 @@ can’t be hosted.  The contents are listed in the same order as the <a data-lin
     <li data-md>
      <p>The zero-based starting <a data-link-type="dfn" href="#column" id="ref-for-column">column</a> of the line in the generated code that the segment represents.
 If this is the first field of the first segment, or the first segment following a new generated
-line (<code>;</code>), then this field holds the whole <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq">Base64 VLQ</a>.  Otherwise, this field contains
+line (<code class="highlight"><c- p>;</c-></code>), then this field holds the whole <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq">Base64 VLQ</a>.  Otherwise, this field contains
 a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq①">Base64 VLQ</a> that is relative to the previous occurrence of this field.  _Note that this
 is different than the fields below because the previous value is reset after every generated line._</p>
     <li data-md>
@@ -2259,13 +2261,13 @@ resolved relative to the SourceMap (like resolving script src in a html document
 the the source map will support GZIP compression directly but that they will consume an
 uncompressed map that may be GZIP’d for transport.</p>
    <h3 class="heading settled" data-level="4.5" id="extensions"><span class="secno">4.5. </span><span class="content">Extensions</span><a class="self-link" href="#extensions"></a></h3>
-   <p>Additional fields may be added to the top level source map provided the fields begin with the <code>x_</code> naming convention.  It is expected that the extensions would be classified by the
-organization providing the extension, such as <code>x_google_linecount</code>.    Field names outside
-the <code>x_</code> namespace are reserved for future revisions.  It is recommended that fields be
-namespaced by domain, i.e. <code>x_com_google_gwt_linecount</code>.</p>
+   <p>Additional fields may be added to the top level source map provided the fields begin with the <code class="highlight">x_</code> naming convention.  It is expected that the extensions would be classified by the
+organization providing the extension, such as <code class="highlight">x_google_linecount</code>.    Field names outside
+the <code class="highlight">x_</code> namespace are reserved for future revisions.  It is recommended that fields be
+namespaced by domain, i.e. <code class="highlight">x_com_google_gwt_linecount</code>.</p>
    <h3 class="heading settled" data-level="4.6" id="known-extensions"><span class="secno">4.6. </span><span class="content">Known Extensions</span><a class="self-link" href="#known-extensions"></a></h3>
-   <p><dfn data-dfn-type="dfn" data-export id="x_google_linecount"><code>x_google_linecount</code><a class="self-link" href="#x_google_linecount"></a></dfn> The number of lines represented by this source map.</p>
-   <p><dfn data-dfn-type="dfn" data-export id="x_google_ignorelist"><code>x_google_ignoreList</code><a class="self-link" href="#x_google_ignorelist"></a></dfn> Identifies third-party sources (such as framework
+   <p><dfn data-dfn-type="dfn" data-export id="x_google_linecount"><code class="highlight">x_google_linecount</code><a class="self-link" href="#x_google_linecount"></a></dfn> The number of lines represented by this source map.</p>
+   <p><dfn data-dfn-type="dfn" data-export id="x_google_ignorelist"><code class="highlight">x_google_ignoreList</code><a class="self-link" href="#x_google_ignorelist"></a></dfn> Identifies third-party sources (such as framework
 code or bundler-generated code), allowing developers to avoid code that they don’t want to see
 or step through, without having to configure this beforehand.</p>
    <p>It refers to the <a data-link-type="dfn" href="#sources" id="ref-for-sources②">sources</a> array, and lists the indices of all the known third-party sources
@@ -2297,16 +2299,16 @@ alternate representation of a map is supported:</p>
 </pre>
    <p>The index map follow the form of the standard map.  Like the regular source map
 the file format is JSON with a top-level object.  It shares the <a data-link-type="dfn" href="#version" id="ref-for-version">version</a> and <a data-link-type="dfn" href="#file" id="ref-for-file">file</a> field from the regular source map, but gains a new <a data-link-type="dfn" href="#sections" id="ref-for-sections">sections</a> field.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sections"><code>sections</code></dfn> is an array of JSON objects that itself has two
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sections"><code class="highlight">sections</code></dfn> is an array of JSON objects that itself has two
 fields <a data-link-type="dfn" href="#offset" id="ref-for-offset">offset</a> and a source map reference.</p>
    <h3 class="heading settled" data-level="5.1" id="section"><span class="secno">5.1. </span><span class="content">Section</span><a class="self-link" href="#section"></a></h3>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="offset"><code>offset</code></dfn> is an object with two fields, <code>line</code> and <code>column</code>,
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="offset"><code class="highlight">offset</code></dfn> is an object with two fields, <code class="highlight">line</code> and <code class="highlight">column</code>,
 that represent the offset into generated code that the referenced source map
 represents.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="url"><code>url</code></dfn> is an entry that must be a <a data-link-type="biblio" href="#biblio-url" title="URL Standard">[URL]</a> where a source
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="url"><code class="highlight">url</code></dfn> is an entry that must be a <a data-link-type="biblio" href="#biblio-url" title="URL Standard">[URL]</a> where a source
 map can be found for this section and the <a data-link-type="dfn" href="#url" id="ref-for-url">url</a> is resolved in the same way as
 the <a data-link-type="dfn" href="#sources" id="ref-for-sources③">sources</a> fields in the standard map.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="map"><code>map</code></dfn> is an alternative entry to <a data-link-type="dfn" href="#url" id="ref-for-url①">url</a> that must be an
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="map"><code class="highlight">map</code></dfn> is an alternative entry to <a data-link-type="dfn" href="#url" id="ref-for-url①">url</a> that must be an
 embedded complete source map object.  An embedded map does not inherit any
 values from the containing index map.</p>
    <p>The sections must be sorted by starting position and the represented sections
@@ -2315,26 +2317,26 @@ may not overlap and each section must either use <a data-link-type="dfn" href="#
    <p>The following conventions should be followed when working with source maps or
 when generating them.</p>
    <h3 class="heading settled" data-level="6.1" id="source-map-naming"><span class="secno">6.1. </span><span class="content">Source Map Naming</span><a class="self-link" href="#source-map-naming"></a></h3>
-   <p>Optionally, a source map will have the same name as the generated file but with a <code>.map</code> extension.  For example, for <code>page.js</code> a source map named <code>page.js.map</code> would be generated.</p>
+   <p>Optionally, a source map will have the same name as the generated file but with a <code class="highlight"><c- p>.</c->map</code> extension.  For example, for <code class="highlight">page<c- p>.</c->js</code> a source map named <code class="highlight">page<c- p>.</c->js<c- p>.</c->map</code> would be generated.</p>
    <h3 class="heading settled" data-level="6.2" id="linking-generated-code"><span class="secno">6.2. </span><span class="content">Linking generated code to source maps</span><a class="self-link" href="#linking-generated-code"></a></h3>
    <p>While the source map format is intended to be language and platform agnostic, it is useful
 to have a some conventions for the expected use-case of web server hosted javascript.</p>
    <p>There are two suggested ways to link source maps to the output.  The first requires server
 support to add a HTTP header and the second requires an annotation in the source.</p>
    <p>The HTTP header should supply the source map URL reference as:</p>
-<pre>SourceMap: &lt;url>
+<pre class="highlight">SourceMap<c- o>:</c-> <c- o>&lt;</c->url<c- o>></c->
 </pre>
-   <p class="note" role="note"><span class="marker">Note:</span> previous revisions of this document recommended a header name of <code>X-SourceMap</code>.  This
-is now deprecated; <code>SourceMap</code> is now expected.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> previous revisions of this document recommended a header name of <code class="highlight">X<c- o>-</c->SourceMap</code>.  This
+is now deprecated; <code class="highlight">SourceMap</code> is now expected.</p>
    <p>The generated code should include a line at the end of the source, with the following form:</p>
-<pre>//# sourceMappingURL=&lt;url>
+<pre class="highlight"><c- c1>//# sourceMappingURL=&lt;url></c->
 </pre>
-   <p class="note" role="note"><span class="marker">Note:</span> The prefix for this annotation was initially <code>//@</code> however this conflicts with Internet
-Explorer’s Conditional Compilation and was changed to <code>//#</code>.  It is reasonable for tools to
-also accept <code>//@</code> but <code>//#</code> is preferred.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> The prefix for this annotation was initially <code class="highlight"><c- c1>//@</c-></code> however this conflicts with Internet
+Explorer’s Conditional Compilation and was changed to <code class="highlight"><c- c1>//#</c-></code>.  It is reasonable for tools to
+also accept <code class="highlight"><c- c1>//@</c-></code> but <code class="highlight"><c- c1>//#</c-></code> is preferred.</p>
    <p>This recommendation works well for JavaScript, it is expected that other source files will
-have other conventions.  For instance for CSS <code>/*# sourceMappingURL=&lt;url> */</code> is proposed.</p>
-   <p><code>&lt;url></code> is a URL as defined in <a data-link-type="biblio" href="#biblio-url" title="URL Standard">[URL]</a>; in particular,
+have other conventions.  For instance for CSS <code class="highlight"><c- d>/*# sourceMappingURL=&lt;url> */</c-></code> is proposed.</p>
+   <p><code class="highlight"><c- o>&lt;</c->url<c- o>></c-></code> is a URL as defined in <a data-link-type="biblio" href="#biblio-url" title="URL Standard">[URL]</a>; in particular,
 characters outside the set permitted to appear in URIs must be percent-encoded
 and it maybe a data URI.  Using a data URI along with <a data-link-type="dfn" href="#sourcescontent" id="ref-for-sourcescontent">sourcesContent</a> allow
 for a completely self-contained source-map.</p>
@@ -2343,23 +2345,23 @@ process is used to resolve it, which is as follows:</p>
    <p>When the <a data-link-type="dfn" href="#source-mapping-url" id="ref-for-source-mapping-url①">Source Mapping URL</a> is not absolute, then it is relative to the generated code’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="source-origin">source origin</dfn>. The <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin">source origin</a> is determined by one of the following cases:</p>
    <ul>
     <li data-md>
-     <p>If the generated source is not associated with a script element that has a <code>src</code> attribute and there exists a <code>//# sourceURL</code> comment in the generated code, that
-comment should be used to determine the <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin①">source origin</a>. Note: Previously, this was <code>//@ sourceURL</code>, as with <code>//@ sourceMappingURL</code>, it is reasonable to accept both
-but <code>//#</code> is preferred.</p>
+     <p>If the generated source is not associated with a script element that has a <code class="highlight">src</code> attribute and there exists a <code class="highlight"><c- c1>//# sourceURL</c-></code> comment in the generated code, that
+comment should be used to determine the <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin①">source origin</a>. Note: Previously, this was <code class="highlight"><c- c1>//@ sourceURL</c-></code>, as with <code class="highlight"><c- c1>//@ sourceMappingURL</c-></code>, it is reasonable to accept both
+but <code class="highlight"><c- c1>//#</c-></code> is preferred.</p>
     <li data-md>
      <p>If the generated code is associated with a script element and the script element has
-a <code>src</code> attribute, the <code>src</code> attribute of the script element will be the <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin②">source origin</a>.</p>
+a <code class="highlight">src</code> attribute, the <code class="highlight">src</code> attribute of the script element will be the <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin②">source origin</a>.</p>
     <li data-md>
      <p>If the generated code is associated with a script element and the script element does
-not have a <code>src</code> attribute, then the <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin③">source origin</a> will be the page’s origin.</p>
+not have a <code class="highlight">src</code> attribute, then the <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin③">source origin</a> will be the page’s origin.</p>
     <li data-md>
-     <p>If the generated code is being evaluated as a string with the <code>eval()</code> function or
-via <code>new Function()</code>, then the <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin④">source origin</a> will be the page’s origin.</p>
+     <p>If the generated code is being evaluated as a string with the <code class="highlight">eval<c- p>()</c-></code> function or
+via <code class="highlight"><c- ow>new</c-> Function<c- p>()</c-></code>, then the <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin④">source origin</a> will be the page’s origin.</p>
    </ul>
    <h3 class="heading settled" data-level="6.3" id="linking-evald-code-to-named-generated-code"><span class="secno">6.3. </span><span class="content">Linking eval’d code to named generated code</span><a class="self-link" href="#linking-evald-code-to-named-generated-code"></a></h3>
    <p>There is an existing convention that should be supported for the use of source maps with
 eval’d code, it has the following form:</p>
-<pre>//# sourceURL=foo.js
+<pre class="highlight"><c- c1>//# sourceURL=foo.js</c->
 </pre>
    <p>It is described in <a data-link-type="biblio" href="#biblio-evalsourceurl" title="Give your eval a name with //@ sourceURL">[EvalSourceURL]</a>.</p>
    <h2 class="heading settled" data-level="7" id="language-neutral-stack-mapping-notes"><span class="secno">7. </span><span class="content">Language Neutral Stack Mapping Notes</span><a class="self-link" href="#language-neutral-stack-mapping-notes"></a></h2>
@@ -2379,26 +2381,9 @@ More specifically, what a source map reference looks like in a language that doe
 JavaScript style single line comments.</p>
    <h2 class="heading settled" data-level="9" id="json-over-http-transport"><span class="secno">9. </span><span class="content">JSON over HTTP Transport</span><a class="self-link" href="#json-over-http-transport"></a></h2>
    <p><mark>For historic security reasons, when delivering source maps over HTTP, servers may prepend a
-line starting with the string <code>)]}'</code> to the source map.  If the response starts with this
+line starting with the string <code class="highlight"><c- p>)]}</c->'</code> to the source map.  If the response starts with this
 string clients must ignore the first line.</mark></p>
   </main>
-  <div data-fill-with="conformance">
-   <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
-   <p> Conformance requirements are expressed with a combination of descriptive assertions and RFC 2119 terminology.
-            The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL”
-            in the normative parts of this document
-            are to be interpreted as described in RFC 2119.
-            However, for readability,
-            these words do not appear in all uppercase letters in this specification. </p>
-   <p> All of the text of this specification is normative
-            except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a> </p>
-   <p> Examples in this specification are introduced with the words “for example”
-            or are set apart from the normative text with <code>class="example"</code>, like this: </p>
-   <div class="example" id="example-example"><a class="self-link" href="#example-example"></a> This is an example of an informative example. </div>
-   <p> Informative notes begin with the word “Note”
-            and are set apart from the normative text with <code>class="note"</code>, like this: </p>
-   <p class="note" role="note"> Note, this is an informative note.</p>
-  </div>
 <script>
 (function() {
   "use strict";
@@ -2552,11 +2537,6 @@ string clients must ignore the first line.</mark></p>
    <li><a href="#x_google_linecount">x_google_linecount</a><span>, in § 4.6</span>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
-  <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
-  <dl>
-   <dt id="biblio-rfc2119">[RFC2119]
-   <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
-  </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-base64">[BASE64]
