@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5edf5e459, updated Thu Jun 22 11:28:01 2023 -0700" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="7f46b15b7acc20a055d6683d7e98746321a01404" name="document-revision">
+  <meta content="c3d2c3bf57e16325a1632bcb299c59d52a24a515" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2292,9 +2292,8 @@ alternate representation of a map is supported:</p>
   <c- f>"version"</c-> <c- p>:</c-> <c- mi>3</c-><c- p>,</c->
   <c- f>"file"</c-><c- p>:</c-> <c- u>"app.js"</c-><c- p>,</c->
   <c- f>"sections"</c-><c- p>:</c-> <c- p>[</c->
-    <c- p>{</c-><c- f>"offset"</c-><c- p>:</c-> <c- p>{</c-><c- f>"line"</c-><c- p>:</c-> <c- mi>0</c-><c- p>,</c-> <c- f>"column"</c-><c- p>:</c-> <c- mi>0</c-><c- p>},</c-> <c- f>"url"</c-><c- p>:</c-> <c- u>"url_for_part1.map"</c-><c- p>}</c->
     <c- p>{</c->
-      <c- f>"offset"</c-><c- p>:</c-> <c- p>{</c-><c- f>"line"</c-><c- p>:</c-> <c- mi>100</c-><c- p>,</c-> <c- f>"column"</c-><c- p>:</c-> <c- mi>10</c-><c- p>},</c->
+      <c- f>"offset"</c-><c- p>:</c-> <c- p>{</c-><c- f>"line"</c-><c- p>:</c-> <c- mi>0</c-><c- p>,</c-> <c- f>"column"</c-><c- p>:</c-> <c- mi>0</c-><c- p>},</c->
       <c- f>"map"</c-><c- p>:</c-> <c- p>{</c->
         <c- f>"version"</c-> <c- p>:</c-> <c- mi>3</c-><c- p>,</c->
         <c- f>"file"</c-><c- p>:</c-> <c- u>"section.js"</c-><c- p>,</c->
@@ -2302,26 +2301,32 @@ alternate representation of a map is supported:</p>
         <c- f>"names"</c-><c- p>:</c-> <c- p>[</c-><c- u>"src"</c-><c- p>,</c-> <c- u>"maps"</c-><c- p>,</c-> <c- u>"are"</c-><c- p>,</c-> <c- u>"fun"</c-><c- p>],</c->
         <c- f>"mappings"</c-><c- p>:</c-> <c- u>"AAAA,E;;ABCDE;"</c->
       <c- p>}</c->
+    <c- p>},</c->
+    <c- p>{</c->
+      <c- f>"offset"</c-><c- p>:</c-> <c- p>{</c-><c- f>"line"</c-><c- p>:</c-> <c- mi>100</c-><c- p>,</c-> <c- f>"column"</c-><c- p>:</c-> <c- mi>10</c-><c- p>},</c->
+      <c- f>"map"</c-><c- p>:</c-> <c- p>{</c->
+        <c- f>"version"</c-> <c- p>:</c-> <c- mi>3</c-><c- p>,</c->
+        <c- f>"file"</c-><c- p>:</c-> <c- u>"another_section.js"</c-><c- p>,</c->
+        <c- f>"sources"</c-><c- p>:</c-> <c- p>[</c-><c- u>"more.js"</c-><c- p>],</c->
+        <c- f>"names"</c-><c- p>:</c-> <c- p>[</c-><c- u>"more"</c-><c- p>,</c-> <c- u>"is"</c-><c- p>,</c-> <c- u>"better"</c-><c- p>],</c->
+        <c- f>"mappings"</c-><c- p>:</c-> <c- u>"AAAA,E;AACA,C;ABCDE;"</c->
+      <c- p>}</c->
     <c- p>}</c->
-  <c- p>],</c->
+  <c- p>]</c->
 <c- p>}</c->
 </pre>
-   <p>The index map follow the form of the standard map.  Like the regular source map
+   <p>The index map follows the form of the standard map.  Like the regular source map
 the file format is JSON with a top-level object.  It shares the <a data-link-type="dfn" href="#version" id="ref-for-version">version</a> and <a data-link-type="dfn" href="#file" id="ref-for-file">file</a> field from the regular source map, but gains a new <a data-link-type="dfn" href="#sections" id="ref-for-sections">sections</a> field.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sections"><code class="highlight">sections</code></dfn> is an array of JSON objects that itself has two
-fields <a data-link-type="dfn" href="#offset" id="ref-for-offset">offset</a> and a source map reference.</p>
+fields <a data-link-type="dfn" href="#offset" id="ref-for-offset">offset</a> and <a data-link-type="dfn" href="#map" id="ref-for-map">map</a>.</p>
    <h3 class="heading settled" data-level="5.1" id="section"><span class="secno">5.1. </span><span class="content">Section</span><a class="self-link" href="#section"></a></h3>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="offset"><code class="highlight">offset</code></dfn> is an object with two fields, <code class="highlight">line</code> and <code class="highlight">column</code>,
 that represent the offset into generated code that the referenced source map
 represents.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="url"><code class="highlight">url</code></dfn> is an entry that must be a <a data-link-type="biblio" href="#biblio-url" title="URL Standard">[URL]</a> where a source
-map can be found for this section and the <a data-link-type="dfn" href="#url" id="ref-for-url">url</a> is resolved in the same way as
-the <a data-link-type="dfn" href="#sources" id="ref-for-sources③">sources</a> fields in the standard map.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="map"><code class="highlight">map</code></dfn> is an alternative entry to <a data-link-type="dfn" href="#url" id="ref-for-url①">url</a> that must be an
-embedded complete source map object.  An embedded map does not inherit any
-values from the containing index map.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="map"><code class="highlight">map</code></dfn> is an embedded complete source map object.
+An embedded map does not inherit any values from the containing index map.</p>
    <p>The sections must be sorted by starting position and the represented sections
-may not overlap and each section must either use <a data-link-type="dfn" href="#map" id="ref-for-map">map</a> or <a data-link-type="dfn" href="#url" id="ref-for-url②">url</a> but not mboth.</p>
+may not overlap.</p>
    <h2 class="heading settled" data-level="6" id="conventions"><span class="secno">6. </span><span class="content">Conventions</span><a class="self-link" href="#conventions"></a></h2>
    <p>The following conventions should be followed when working with source maps or
 when generating them.</p>
@@ -2540,7 +2545,6 @@ string clients must ignore the first line.</mark></p>
    <li><a href="#sourceroot">sourceRoot</a><span>, in § 4</span>
    <li><a href="#sources">sources</a><span>, in § 4</span>
    <li><a href="#sourcescontent">sourcesContent</a><span>, in § 4</span>
-   <li><a href="#url">url</a><span>, in § 5.1</span>
    <li><a href="#version">version</a><span>, in § 4</span>
    <li><a href="#x_google_ignorelist">x_google_ignoreList</a><span>, in § 4.6</span>
    <li><a href="#x_google_linecount">x_google_linecount</a><span>, in § 4.6</span>
@@ -2722,14 +2726,13 @@ window.dfnpanelData['column'] = {"dfnID": "column", "url": "#column", "dfnText":
 window.dfnpanelData['version'] = {"dfnID": "version", "url": "#version", "dfnText": "version", "refSections": [{"refs": [{"id": "ref-for-version"}], "title": "5. Index Map"}], "external": false};
 window.dfnpanelData['file'] = {"dfnID": "file", "url": "#file", "dfnText": "file", "refSections": [{"refs": [{"id": "ref-for-file"}], "title": "5. Index Map"}], "external": false};
 window.dfnpanelData['sourceroot'] = {"dfnID": "sourceroot", "url": "#sourceroot", "dfnText": "sourceRoot", "refSections": [{"refs": [{"id": "ref-for-sourceroot"}], "title": "4.2. Resolving Sources"}], "external": false};
-window.dfnpanelData['sources'] = {"dfnID": "sources", "url": "#sources", "dfnText": "sources", "refSections": [{"refs": [{"id": "ref-for-sources"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-sources\u2460"}], "title": "4.1. Mappings Structure"}, {"refs": [{"id": "ref-for-sources\u2461"}], "title": "4.6. Known Extensions"}, {"refs": [{"id": "ref-for-sources\u2462"}], "title": "5.1. Section"}], "external": false};
+window.dfnpanelData['sources'] = {"dfnID": "sources", "url": "#sources", "dfnText": "sources", "refSections": [{"refs": [{"id": "ref-for-sources"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-sources\u2460"}], "title": "4.1. Mappings Structure"}, {"refs": [{"id": "ref-for-sources\u2461"}], "title": "4.6. Known Extensions"}], "external": false};
 window.dfnpanelData['sourcescontent'] = {"dfnID": "sourcescontent", "url": "#sourcescontent", "dfnText": "sourcesContent", "refSections": [{"refs": [{"id": "ref-for-sourcescontent"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
 window.dfnpanelData['names'] = {"dfnID": "names", "url": "#names", "dfnText": "names", "refSections": [{"refs": [{"id": "ref-for-names"}], "title": "4.1. Mappings Structure"}], "external": false};
 window.dfnpanelData['mappings'] = {"dfnID": "mappings", "url": "#mappings", "dfnText": "mappings", "refSections": [{"refs": [{"id": "ref-for-mappings"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-mappings\u2460"}], "title": "4.1. Mappings Structure"}], "external": false};
 window.dfnpanelData['sections'] = {"dfnID": "sections", "url": "#sections", "dfnText": "sections", "refSections": [{"refs": [{"id": "ref-for-sections"}], "title": "5. Index Map"}], "external": false};
 window.dfnpanelData['offset'] = {"dfnID": "offset", "url": "#offset", "dfnText": "offset", "refSections": [{"refs": [{"id": "ref-for-offset"}], "title": "5. Index Map"}], "external": false};
-window.dfnpanelData['url'] = {"dfnID": "url", "url": "#url", "dfnText": "url", "refSections": [{"refs": [{"id": "ref-for-url"}, {"id": "ref-for-url\u2460"}, {"id": "ref-for-url\u2461"}], "title": "5.1. Section"}], "external": false};
-window.dfnpanelData['map'] = {"dfnID": "map", "url": "#map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-map"}], "title": "5.1. Section"}], "external": false};
+window.dfnpanelData['map'] = {"dfnID": "map", "url": "#map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-map"}], "title": "5. Index Map"}], "external": false};
 window.dfnpanelData['source-origin'] = {"dfnID": "source-origin", "url": "#source-origin", "dfnText": "source origin", "refSections": [{"refs": [{"id": "ref-for-source-origin"}, {"id": "ref-for-source-origin\u2460"}, {"id": "ref-for-source-origin\u2461"}, {"id": "ref-for-source-origin\u2462"}, {"id": "ref-for-source-origin\u2463"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
 </script>
 <script>/* Boilerplate: script-dom-helper */
