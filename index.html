@@ -1238,14 +1238,15 @@ Possible extra rowspan handling
 			grid-column: 2;
 			width: auto;
 			margin-right: 1rem;
+			border-bottom: 3px solid transparent;
+			margin-bottom: -3px;
 		}
 		#toc .content:hover,
 		#toc .content:focus {
 			background: rgba(75%, 75%, 75%, .25);
 			background: var(--a-hover-bg);
-			border-bottom: 3px solid #054572;
-			border-bottom: 3px solid var(--toclink-underline);
-			margin-bottom: -3px;
+			border-bottom-color: #054572;
+			border-bottom-color: var(--toclink-underline);
 		}
 		#toc li li li .content {
 			margin-left: 1rem;
@@ -1487,10 +1488,10 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
+  <meta content="Bikeshed version 5edf5e459, updated Thu Jun 22 11:28:01 2023 -0700" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="edc675544426ee4e5535dd2889d8c39914b8da18" name="document-revision">
-<style>/* style-autolinks */
+  <meta content="7f46b15b7acc20a055d6683d7e98746321a01404" name="document-revision">
+<style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
     font-size: inherit;
@@ -1551,8 +1552,16 @@ pre .property::before, pre .property::after {
 [data-link-type=biblio] {
     white-space: pre;
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --selflink-text: black;
+        --selflink-bg: silver;
+        --selflink-hover-text: white;
+    }
+}
 </style>
-<style>/* style-colors */
+<style>/* Boilerplate: style-colors */
 
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
 :root {
@@ -1661,216 +1670,6 @@ pre .property::before, pre .property::after {
 
     --editedrec-bg: darkorange;
 }
-</style>
-<style>/* style-counters */
-body {
-    counter-reset: example figure issue;
-}
-.issue {
-    counter-increment: issue;
-}
-.issue:not(.no-marker)::before {
-    content: "Issue " counter(issue);
-}
-
-.example {
-    counter-increment: example;
-}
-.example:not(.no-marker)::before {
-    content: "Example " counter(example);
-}
-.invalid.example:not(.no-marker)::before,
-.illegal.example:not(.no-marker)::before {
-    content: "Invalid Example" counter(example);
-}
-
-figcaption {
-    counter-increment: figure;
-}
-figcaption:not(.no-marker)::before {
-    content: "Figure " counter(figure) " ";
-}
-</style>
-<style>/* style-dfn-panel */
-:root {
-    --dfnpanel-bg: #ddd;
-    --dfnpanel-text: var(--text);
-}
-.dfn-panel {
-    position: absolute;
-    z-index: 35;
-    width: 20em;
-    min-width: min-content;
-    max-width: 300px;
-    height: auto;
-    max-height: 500px;
-    overflow: auto;
-    padding: 0.5em 0.75em;
-    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-    background: var(--dfnpanel-bg);
-    color: var(--dfnpanel-text);
-    border: outset 0.2em;
-    white-space: normal; /* in case it's moved into a pre */
-}
-.dfn-panel:not(.on) { display: none; }
-.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-.dfn-panel > b { display: block; }
-.dfn-panel a { color: var(--dfnpanel-text); }
-.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-.dfn-panel > b + b { margin-top: 0.25em; }
-.dfn-panel ul { padding: 0; }
-.dfn-panel li { list-style: inside; }
-.dfn-panel.activated {
-    display: inline-block;
-    position: fixed;
-    left: .5em;
-    bottom: 2em;
-    margin: 0 auto;
-    max-width: calc(100vw - 1.5em - .4em - .5em);
-    max-height: 30vh;
-}
-
-.dfn-paneled { cursor: pointer; }
-</style>
-<style>/* style-issues */
-a[href].issue-return {
-    float: right;
-    float: inline-end;
-    color: var(--issueheading-text);
-    font-weight: bold;
-    text-decoration: none;
-}
-</style>
-<style>/* style-md-lists */
-/* This is a weird hack for me not yet following the commonmark spec
-   regarding paragraph and lists. */
-[data-md] > :first-child {
-    margin-top: 0;
-}
-[data-md] > :last-child {
-    margin-bottom: 0;
-}
-</style>
-<style>/* style-selflinks */
-
-:root {
-    --selflink-text: white;
-    --selflink-bg: gray;
-    --selflink-hover-text: black;
-}
-.heading, .issue, .note, .example, li, dt {
-    position: relative;
-}
-a.self-link {
-    position: absolute;
-    top: 0;
-    left: calc(-1 * (3.5rem - 26px));
-    width: calc(3.5rem - 26px);
-    height: 2em;
-    text-align: center;
-    border: none;
-    transition: opacity .2s;
-    opacity: .5;
-}
-a.self-link:hover {
-    opacity: 1;
-}
-.heading > a.self-link {
-    font-size: 83%;
-}
-.example > a.self-link,
-.note > a.self-link,
-.issue > a.self-link {
-    /* These blocks are overflow:auto, so positioning outside
-       doesn't work. */
-    left: auto;
-    right: 0;
-}
-li > a.self-link {
-    left: calc(-1 * (3.5rem - 26px) - 2em);
-}
-dfn > a.self-link {
-    top: auto;
-    left: auto;
-    opacity: 0;
-    width: 1.5em;
-    height: 1.5em;
-    background: var(--selflink-bg);
-    color: var(--selflink-text);
-    font-style: normal;
-    transition: opacity .2s, background-color .2s, color .2s;
-}
-dfn:hover > a.self-link {
-    opacity: 1;
-}
-dfn > a.self-link:hover {
-    color: var(--selflink-hover-text);
-}
-
-a.self-link::before            { content: "¶"; }
-.heading > a.self-link::before { content: "§"; }
-dfn > a.self-link::before      { content: "#"; }
-</style>
-<style>/* style-syntax-highlighting */
-
-code.highlight { padding: .1em; border-radius: .3em; }
-pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
-
-.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
-c-[a] { color: #990055 } /* Keyword.Declaration */
-c-[b] { color: #990055 } /* Keyword.Type */
-c-[c] { color: #708090 } /* Comment */
-c-[d] { color: #708090 } /* Comment.Multiline */
-c-[e] { color: #0077aa } /* Name.Attribute */
-c-[f] { color: #669900 } /* Name.Tag */
-c-[g] { color: #222222 } /* Name.Variable */
-c-[k] { color: #990055 } /* Keyword */
-c-[l] { color: #000000 } /* Literal */
-c-[m] { color: #000000 } /* Literal.Number */
-c-[n] { color: #0077aa } /* Name */
-c-[o] { color: #999999 } /* Operator */
-c-[p] { color: #999999 } /* Punctuation */
-c-[s] { color: #a67f59 } /* Literal.String */
-c-[t] { color: #a67f59 } /* Literal.String.Single */
-c-[u] { color: #a67f59 } /* Literal.String.Double */
-c-[cp] { color: #708090 } /* Comment.Preproc */
-c-[c1] { color: #708090 } /* Comment.Single */
-c-[cs] { color: #708090 } /* Comment.Special */
-c-[kc] { color: #990055 } /* Keyword.Constant */
-c-[kn] { color: #990055 } /* Keyword.Namespace */
-c-[kp] { color: #990055 } /* Keyword.Pseudo */
-c-[kr] { color: #990055 } /* Keyword.Reserved */
-c-[ld] { color: #000000 } /* Literal.Date */
-c-[nc] { color: #0077aa } /* Name.Class */
-c-[no] { color: #0077aa } /* Name.Constant */
-c-[nd] { color: #0077aa } /* Name.Decorator */
-c-[ni] { color: #0077aa } /* Name.Entity */
-c-[ne] { color: #0077aa } /* Name.Exception */
-c-[nf] { color: #0077aa } /* Name.Function */
-c-[nl] { color: #0077aa } /* Name.Label */
-c-[nn] { color: #0077aa } /* Name.Namespace */
-c-[py] { color: #0077aa } /* Name.Property */
-c-[ow] { color: #999999 } /* Operator.Word */
-c-[mb] { color: #000000 } /* Literal.Number.Bin */
-c-[mf] { color: #000000 } /* Literal.Number.Float */
-c-[mh] { color: #000000 } /* Literal.Number.Hex */
-c-[mi] { color: #000000 } /* Literal.Number.Integer */
-c-[mo] { color: #000000 } /* Literal.Number.Oct */
-c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
-c-[sc] { color: #a67f59 } /* Literal.String.Char */
-c-[sd] { color: #a67f59 } /* Literal.String.Doc */
-c-[se] { color: #a67f59 } /* Literal.String.Escape */
-c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
-c-[si] { color: #a67f59 } /* Literal.String.Interpol */
-c-[sx] { color: #a67f59 } /* Literal.String.Other */
-c-[sr] { color: #a67f59 } /* Literal.String.Regex */
-c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
-c-[vc] { color: #0077aa } /* Name.Variable.Class */
-c-[vg] { color: #0077aa } /* Name.Variable.Global */
-c-[vi] { color: #0077aa } /* Name.Variable.Instance */
-c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
-</style>
-<style>/* style-darkmode */
 
 @media (prefers-color-scheme: dark) {
     :root {
@@ -1983,14 +1782,227 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
        which is quite common in practice... */
     img { background: white; }
 }
+</style>
+<style>/* Boilerplate: style-counters */
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
 
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
+
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}
+</style>
+<style>/* Boilerplate: style-dfn-panel */
+:root {
+    --dfnpanel-bg: #ddd;
+    --dfnpanel-text: var(--text);
+}
 @media (prefers-color-scheme: dark) {
     :root {
-        --selflink-text: black;
-        --selflink-bg: silver;
-        --selflink-hover-text: white;
+        --dfnpanel-bg: #222;
+        --dfnpanel-text: var(--text);
     }
 }
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    width: 20em;
+    width: 300px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--dfnpanel-bg);
+    color: var(--dfnpanel-text);
+    border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: var(--dfnpanel-text); }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
+.dfn-panel li a {
+    white-space: pre;
+    display: inline-block;
+    max-width: calc(300px - 1.5em - 1em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
+
+.dfn-paneled[role="button"] { cursor: pointer; }
+</style>
+<style>/* Boilerplate: style-issues */
+a[href].issue-return {
+    float: right;
+    float: inline-end;
+    color: var(--issueheading-text);
+    font-weight: bold;
+    text-decoration: none;
+}
+</style>
+<style>/* Boilerplate: style-md-lists */
+/* This is a weird hack for me not yet following the commonmark spec
+   regarding paragraph and lists. */
+[data-md] > :first-child {
+    margin-top: 0;
+}
+[data-md] > :last-child {
+    margin-bottom: 0;
+}
+</style>
+<style>/* Boilerplate: style-selflinks */
+
+:root {
+    --selflink-text: white;
+    --selflink-bg: gray;
+    --selflink-hover-text: black;
+}
+.heading, .issue, .note, .example, li, dt {
+    position: relative;
+}
+a.self-link {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * (3.5rem - 26px));
+    width: calc(3.5rem - 26px);
+    height: 2em;
+    text-align: center;
+    border: none;
+    transition: opacity .2s;
+    opacity: .5;
+}
+a.self-link:hover {
+    opacity: 1;
+}
+.heading > a.self-link {
+    font-size: 83%;
+}
+.example > a.self-link,
+.note > a.self-link,
+.issue > a.self-link {
+    /* These blocks are overflow:auto, so positioning outside
+       doesn't work. */
+    left: auto;
+    right: 0;
+}
+li > a.self-link {
+    left: calc(-1 * (3.5rem - 26px) - 2em);
+}
+dfn > a.self-link {
+    top: auto;
+    left: auto;
+    opacity: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: var(--selflink-bg);
+    color: var(--selflink-text);
+    font-style: normal;
+    transition: opacity .2s, background-color .2s, color .2s;
+}
+dfn:hover > a.self-link {
+    opacity: 1;
+}
+dfn > a.self-link:hover {
+    color: var(--selflink-hover-text);
+}
+
+a.self-link::before            { content: "¶"; }
+.heading > a.self-link::before { content: "§"; }
+dfn > a.self-link::before      { content: "#"; }
+</style>
+<style>/* Boilerplate: style-syntax-highlighting */
+
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+
+.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
+c-[a] { color: #990055 } /* Keyword.Declaration */
+c-[b] { color: #990055 } /* Keyword.Type */
+c-[c] { color: #708090 } /* Comment */
+c-[d] { color: #708090 } /* Comment.Multiline */
+c-[e] { color: #0077aa } /* Name.Attribute */
+c-[f] { color: #669900 } /* Name.Tag */
+c-[g] { color: #222222 } /* Name.Variable */
+c-[k] { color: #990055 } /* Keyword */
+c-[l] { color: #000000 } /* Literal */
+c-[m] { color: #000000 } /* Literal.Number */
+c-[n] { color: #0077aa } /* Name */
+c-[o] { color: #999999 } /* Operator */
+c-[p] { color: #999999 } /* Punctuation */
+c-[s] { color: #a67f59 } /* Literal.String */
+c-[t] { color: #a67f59 } /* Literal.String.Single */
+c-[u] { color: #a67f59 } /* Literal.String.Double */
+c-[cp] { color: #708090 } /* Comment.Preproc */
+c-[c1] { color: #708090 } /* Comment.Single */
+c-[cs] { color: #708090 } /* Comment.Special */
+c-[kc] { color: #990055 } /* Keyword.Constant */
+c-[kn] { color: #990055 } /* Keyword.Namespace */
+c-[kp] { color: #990055 } /* Keyword.Pseudo */
+c-[kr] { color: #990055 } /* Keyword.Reserved */
+c-[ld] { color: #000000 } /* Literal.Date */
+c-[nc] { color: #0077aa } /* Name.Class */
+c-[no] { color: #0077aa } /* Name.Constant */
+c-[nd] { color: #0077aa } /* Name.Decorator */
+c-[ni] { color: #0077aa } /* Name.Entity */
+c-[ne] { color: #0077aa } /* Name.Exception */
+c-[nf] { color: #0077aa } /* Name.Function */
+c-[nl] { color: #0077aa } /* Name.Label */
+c-[nn] { color: #0077aa } /* Name.Namespace */
+c-[py] { color: #0077aa } /* Name.Property */
+c-[ow] { color: #999999 } /* Operator.Word */
+c-[mb] { color: #000000 } /* Literal.Number.Bin */
+c-[mf] { color: #000000 } /* Literal.Number.Float */
+c-[mh] { color: #000000 } /* Literal.Number.Hex */
+c-[mi] { color: #000000 } /* Literal.Number.Integer */
+c-[mo] { color: #000000 } /* Literal.Number.Oct */
+c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
+c-[sc] { color: #a67f59 } /* Literal.String.Char */
+c-[sd] { color: #a67f59 } /* Literal.String.Doc */
+c-[se] { color: #a67f59 } /* Literal.String.Escape */
+c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
+c-[si] { color: #a67f59 } /* Literal.String.Interpol */
+c-[sx] { color: #a67f59 } /* Literal.String.Other */
+c-[sr] { color: #a67f59 } /* Literal.String.Regex */
+c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
+c-[vc] { color: #0077aa } /* Name.Variable.Class */
+c-[vg] { color: #0077aa } /* Name.Variable.Global */
+c-[vi] { color: #0077aa } /* Name.Variable.Instance */
+c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
+
 
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -2059,7 +2071,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-04-13">13 April 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-07-06">6 July 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2135,10 +2147,10 @@ modifications.  If you want to get involved you will find more information under
 the following GitHub repositories:</p>
    <ul>
     <li data-md>
-     <p><a href="github.com/source-map/source-map-spec/">Spec Repository</a>: holds the different
+     <p><a href="https://github.com/source-map/source-map-spec/">Spec Repository</a>: holds the different
 specifications (v1, v2, v3 and the hardened v3 draft you are looking at)</p>
     <li data-md>
-     <p><a href="github.com/source-map/source-map-rfc/">RFC Repository</a>: meta
+     <p><a href="https://github.com/source-map/source-map-rfc/">RFC Repository</a>: meta
 repository for change suggestions to the specification.</p>
    </ul>
    <h2 class="heading settled" data-level="1" id="background"><span class="secno">1. </span><span class="content">Background</span><a class="self-link" href="#background"></a></h2>
@@ -2194,10 +2206,7 @@ following structure:</p>
    <p class="note" role="note"><span class="marker">Note:</span> Previous specification suggested an order to the keys in this file, but
 for practical reasons the order cannot be defined in many JSON generators and
 has never been enforced.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code class="highlight">version</code></dfn> is the version field. <mark>The
-original specification referred to this as "file version field" but it has been
-used in practice to version the source map specification. <code class="highlight"><c- mf>3</c-></code> refers to this
-specification of the source map.</mark></p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code class="highlight">version</code></dfn> is the version field which is always the number <code class="highlight"><c- mf>3</c-></code> as integer.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="file"><code class="highlight">file</code></dfn> an optional name of the generated code
 that this source map is associated with. <mark>It’s not specified if this can
 be a URL, relative path name or just a base name and as such has mostly informal
@@ -2550,127 +2559,68 @@ string clients must ignore the first line.</mark></p>
    <dt id="biblio-vlq">[VLQ]
    <dd><a href="https://en.wikipedia.org/wiki/Variable-length_quantity"><cite>Variable-length quantity</cite></a>. reference article. URL: <a href="https://en.wikipedia.org/wiki/Variable-length_quantity">https://en.wikipedia.org/wiki/Variable-length_quantity</a>
   </dl>
-  <aside aria-labelledby="infopaneltitle-for-generated-code" class="dfn-panel" data-for="generated-code" id="infopanel-for-generated-code">
-   <span id="infopaneltitle-for-generated-code" style="display:none">Info about the 'Generated Code' definition.</span><b><a href="#generated-code">#generated-code</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-generated-code">2. Terminology</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-original-source" class="dfn-panel" data-for="original-source" id="infopanel-for-original-source">
-   <span id="infopaneltitle-for-original-source" style="display:none">Info about the 'Original Source' definition.</span><b><a href="#original-source">#original-source</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-original-source">4. Source Map Format</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-base64-vlq" class="dfn-panel" data-for="base64-vlq" id="infopanel-for-base64-vlq">
-   <span id="infopaneltitle-for-base64-vlq" style="display:none">Info about the 'Base64 VLQ' definition.</span><b><a href="#base64-vlq">#base64-vlq</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-base64-vlq">4.1. Mappings Structure</a> <a href="#ref-for-base64-vlq①">(2)</a> <a href="#ref-for-base64-vlq②">(3)</a> <a href="#ref-for-base64-vlq③">(4)</a> <a href="#ref-for-base64-vlq④">(5)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-source-mapping-url" class="dfn-panel" data-for="source-mapping-url" id="infopanel-for-source-mapping-url">
-   <span id="infopaneltitle-for-source-mapping-url" style="display:none">Info about the 'Source Mapping URL' definition.</span><b><a href="#source-mapping-url">#source-mapping-url</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-source-mapping-url">6.2. Linking generated code to source maps</a> <a href="#ref-for-source-mapping-url①">(2)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-column" class="dfn-panel" data-for="column" id="infopanel-for-column">
-   <span id="infopaneltitle-for-column" style="display:none">Info about the 'Column' definition.</span><b><a href="#column">#column</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-column">4.1. Mappings Structure</a> <a href="#ref-for-column①">(2)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-version" class="dfn-panel" data-for="version" id="infopanel-for-version">
-   <span id="infopaneltitle-for-version" style="display:none">Info about the 'version' definition.</span><b><a href="#version">#version</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-version">5. Index Map</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-file" class="dfn-panel" data-for="file" id="infopanel-for-file">
-   <span id="infopaneltitle-for-file" style="display:none">Info about the 'file' definition.</span><b><a href="#file">#file</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-file">5. Index Map</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-sourceroot" class="dfn-panel" data-for="sourceroot" id="infopanel-for-sourceroot">
-   <span id="infopaneltitle-for-sourceroot" style="display:none">Info about the 'sourceRoot' definition.</span><b><a href="#sourceroot">#sourceroot</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-sourceroot">4.2. Resolving Sources</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-sources" class="dfn-panel" data-for="sources" id="infopanel-for-sources">
-   <span id="infopaneltitle-for-sources" style="display:none">Info about the 'sources' definition.</span><b><a href="#sources">#sources</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-sources">4. Source Map Format</a>
-    <li><a href="#ref-for-sources①">4.1. Mappings Structure</a>
-    <li><a href="#ref-for-sources②">4.6. Known Extensions</a>
-    <li><a href="#ref-for-sources③">5.1. Section</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-sourcescontent" class="dfn-panel" data-for="sourcescontent" id="infopanel-for-sourcescontent">
-   <span id="infopaneltitle-for-sourcescontent" style="display:none">Info about the 'sourcesContent' definition.</span><b><a href="#sourcescontent">#sourcescontent</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-sourcescontent">6.2. Linking generated code to source maps</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-names" class="dfn-panel" data-for="names" id="infopanel-for-names">
-   <span id="infopaneltitle-for-names" style="display:none">Info about the 'names' definition.</span><b><a href="#names">#names</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-names">4.1. Mappings Structure</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-mappings" class="dfn-panel" data-for="mappings" id="infopanel-for-mappings">
-   <span id="infopaneltitle-for-mappings" style="display:none">Info about the 'mappings' definition.</span><b><a href="#mappings">#mappings</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mappings">4. Source Map Format</a>
-    <li><a href="#ref-for-mappings①">4.1. Mappings Structure</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-sections" class="dfn-panel" data-for="sections" id="infopanel-for-sections">
-   <span id="infopaneltitle-for-sections" style="display:none">Info about the 'sections' definition.</span><b><a href="#sections">#sections</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-sections">5. Index Map</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-offset" class="dfn-panel" data-for="offset" id="infopanel-for-offset">
-   <span id="infopaneltitle-for-offset" style="display:none">Info about the 'offset' definition.</span><b><a href="#offset">#offset</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-offset">5. Index Map</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-url" class="dfn-panel" data-for="url" id="infopanel-for-url">
-   <span id="infopaneltitle-for-url" style="display:none">Info about the 'url' definition.</span><b><a href="#url">#url</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-url">5.1. Section</a> <a href="#ref-for-url①">(2)</a> <a href="#ref-for-url②">(3)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-map" class="dfn-panel" data-for="map" id="infopanel-for-map">
-   <span id="infopaneltitle-for-map" style="display:none">Info about the 'map' definition.</span><b><a href="#map">#map</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-map">5.1. Section</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-source-origin" class="dfn-panel" data-for="source-origin" id="infopanel-for-source-origin">
-   <span id="infopaneltitle-for-source-origin" style="display:none">Info about the 'source origin' definition.</span><b><a href="#source-origin">#source-origin</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-source-origin">6.2. Linking generated code to source maps</a> <a href="#ref-for-source-origin①">(2)</a> <a href="#ref-for-source-origin②">(3)</a> <a href="#ref-for-source-origin③">(4)</a> <a href="#ref-for-source-origin④">(5)</a>
-   </ul>
-  </aside>
-<script>/* script-dfn-panel */
+<script>/* Boilerplate: script-dfn-panel */
 "use strict";
 {
-    function queryAll(sel) {
-        return [].slice.call(document.querySelectorAll(sel));
+    const dfnsJson = window.dfnsJson || {};
+
+    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
+        return mk.aside({
+            class: "dfn-panel",
+            id: `infopanel-for-${dfnID}`,
+            "data-for": dfnID,
+            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+            },
+            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+                `Info about the '${dfnText}' ${external?"external":""} reference.`),
+            mk.a({href:url}, url),
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({
+                                    href: `#${ref.id}`
+                                    },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        );
     }
 
-    // Add popup behavior to all dfns to show the corresponding dfn-panel.
-    var dfns = document.querySelectorAll('.dfn-paneled');
-    for (let dfn of dfns) { insertDfnPopupAction(dfn); }
+    function genAllDfnPanels() {
+        for(const panelData of Object.values(window.dfnpanelData)) {
+            const dfnID = panelData.dfnID;
+            const dfn = document.getElementById(dfnID);
+            if(!dfn) {
+                console.log(`Can't find dfn#${dfnID}.`, panelData);
+            } else {
+                const panel = genDfnPanel(panelData);
+                append(document.body, panel);
+                insertDfnPopupAction(dfn, panel)
+            }
+        }
+    }
 
-    document.body.addEventListener("click", (e) => {
-        // If not handled already, just hide all dfn panels.
-        hideAllDfnPanels();
-    });
+    document.addEventListener("DOMContentLoaded", ()=>{
+        genAllDfnPanels();
+
+        // Add popup behavior to all dfns to show the corresponding dfn-panel.
+        var dfns = queryAll('.dfn-paneled');
+        for(let dfn of dfns) { ; }
+
+        document.body.addEventListener("click", (e) => {
+            // If not handled already, just hide all dfn panels.
+            hideAllDfnPanels();
+        });
+    })
+
 
     function hideAllDfnPanels() {
         // Turn off any currently "on" or "activated" panels.
@@ -2720,49 +2670,261 @@ string clients must ignore the first line.</mark></p>
         }
     }
 
-    function insertDfnPopupAction(dfn) {
+    function insertDfnPopupAction(dfn, dfnPanel) {
         // Find dfn panel
-        const dfnPanel = document.querySelector(`.dfn-panel[data-for='${dfn.id}']`);
-        if (dfnPanel) {
-            const panelWrapper = document.createElement('span');
-            panelWrapper.appendChild(dfnPanel);
-            panelWrapper.style.position = "relative";
-            panelWrapper.style.height = "0px";
-            dfn.insertAdjacentElement("afterend", panelWrapper);
-            dfn.setAttribute('role', 'button');
-            dfn.setAttribute('aria-expanded', 'false')
-            dfn.tabIndex = 0;
-            dfn.classList.add('has-dfn-panel');
-            dfn.addEventListener('click', (event) => {
-                showDfnPanel(dfnPanel, dfn);
+        const panelWrapper = document.createElement('span');
+        panelWrapper.appendChild(dfnPanel);
+        panelWrapper.style.position = "relative";
+        panelWrapper.style.height = "0px";
+        dfn.insertAdjacentElement("afterend", panelWrapper);
+        dfn.setAttribute('role', 'button');
+        dfn.setAttribute('aria-expanded', 'false')
+        dfn.tabIndex = 0;
+        dfn.classList.add('has-dfn-panel');
+        dfn.addEventListener('click', (event) => {
+            showDfnPanel(dfnPanel, dfn);
+            event.stopPropagation();
+        });
+        dfn.addEventListener('keypress', (event) => {
+            const kc = event.keyCode;
+            // 32->Space, 13->Enter
+            if(kc == 32 || kc == 13) {
+                toggleDfnPanel(dfnPanel, dfn);
                 event.stopPropagation();
-            });
-            dfn.addEventListener('keypress', (event) => {
-                const kc = event.keyCode;
-                // 32->Space, 13->Enter
-                if(kc == 32 || kc == 13) {
-                    toggleDfnPanel(dfnPanel, dfn);
-                    event.stopPropagation();
-                    event.preventDefault();
-                }
-            });
+                event.preventDefault();
+            }
+        });
 
-            dfnPanel.addEventListener('click', (event) => {
+        dfnPanel.addEventListener('click', (event) => {
+            if (event.target.nodeName == 'A') {
                 pinDfnPanel(dfnPanel);
+            }
+            event.stopPropagation();
+        });
+
+        dfnPanel.addEventListener('keydown', (event) => {
+            if(event.keyCode == 27) { // Escape key
+                hideDfnPanel(dfnPanel, dfn);
                 event.stopPropagation();
-            });
-
-            dfnPanel.addEventListener('keydown', (event) => {
-                if(event.keyCode == 27) { // Escape key
-                    hideDfnPanel(dfnPanel, dfn);
-                    event.stopPropagation();
-                    event.preventDefault();
-                }
-            })
-
-        } else {
-            console.log("Couldn't find .dfn-panel[data-for='" + dfn.id + "']");
-        }
+                event.preventDefault();
+            }
+        })
     }
+}
+</script>
+<script>/* Boilerplate: script-dfn-panel-json */
+window.dfnpanelData = {};
+window.dfnpanelData['generated-code'] = {"dfnID": "generated-code", "url": "#generated-code", "dfnText": "Generated Code", "refSections": [{"refs": [{"id": "ref-for-generated-code"}], "title": "2. Terminology"}], "external": false};
+window.dfnpanelData['original-source'] = {"dfnID": "original-source", "url": "#original-source", "dfnText": "Original Source", "refSections": [{"refs": [{"id": "ref-for-original-source"}], "title": "4. Source Map Format"}], "external": false};
+window.dfnpanelData['base64-vlq'] = {"dfnID": "base64-vlq", "url": "#base64-vlq", "dfnText": "Base64 VLQ", "refSections": [{"refs": [{"id": "ref-for-base64-vlq"}, {"id": "ref-for-base64-vlq\u2460"}, {"id": "ref-for-base64-vlq\u2461"}, {"id": "ref-for-base64-vlq\u2462"}, {"id": "ref-for-base64-vlq\u2463"}], "title": "4.1. Mappings Structure"}], "external": false};
+window.dfnpanelData['source-mapping-url'] = {"dfnID": "source-mapping-url", "url": "#source-mapping-url", "dfnText": "Source Mapping URL", "refSections": [{"refs": [{"id": "ref-for-source-mapping-url"}, {"id": "ref-for-source-mapping-url\u2460"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
+window.dfnpanelData['column'] = {"dfnID": "column", "url": "#column", "dfnText": "Column", "refSections": [{"refs": [{"id": "ref-for-column"}, {"id": "ref-for-column\u2460"}], "title": "4.1. Mappings Structure"}], "external": false};
+window.dfnpanelData['version'] = {"dfnID": "version", "url": "#version", "dfnText": "version", "refSections": [{"refs": [{"id": "ref-for-version"}], "title": "5. Index Map"}], "external": false};
+window.dfnpanelData['file'] = {"dfnID": "file", "url": "#file", "dfnText": "file", "refSections": [{"refs": [{"id": "ref-for-file"}], "title": "5. Index Map"}], "external": false};
+window.dfnpanelData['sourceroot'] = {"dfnID": "sourceroot", "url": "#sourceroot", "dfnText": "sourceRoot", "refSections": [{"refs": [{"id": "ref-for-sourceroot"}], "title": "4.2. Resolving Sources"}], "external": false};
+window.dfnpanelData['sources'] = {"dfnID": "sources", "url": "#sources", "dfnText": "sources", "refSections": [{"refs": [{"id": "ref-for-sources"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-sources\u2460"}], "title": "4.1. Mappings Structure"}, {"refs": [{"id": "ref-for-sources\u2461"}], "title": "4.6. Known Extensions"}, {"refs": [{"id": "ref-for-sources\u2462"}], "title": "5.1. Section"}], "external": false};
+window.dfnpanelData['sourcescontent'] = {"dfnID": "sourcescontent", "url": "#sourcescontent", "dfnText": "sourcesContent", "refSections": [{"refs": [{"id": "ref-for-sourcescontent"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
+window.dfnpanelData['names'] = {"dfnID": "names", "url": "#names", "dfnText": "names", "refSections": [{"refs": [{"id": "ref-for-names"}], "title": "4.1. Mappings Structure"}], "external": false};
+window.dfnpanelData['mappings'] = {"dfnID": "mappings", "url": "#mappings", "dfnText": "mappings", "refSections": [{"refs": [{"id": "ref-for-mappings"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-mappings\u2460"}], "title": "4.1. Mappings Structure"}], "external": false};
+window.dfnpanelData['sections'] = {"dfnID": "sections", "url": "#sections", "dfnText": "sections", "refSections": [{"refs": [{"id": "ref-for-sections"}], "title": "5. Index Map"}], "external": false};
+window.dfnpanelData['offset'] = {"dfnID": "offset", "url": "#offset", "dfnText": "offset", "refSections": [{"refs": [{"id": "ref-for-offset"}], "title": "5. Index Map"}], "external": false};
+window.dfnpanelData['url'] = {"dfnID": "url", "url": "#url", "dfnText": "url", "refSections": [{"refs": [{"id": "ref-for-url"}, {"id": "ref-for-url\u2460"}, {"id": "ref-for-url\u2461"}], "title": "5.1. Section"}], "external": false};
+window.dfnpanelData['map'] = {"dfnID": "map", "url": "#map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-map"}], "title": "5.1. Section"}], "external": false};
+window.dfnpanelData['source-origin'] = {"dfnID": "source-origin", "url": "#source-origin", "dfnText": "source origin", "refSections": [{"refs": [{"id": "ref-for-source-origin"}, {"id": "ref-for-source-origin\u2460"}, {"id": "ref-for-source-origin\u2461"}, {"id": "ref-for-source-origin\u2462"}, {"id": "ref-for-source-origin\u2463"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
+</script>
+<script>/* Boilerplate: script-dom-helper */
+function query(sel) { return document.querySelector(sel); }
+
+function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
+
+function iter(obj) {
+	if(!obj) return [];
+	var it = obj[Symbol.iterator];
+	if(it) return it;
+	return Object.entries(obj);
+}
+
+function mk(tagname, attrs, ...children) {
+	const el = document.createElement(tagname);
+	for(const [k,v] of iter(attrs)) {
+		if(k.slice(0,3) == "_on") {
+			const eventName = k.slice(3);
+			el.addEventListener(eventName, v);
+		} else if(k[0] == "_") {
+			// property, not attribute
+			el[k.slice(1)] = v;
+		} else {
+			if(v === false || v == null) {
+        continue;
+      } else if(v === true) {
+        el.setAttribute(k, "");
+        continue;
+      } else {
+  			el.setAttribute(k, v);
+      }
+		}
+	}
+	append(el, children);
+	return el;
+}
+
+/* Create shortcuts for every known HTML element */
+[
+  "a",
+  "abbr",
+  "acronym",
+  "address",
+  "applet",
+  "area",
+  "article",
+  "aside",
+  "audio",
+  "b",
+  "base",
+  "basefont",
+  "bdo",
+  "big",
+  "blockquote",
+  "body",
+  "br",
+  "button",
+  "canvas",
+  "caption",
+  "center",
+  "cite",
+  "code",
+  "col",
+  "colgroup",
+  "datalist",
+  "dd",
+  "del",
+  "details",
+  "dfn",
+  "dialog",
+  "div",
+  "dl",
+  "dt",
+  "em",
+  "embed",
+  "fieldset",
+  "figcaption",
+  "figure",
+  "font",
+  "footer",
+  "form",
+  "frame",
+  "frameset",
+  "head",
+  "header",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "hr",
+  "html",
+  "i",
+  "iframe",
+  "img",
+  "input",
+  "ins",
+  "kbd",
+  "label",
+  "legend",
+  "li",
+  "link",
+  "main",
+  "map",
+  "mark",
+  "meta",
+  "meter",
+  "nav",
+  "nobr",
+  "noscript",
+  "object",
+  "ol",
+  "optgroup",
+  "option",
+  "output",
+  "p",
+  "param",
+  "pre",
+  "progress",
+  "q",
+  "s",
+  "samp",
+  "script",
+  "section",
+  "select",
+  "small",
+  "source",
+  "span",
+  "strike",
+  "strong",
+  "style",
+  "sub",
+  "summary",
+  "sup",
+  "table",
+  "tbody",
+  "td",
+  "template",
+  "textarea",
+  "tfoot",
+  "th",
+  "thead",
+  "time",
+  "title",
+  "tr",
+  "u",
+  "ul",
+  "var",
+  "video",
+  "wbr",
+  "xmp",
+].forEach(tagname=>{
+	mk[tagname] = (...args) => mk(tagname, ...args);
+});
+
+function* nodesFromChildList(children) {
+	for(const child of children.flat(Infinity)) {
+		if(child instanceof Node) {
+			yield child;
+		} else {
+			yield new Text(child);
+		}
+	}
+}
+function append(el, ...children) {
+	for(const child of nodesFromChildList(children)) {
+		if(el instanceof Node) el.appendChild(child);
+		else el.push(child);
+	}
+	return el;
+}
+
+function insertAfter(el, ...children) {
+	for(const child of nodesFromChildList(children)) {
+		el.parentNode.insertBefore(child, el.nextSibling);
+	}
+	return el;
+}
+
+function clearContents(el) {
+	el.innerHTML = "";
+	return el;
+}
+
+function parseHTML(markup) {
+	if(markup.toLowerCase().trim().indexOf('<!doctype') === 0) {
+		const doc = document.implementation.createHTMLDocument("");
+		doc.documentElement.innerHTML = markup;
+		return doc;
+	} else {
+		const el = mk.template({});
+		el.innerHTML = markup;
+		return el.content;
+	}
 }
 </script>
