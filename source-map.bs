@@ -421,7 +421,7 @@ HTTP thus should check if the response starts with this string and then ignore t
 first line.
 
 ```
-)]}garbage here
+)]}'garbage here
 {"version": 3, ...}
 ```
 
