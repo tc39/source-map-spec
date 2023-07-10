@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5edf5e459, updated Thu Jun 22 11:28:01 2023 -0700" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="c3d2c3bf57e16325a1632bcb299c59d52a24a515" name="document-revision">
+  <meta content="62dff390ae529dff97cfa453fbf0f0aed064f300" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2071,7 +2071,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-07-06">6 July 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-07-10">10 July 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2394,9 +2394,16 @@ the choice of using the that as well.</p>
 More specifically, what a source map reference looks like in a language that doesn’t support
 JavaScript style single line comments.</p>
    <h2 class="heading settled" data-level="9" id="json-over-http-transport"><span class="secno">9. </span><span class="content">JSON over HTTP Transport</span><a class="self-link" href="#json-over-http-transport"></a></h2>
-   <p><mark>For historic security reasons, when delivering source maps over HTTP, servers may prepend a
-line starting with the string <code class="highlight"><c- p>)]}</c->'</code> to the source map.  If the response starts with this
-string clients must ignore the first line.</mark></p>
+   <p>For historic reasons, when delivering source maps over HTTP, servers may prepend a line
+starting with the string <code class="highlight"><c- p>)]}</c->'</code> to the source map.  A client fetching a source map via
+HTTP thus should check if the response starts with this string and then ignore the
+first line.</p>
+<pre class="highlight"><c- p>)]}</c->'garbage here
+<c- p>{</c-><c- u>"version"</c-><c- o>:</c-> <c- mf>3</c-><c- p>,</c-> <c- p>...}</c->
+</pre>
+   <p>Is to be interpreted as</p>
+<pre class="highlight"><c- p>{</c-><c- u>"version"</c-><c- o>:</c-> <c- mf>3</c-><c- p>,</c-> <c- p>...}</c->
+</pre>
   </main>
 <script>
 (function() {
