@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5edf5e459, updated Thu Jun 22 11:28:01 2023 -0700" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="62dff390ae529dff97cfa453fbf0f0aed064f300" name="document-revision">
+  <meta content="f23f6b9e599538adce04db415c915fb2f18a23ad" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2071,7 +2071,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-07-10">10 July 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-07-11">11 July 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2354,6 +2354,8 @@ have other conventions.  For instance for CSS <code class="highlight"><c- d>/*# 
 characters outside the set permitted to appear in URIs must be percent-encoded
 and it maybe a data URI.  Using a data URI along with <a data-link-type="dfn" href="#sourcescontent" id="ref-for-sourcescontent">sourcesContent</a> allow
 for a completely self-contained source-map.</p>
+   <ins>The HTTP <code class="highlight">SourceMap</code> header has precedence over source annotation, and if both are present,
+header URL should be used to resolve the source map file.</ins>
    <p>Regardless of the method used to retrieve the <a data-link-type="dfn" href="#source-mapping-url" id="ref-for-source-mapping-url">Source Mapping URL</a> the same
 process is used to resolve it, which is as follows:</p>
    <p>When the <a data-link-type="dfn" href="#source-mapping-url" id="ref-for-source-mapping-url①">Source Mapping URL</a> is not absolute, then it is relative to the generated code’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="source-origin">source origin</dfn>. The <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin">source origin</a> is determined by one of the following cases:</p>
