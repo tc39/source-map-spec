@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5edf5e459, updated Thu Jun 22 11:28:01 2023 -0700" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="f23f6b9e599538adce04db415c915fb2f18a23ad" name="document-revision">
+  <meta content="2a3bd8cf1918ec2ef7240eef717b51293fbfc720" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2142,7 +2142,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
    <h3 class="heading settled" id="introduction"><span class="content">Introduction</span></h3>
    <p>This document is a draft version of a hardened version of the Source Map v3
-specification.  It the current form it’s not a defined standard and subject to
+specification.  In its current form, it’s not a defined standard and is subject to
 modifications.  If you want to get involved you will find more information under
 the following GitHub repositories:</p>
    <ul>
@@ -2155,11 +2155,11 @@ repository for change suggestions to the specification.</p>
    </ul>
    <h2 class="heading settled" data-level="1" id="background"><span class="secno">1. </span><span class="content">Background</span><a class="self-link" href="#background"></a></h2>
    <p>The original source map format (v1) was created by Joseph Schorr for use by
-Closure Inspector to enable source level debugging of optimized JavaScript code
+Closure Inspector to enable source-level debugging of optimized JavaScript code
 (although the format itself is language agnostic).  However, as the size of the
 projects using the source maps expanded the verbosity of the format started to
-be become a problem.  The v2 (<a data-link-type="biblio" href="#biblio-v2format" title="Source Map Revision 2 Proposal">[V2Format]</a>) was created trading some simplicity
-and flexibility to reduce to overall size of the source map. Even with the
+become a problem.  The v2 (<a data-link-type="biblio" href="#biblio-v2format" title="Source Map Revision 2 Proposal">[V2Format]</a>) was created by trading some simplicity
+and flexibility to reduce the overall size of the source map. Even with the
 changes made with the v2 version of the format, the source map file size was
 limiting its usefulness.  The v3 format is based on suggestions made by
 Pavel Podivilov (Google).</p>
@@ -2175,7 +2175,7 @@ bit (the 6th bit) is used as the continuation bit, and the "digits" are encoded
 into the string least significant first, and where the least significant bit of
 the first digit is used as the sign bit.</p>
    <p class="note" role="note"><span class="marker">Note:</span> The values that can be represented by the VLQ Base64 encoded are limited to
-32 bit quantities until some use case for larger values is presented.</p>
+32-bit quantities until some use case for larger values is presented.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="source-mapping-url">Source Mapping URL</dfn> refers to the URL referencing
 the location of a source map from the <a data-link-type="dfn" href="#generated-code" id="ref-for-generated-code">Generated code</a>.</p>
    <ins><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="column">Column</dfn> is the 0 (zero) indexed offsets within a line of the
@@ -2186,9 +2186,9 @@ generated code measured in UTF-16 offsets.</ins>
     <li data-md>
      <p>Reduce the overall size to improve parse time, memory consumption, and download time.</p>
     <li data-md>
-     <p>Support source level debugging allowing bidirectional mapping</p>
+     <p>Support source-level debugging allowing bidirectional mapping</p>
     <li data-md>
-     <p>Support server side stack trace deobfuscation</p>
+     <p>Support server-side stack trace deobfuscation</p>
    </ul>
    <h2 class="heading settled" data-level="4" id="source-map-format"><span class="secno">4. </span><span class="content">Source Map Format</span><a class="self-link" href="#source-map-format"></a></h2>
    <p>The source map is a JSON document containing a top-level JSON object with the
@@ -2203,13 +2203,13 @@ following structure:</p>
   <c- f>"mappings"</c-><c- p>:</c-> <c- u>"A,AAAB;;ABCDE;"</c->
 <c- p>}</c->
 </pre>
-   <p class="note" role="note"><span class="marker">Note:</span> Previous specification suggested an order to the keys in this file, but
-for practical reasons the order cannot be defined in many JSON generators and
+   <p class="note" role="note"><span class="marker">Note:</span> The previous specification suggested an order to the keys in this file, but
+for practical reasons, the order cannot be defined in many JSON generators and
 has never been enforced.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code class="highlight">version</code></dfn> is the version field which is always the number <code class="highlight"><c- mf>3</c-></code> as integer.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code class="highlight">version</code></dfn> is the version field which is always the number <code class="highlight"><c- mf>3</c-></code> as an integer.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="file"><code class="highlight">file</code></dfn> an optional name of the generated code
 that this source map is associated with. <mark>It’s not specified if this can
-be a URL, relative path name or just a base name and as such has mostly informal
+be a URL, relative path name, or just a base name. As such has a mostly informal
 character.</mark></p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sourceroot"><code class="highlight">sourceRoot</code></dfn> an optional source root,
 useful for relocating source files on a server or removing repeated values in
@@ -2242,35 +2242,35 @@ line (<code class="highlight"><c- p>;</c-></code>), then this field holds the wh
 a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq①">Base64 VLQ</a> that is relative to the previous occurrence of this field.  _Note that this
 is different than the fields below because the previous value is reset after every generated line._</p>
     <li data-md>
-     <p>If present, an zero-based index into the <a data-link-type="dfn" href="#sources" id="ref-for-sources①">sources</a> list. This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq②">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first occurrence of this
+     <p>If present, a zero-based index into the <a data-link-type="dfn" href="#sources" id="ref-for-sources①">sources</a> list. This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq②">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first occurrence of this
 field, in which case the whole value is represented.</p>
     <li data-md>
-     <p>If present, the zero-based starting line in the original source represented.  This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq③">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first
+     <p>If present, the zero-based starting line in the original source is represented.  This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq③">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first
 occurrence of this field, in which case the whole value is represented.  Always present if there
 is a source field.</p>
     <li data-md>
      <p>If present, the zero-based starting <a data-link-type="dfn" href="#column" id="ref-for-column①">column</a> of the line in the source represented.  This
-field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq④">Base64 VLQ</a> relative to the previous occurrence of this field, unless this
+field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq④">Base64 VLQ</a> relative to the previous occurrence of this field unless this
 is the first occurrence of this field, in which case the whole value is represented.  Always
 present if there is a source field.</p>
     <li data-md>
      <p>If present, the zero-based index into the <a data-link-type="dfn" href="#names" id="ref-for-names">names</a> list associated with this segment.  This
-field is a base 64 VLQ relative to the previous occurrence of this field, unless this is the
-first occurrence of this field, in which case the whole value is represented.</p>
+field is a base 64 VLQ relative to the previous occurrence of this field unless this
+is the first occurrence of this field, in which case the whole value is represented.</p>
    </ol>
-   <p class="note" role="note"><span class="marker">Note:</span> This encoding reduces the source map size 50% relative to the V2 format in tests performed using
-Google Calendar.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> This encoding reduces the source map size by 50% relative to the V2 format in tests performed
+using Google Calendar.</p>
    <h3 class="heading settled" data-level="4.2" id="resolving-sources"><span class="secno">4.2. </span><span class="content">Resolving Sources</span><a class="self-link" href="#resolving-sources"></a></h3>
-   <p>If the sources are not absolute URLs after prepending of the <a data-link-type="dfn" href="#sourceroot" id="ref-for-sourceroot">sourceRoot</a>, the sources are
-resolved relative to the SourceMap (like resolving script src in a html document).</p>
+   <p>If the sources are not absolute URLs after prepending the <a data-link-type="dfn" href="#sourceroot" id="ref-for-sourceroot">sourceRoot</a>, the sources are
+resolved relative to the SourceMap (like resolving the script <code class="highlight">src</code> attribute in an HTML document).</p>
    <h3 class="heading settled" data-level="4.3" id="encoding"><span class="secno">4.3. </span><span class="content">Encoding</span><a class="self-link" href="#encoding"></a></h3>
    <p>For simplicity, the character set encoding is always UTF-8.</p>
    <h3 class="heading settled" data-level="4.4" id="compression"><span class="secno">4.4. </span><span class="content">Compression</span><a class="self-link" href="#compression"></a></h3>
    <p>The file is allowed to be GZIP compressed.   It is not expected that in-browser consumers of
-the the source map will support GZIP compression directly but that they will consume an
+the source map will support GZIP compression directly but that they will consume an
 uncompressed map that may be GZIP’d for transport.</p>
    <h3 class="heading settled" data-level="4.5" id="extensions"><span class="secno">4.5. </span><span class="content">Extensions</span><a class="self-link" href="#extensions"></a></h3>
-   <p>Additional fields may be added to the top level source map provided the fields begin with the <code class="highlight">x_</code> naming convention.  It is expected that the extensions would be classified by the
+   <p>Additional fields may be added to the top-level source map provided the fields begin with the <code class="highlight">x_</code> naming convention.  It is expected that the extensions would be classified by the
 organization providing the extension, such as <code class="highlight">x_google_linecount</code>.    Field names outside
 the <code class="highlight">x_</code> namespace are reserved for future revisions.  It is recommended that fields be
 namespaced by domain, i.e. <code class="highlight">x_com_google_gwt_linecount</code>.</p>
@@ -2279,15 +2279,15 @@ namespaced by domain, i.e. <code class="highlight">x_com_google_gwt_linecount</c
    <p><dfn data-dfn-type="dfn" data-export id="x_google_ignorelist"><code class="highlight">x_google_ignoreList</code><a class="self-link" href="#x_google_ignorelist"></a></dfn> Identifies third-party sources (such as framework
 code or bundler-generated code), allowing developers to avoid code that they don’t want to see
 or step through, without having to configure this beforehand.</p>
-   <p>It refers to the <a data-link-type="dfn" href="#sources" id="ref-for-sources②">sources</a> array, and lists the indices of all the known third-party sources
+   <p>It refers to the <a data-link-type="dfn" href="#sources" id="ref-for-sources②">sources</a> array and lists the indices of all the known third-party sources
 in that source map.  When parsing the source map, developer tools can use this to determine
 sections of the code that the browser loads and runs that could be automatically ignore-listed.</p>
    <h3 class="heading settled" data-level="4.7" id="notes-on-file-offsets"><span class="secno">4.7. </span><span class="content">Notes on File Offsets</span><a class="self-link" href="#notes-on-file-offsets"></a></h3>
-   <p>Using file offsets were considered but rejected in favor of using line/column data to avoid becoming
-misaligned with the original due to platform specific line endings.</p>
+   <p>Using file offsets was considered but rejected in favor of using line/column data to avoid becoming
+misaligned with the original due to platform-specific line endings.</p>
    <h2 class="heading settled" data-level="5" id="index-map"><span class="secno">5. </span><span class="content">Index Map</span><a class="self-link" href="#index-map"></a></h2>
-   <p>To support concatenating generated code and other common post processing, an
-alternate representation of a map is supported:</p>
+   <p>To support concatenating generated code and other common post-processing,
+an alternate representation of a map is supported:</p>
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"version"</c-> <c- p>:</c-> <c- mi>3</c-><c- p>,</c->
   <c- f>"file"</c-><c- p>:</c-> <c- u>"app.js"</c-><c- p>,</c->
@@ -2315,7 +2315,7 @@ alternate representation of a map is supported:</p>
   <c- p>]</c->
 <c- p>}</c->
 </pre>
-   <p>The index map follows the form of the standard map.  Like the regular source map
+   <p>The index map follows the form of the standard map.  Like the regular source map,
 the file format is JSON with a top-level object.  It shares the <a data-link-type="dfn" href="#version" id="ref-for-version">version</a> and <a data-link-type="dfn" href="#file" id="ref-for-file">file</a> field from the regular source map, but gains a new <a data-link-type="dfn" href="#sections" id="ref-for-sections">sections</a> field.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sections"><code class="highlight">sections</code></dfn> is an array of JSON objects that itself has two
 fields <a data-link-type="dfn" href="#offset" id="ref-for-offset">offset</a> and <a data-link-type="dfn" href="#map" id="ref-for-map">map</a>.</p>
@@ -2334,8 +2334,8 @@ when generating them.</p>
    <p>Optionally, a source map will have the same name as the generated file but with a <code class="highlight"><c- p>.</c->map</code> extension.  For example, for <code class="highlight">page<c- p>.</c->js</code> a source map named <code class="highlight">page<c- p>.</c->js<c- p>.</c->map</code> would be generated.</p>
    <h3 class="heading settled" data-level="6.2" id="linking-generated-code"><span class="secno">6.2. </span><span class="content">Linking generated code to source maps</span><a class="self-link" href="#linking-generated-code"></a></h3>
    <p>While the source map format is intended to be language and platform agnostic, it is useful
-to have a some conventions for the expected use-case of web server hosted javascript.</p>
-   <p>There are two suggested ways to link source maps to the output.  The first requires server
+to have some conventions for the expected use-case of web server-hosted javascript.</p>
+   <p>There are two suggested ways to link source maps to the output.  The first requires a server
 support to add a HTTP header and the second requires an annotation in the source.</p>
    <p>The HTTP header should supply the source map URL reference as:</p>
 <pre class="highlight">SourceMap<c- o>:</c-> <c- o>&lt;</c->url<c- o>></c->
@@ -2349,11 +2349,11 @@ is now deprecated; <code class="highlight">SourceMap</code> is now expected.</p>
 Explorer’s Conditional Compilation and was changed to <code class="highlight"><c- c1>//#</c-></code>.  It is reasonable for tools to
 also accept <code class="highlight"><c- c1>//@</c-></code> but <code class="highlight"><c- c1>//#</c-></code> is preferred.</p>
    <p>This recommendation works well for JavaScript, it is expected that other source files will
-have other conventions.  For instance for CSS <code class="highlight"><c- d>/*# sourceMappingURL=&lt;url> */</c-></code> is proposed.</p>
+have different conventions.  For instance, for CSS <code class="highlight"><c- d>/*# sourceMappingURL=&lt;url> */</c-></code> is proposed.</p>
    <p><code class="highlight"><c- o>&lt;</c->url<c- o>></c-></code> is a URL as defined in <a data-link-type="biblio" href="#biblio-url" title="URL Standard">[URL]</a>; in particular,
 characters outside the set permitted to appear in URIs must be percent-encoded
-and it maybe a data URI.  Using a data URI along with <a data-link-type="dfn" href="#sourcescontent" id="ref-for-sourcescontent">sourcesContent</a> allow
-for a completely self-contained source-map.</p>
+and it may be a data URI.  Using a data URI along with <a data-link-type="dfn" href="#sourcescontent" id="ref-for-sourcescontent">sourcesContent</a> allows
+for a completely self-contained source map.</p>
    <ins>The HTTP <code class="highlight">SourceMap</code> header has precedence over source annotation, and if both are present,
 header URL should be used to resolve the source map file.</ins>
    <p>Regardless of the method used to retrieve the <a data-link-type="dfn" href="#source-mapping-url" id="ref-for-source-mapping-url">Source Mapping URL</a> the same
@@ -2383,7 +2383,7 @@ eval’d code, it has the following form:</p>
    <h2 class="heading settled" data-level="7" id="language-neutral-stack-mapping-notes"><span class="secno">7. </span><span class="content">Language Neutral Stack Mapping Notes</span><a class="self-link" href="#language-neutral-stack-mapping-notes"></a></h2>
    <p>Stack tracing mapping without knowledge of the source language is not covered by this document.</p>
    <h2 class="heading settled" data-level="8" id="multi-level-mapping-notes"><span class="secno">8. </span><span class="content">Multi-level Mapping Notes</span><a class="self-link" href="#multi-level-mapping-notes"></a></h2>
-   <p>It is getting more common to have tools generate source from some DSL (templates) or to compile
+   <p>It is getting more common to have tools generate sources from some DSL (templates) or compile
 TypeScript -> JavaScript -> minified JavaScript, resulting in multiple translations before the
 final source map is created.  This problem can be handled in one of two ways.  The easy but
 lossy way is to ignore the intermediate steps in the process for the purposes of debugging,
@@ -2391,10 +2391,10 @@ the source location information from the translation is either ignored (the inte
 translation is considered the “Original Source”) or the source location information is carried
 through (the intermediate translation hidden).  The more complete way is to support multiple
 levels of mapping: if the Original Source also has a source map reference, the user is given
-the choice of using the that as well.</p>
+the choice of using that as well.</p>
    <p>However, It is unclear what a "source map reference" looks like in anything other than JavaScript.
 More specifically, what a source map reference looks like in a language that doesn’t support
-JavaScript style single line comments.</p>
+JavaScript-style single-line comments.</p>
    <h2 class="heading settled" data-level="9" id="json-over-http-transport"><span class="secno">9. </span><span class="content">JSON over HTTP Transport</span><a class="self-link" href="#json-over-http-transport"></a></h2>
    <p>For historic reasons, when delivering source maps over HTTP, servers may prepend a line
 starting with the string <code class="highlight"><c- p>)]}</c->'</code> to the source map.  A client fetching a source map via
