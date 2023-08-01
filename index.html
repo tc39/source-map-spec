@@ -1488,9 +1488,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version b06c00b8e, updated Tue Jul 11 13:41:16 2023 -0700" name="generator">
+  <meta content="Bikeshed version d29f71adb, updated Wed Jul 19 11:08:56 2023 -0700" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="658504577944ff2d1c2d1cc3eae87508d9da083c" name="document-revision">
+  <meta content="1ac019b79757d9cea70401fa530a78b6c062feb8" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2071,7 +2071,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-07-18">18 July 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-08-01">1 August 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2180,11 +2180,12 @@ the first digit is used as the sign bit.</p>
 the location of a source map from the <a data-link-type="dfn" href="#generated-code" id="ref-for-generated-code">Generated code</a>.</p>
    <ins><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="column">Column</dfn> is the 0 (zero) indexed offsets within a line of the
 generated code measured.  The definition for columns in source maps can depend on
-the format.  For JavaScript and CSS based source maps are defined to be in
+the content type.  For JavaScript and CSS based source maps are defined to be in
 UTF-16 code units analogous to JavaScript string indexes.  That means that
 "A" (<code class="highlight">LATIN CAPITAL LETTER A</code>) measures 1 code unit, and "🔥" (<code class="highlight">FIRE</code>) measures
-2 code units. Source maps for other formats (for instance WebAssembly) might
-diverge from this. </ins>
+2 code units.  For WebAssembly, columns are defined as byte offsets from the beginning 
+of the binary content (and there is only one group representing a line).  Source maps
+for other content types might diverge from this. </ins>
    <h2 class="heading settled" data-level="3" id="general-goals"><span class="secno">3. </span><span class="content">General Goals</span><a class="self-link" href="#general-goals"></a></h2>
    <p><mark>The goals for the v3 format of Source Maps</mark></p>
    <ul>
