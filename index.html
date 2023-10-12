@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="6fc53a38ae1ed7b31154cf2971239752838eda05" name="document-revision">
+  <meta content="83ed2894b6000b7bdf9260906788bac57a9224a8" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2071,7 +2071,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-09-14">14 September 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-10-12">12 October 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2107,8 +2107,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
       <li><a href="#encoding"><span class="secno">4.3</span> <span class="content">Encoding</span></a>
       <li><a href="#compression"><span class="secno">4.4</span> <span class="content">Compression</span></a>
       <li><a href="#extensions"><span class="secno">4.5</span> <span class="content">Extensions</span></a>
-      <li><a href="#known-extensions"><span class="secno">4.6</span> <span class="content">Known Extensions</span></a>
-      <li><a href="#notes-on-file-offsets"><span class="secno">4.7</span> <span class="content">Notes on File Offsets</span></a>
+      <li><a href="#notes-on-file-offsets"><span class="secno">4.6</span> <span class="content">Notes on File Offsets</span></a>
      </ol>
     <li>
      <a href="#index-map"><span class="secno">5</span> <span class="content">Index Map</span></a>
@@ -2206,7 +2205,8 @@ following structure:</p>
   <c- f>"sources"</c-><c- p>:</c-> <c- p>[</c-><c- u>"foo.js"</c-><c- p>,</c-> <c- u>"bar.js"</c-><c- p>],</c->
   <c- f>"sourcesContent"</c-><c- p>:</c-> <c- p>[</c-><c- kc>null</c-><c- p>,</c-> <c- kc>null</c-><c- p>],</c->
   <c- f>"names"</c-><c- p>:</c-> <c- p>[</c-><c- u>"src"</c-><c- p>,</c-> <c- u>"maps"</c-><c- p>,</c-> <c- u>"are"</c-><c- p>,</c-> <c- u>"fun"</c-><c- p>],</c->
-  <c- f>"mappings"</c-><c- p>:</c-> <c- u>"A,AAAB;;ABCDE;"</c->
+  <c- f>"mappings"</c-><c- p>:</c-> <c- u>"A,AAAB;;ABCDE;"</c-><c- p>,</c->
+  <c- f>"ignoreList"</c-><c- p>:</c-> <c- p>[</c-><c- mi>0</c-><c- p>]</c->
 <c- p>}</c->
 </pre>
    <p class="note" role="note"><span class="marker">Note:</span> The previous specification suggested an order to the keys in this file, but
@@ -2229,6 +2229,12 @@ of source content (that is the <a data-link-type="dfn" href="#original-source" i
 can’t be hosted.  The contents are listed in the same order as the <a data-link-type="dfn" href="#sources" id="ref-for-sources">sources</a>. <code class="highlight"><c- kc>null</c-></code> may be used if some original sources should be retrieved by name.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="names"><code class="highlight">names</code></dfn> a list of symbol names used by the <a data-link-type="dfn" href="#mappings" id="ref-for-mappings">mappings</a> entry.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="mappings"><code class="highlight">mappings</code></dfn> a string with the encoded mapping data (see <a href="#mappings-structure">§ 4.1 Mappings Structure</a>).</p>
+   <p><dfn data-dfn-type="dfn" data-noexport id="ignorelist"><code class="highlight">ignoreList</code><a class="self-link" href="#ignorelist"></a></dfn> an optional list of indices of files that
+should be considered third party code, such as framework code or bundler-generated code. This 
+allows developer tools to avoid code that developers likely don’t want to see
+or step through, without requiring developers to configure this beforehand.
+It refers to the <a data-link-type="dfn" href="#sources" id="ref-for-sources①">sources</a> array and lists the indices of all the known third-party sources
+in the source map. Some browsers may also use the deprecated <code class="highlight">x_google_ignoreList</code> field if <code class="highlight">ignoreList</code> is not present.</p>
    <h3 class="heading settled" data-level="4.1" id="mappings-structure"><span class="secno">4.1. </span><span class="content">Mappings Structure</span><a class="self-link" href="#mappings-structure"></a></h3>
    <p>The <a data-link-type="dfn" href="#mappings" id="ref-for-mappings①">mappings</a> data is broken down as follows:</p>
    <ul>
@@ -2248,7 +2254,7 @@ line (<code class="highlight"><c- p>;</c-></code>), then this field holds the wh
 a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq①">Base64 VLQ</a> that is relative to the previous occurrence of this field.  _Note that this
 is different than the fields below because the previous value is reset after every generated line._</p>
     <li data-md>
-     <p>If present, a zero-based index into the <a data-link-type="dfn" href="#sources" id="ref-for-sources①">sources</a> list. This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq②">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first occurrence of this
+     <p>If present, a zero-based index into the <a data-link-type="dfn" href="#sources" id="ref-for-sources②">sources</a> list. This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq②">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first occurrence of this
 field, in which case the whole value is represented.</p>
     <li data-md>
      <p>If present, the zero-based starting line in the original source is represented.  This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq③">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first
@@ -2280,15 +2286,7 @@ uncompressed map that may be GZIP’d for transport.</p>
 organization providing the extension, such as <code class="highlight">x_google_linecount</code>.    Field names outside
 the <code class="highlight">x_</code> namespace are reserved for future revisions.  It is recommended that fields be
 namespaced by domain, i.e. <code class="highlight">x_com_google_gwt_linecount</code>.</p>
-   <h3 class="heading settled" data-level="4.6" id="known-extensions"><span class="secno">4.6. </span><span class="content">Known Extensions</span><a class="self-link" href="#known-extensions"></a></h3>
-   <p><dfn data-dfn-type="dfn" data-export id="x_google_linecount"><code class="highlight">x_google_linecount</code><a class="self-link" href="#x_google_linecount"></a></dfn> The number of lines represented by this source map.</p>
-   <p><dfn data-dfn-type="dfn" data-export id="x_google_ignorelist"><code class="highlight">x_google_ignoreList</code><a class="self-link" href="#x_google_ignorelist"></a></dfn> Identifies third-party sources (such as framework
-code or bundler-generated code), allowing developers to avoid code that they don’t want to see
-or step through, without having to configure this beforehand.</p>
-   <p>It refers to the <a data-link-type="dfn" href="#sources" id="ref-for-sources②">sources</a> array and lists the indices of all the known third-party sources
-in that source map.  When parsing the source map, developer tools can use this to determine
-sections of the code that the browser loads and runs that could be automatically ignore-listed.</p>
-   <h3 class="heading settled" data-level="4.7" id="notes-on-file-offsets"><span class="secno">4.7. </span><span class="content">Notes on File Offsets</span><a class="self-link" href="#notes-on-file-offsets"></a></h3>
+   <h3 class="heading settled" data-level="4.6" id="notes-on-file-offsets"><span class="secno">4.6. </span><span class="content">Notes on File Offsets</span><a class="self-link" href="#notes-on-file-offsets"></a></h3>
    <p>Using file offsets was considered but rejected in favor of using line/column data to avoid becoming
 misaligned with the original due to platform-specific line endings.</p>
    <h2 class="heading settled" data-level="5" id="index-map"><span class="secno">5. </span><span class="content">Index Map</span><a class="self-link" href="#index-map"></a></h2>
@@ -2549,6 +2547,7 @@ first line.</p>
    <li><a href="#column">Column</a><span>, in § 2</span>
    <li><a href="#file">file</a><span>, in § 4</span>
    <li><a href="#generated-code">Generated Code</a><span>, in § 2</span>
+   <li><a href="#ignorelist">ignoreList</a><span>, in § 4</span>
    <li><a href="#map">map</a><span>, in § 5.1</span>
    <li><a href="#mappings">mappings</a><span>, in § 4</span>
    <li><a href="#names">names</a><span>, in § 4</span>
@@ -2561,8 +2560,6 @@ first line.</p>
    <li><a href="#sources">sources</a><span>, in § 4</span>
    <li><a href="#sourcescontent">sourcesContent</a><span>, in § 4</span>
    <li><a href="#version">version</a><span>, in § 4</span>
-   <li><a href="#x_google_ignorelist">x_google_ignoreList</a><span>, in § 4.6</span>
-   <li><a href="#x_google_linecount">x_google_linecount</a><span>, in § 4.6</span>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
@@ -2741,7 +2738,7 @@ window.dfnpanelData['column'] = {"dfnID": "column", "url": "#column", "dfnText":
 window.dfnpanelData['version'] = {"dfnID": "version", "url": "#version", "dfnText": "version", "refSections": [{"refs": [{"id": "ref-for-version"}], "title": "5. Index Map"}], "external": false};
 window.dfnpanelData['file'] = {"dfnID": "file", "url": "#file", "dfnText": "file", "refSections": [{"refs": [{"id": "ref-for-file"}], "title": "5. Index Map"}], "external": false};
 window.dfnpanelData['sourceroot'] = {"dfnID": "sourceroot", "url": "#sourceroot", "dfnText": "sourceRoot", "refSections": [{"refs": [{"id": "ref-for-sourceroot"}], "title": "4.2. Resolving Sources"}], "external": false};
-window.dfnpanelData['sources'] = {"dfnID": "sources", "url": "#sources", "dfnText": "sources", "refSections": [{"refs": [{"id": "ref-for-sources"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-sources\u2460"}], "title": "4.1. Mappings Structure"}, {"refs": [{"id": "ref-for-sources\u2461"}], "title": "4.6. Known Extensions"}], "external": false};
+window.dfnpanelData['sources'] = {"dfnID": "sources", "url": "#sources", "dfnText": "sources", "refSections": [{"refs": [{"id": "ref-for-sources"}, {"id": "ref-for-sources\u2460"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-sources\u2461"}], "title": "4.1. Mappings Structure"}], "external": false};
 window.dfnpanelData['sourcescontent'] = {"dfnID": "sourcescontent", "url": "#sourcescontent", "dfnText": "sourcesContent", "refSections": [{"refs": [{"id": "ref-for-sourcescontent"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
 window.dfnpanelData['names'] = {"dfnID": "names", "url": "#names", "dfnText": "names", "refSections": [{"refs": [{"id": "ref-for-names"}], "title": "4.1. Mappings Structure"}], "external": false};
 window.dfnpanelData['mappings'] = {"dfnID": "mappings", "url": "#mappings", "dfnText": "mappings", "refSections": [{"refs": [{"id": "ref-for-mappings"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-mappings\u2460"}], "title": "4.1. Mappings Structure"}], "external": false};
