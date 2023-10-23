@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="7e50774e1ca83cac92b981efe0d830ea9da07867" name="document-revision">
+  <meta content="45c0f2021ae57f7a58ea8ece502b2013f8341544" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2353,7 +2353,8 @@ is now deprecated; <code class="highlight">SourceMap</code> is now expected.</p>
 Explorer’s Conditional Compilation and was changed to <code class="highlight"><c- c1>//#</c-></code>.  It is reasonable for tools to
 also accept <code class="highlight"><c- c1>//@</c-></code> but <code class="highlight"><c- c1>//#</c-></code> is preferred.</p>
    <p>This recommendation works well for JavaScript, it is expected that other source files will
-have different conventions.  For instance, for CSS <code class="highlight"><c- d>/*# sourceMappingURL=&lt;url> */</c-></code> is proposed.</p>
+have different conventions.  For instance, for CSS <code class="highlight"><c- d>/*# sourceMappingURL=&lt;url> */</c-></code> is proposed.
+On the WebAssembly side, such URL should be placed as a UTF-8 encoded string in the custom section (<a data-link-type="biblio" href="#biblio-wasmcustomsection" title="WebAssembly custom section">[WasmCustomSection]</a>) named <code class="highlight">sourceMappingURL</code>.</p>
    <p><code class="highlight"><c- o>&lt;</c->url<c- o>></c-></code> is a URL as defined in <a data-link-type="biblio" href="#biblio-url" title="URL Standard">[URL]</a>; in particular,
 characters outside the set permitted to appear in URIs must be percent-encoded
 and it may be a data URI.  Using a data URI along with <a data-link-type="dfn" href="#sourcescontent" id="ref-for-sourcescontent">sourcesContent</a> allows
@@ -2574,6 +2575,8 @@ first line.</p>
    <dd><a href="https://docs.google.com/document/d/1xi12LrcqjqIHTtZzrzZKmQ3lbTv9mKrN076UB-j3UZQ/edit?hl=en_US"><cite>Source Map Revision 2 Proposal</cite></a>. URL: <a href="https://docs.google.com/document/d/1xi12LrcqjqIHTtZzrzZKmQ3lbTv9mKrN076UB-j3UZQ/edit?hl=en_US">https://docs.google.com/document/d/1xi12LrcqjqIHTtZzrzZKmQ3lbTv9mKrN076UB-j3UZQ/edit?hl=en_US</a>
    <dt id="biblio-vlq">[VLQ]
    <dd><a href="https://en.wikipedia.org/wiki/Variable-length_quantity"><cite>Variable-length quantity</cite></a>. reference article. URL: <a href="https://en.wikipedia.org/wiki/Variable-length_quantity">https://en.wikipedia.org/wiki/Variable-length_quantity</a>
+   <dt id="biblio-wasmcustomsection">[WasmCustomSection]
+   <dd><a href="https://www.w3.org/TR/wasm-core-2/binary/modules.html#custom-section"><cite>WebAssembly custom section</cite></a>. Living Standard. URL: <a href="https://www.w3.org/TR/wasm-core-2/binary/modules.html#custom-section">https://www.w3.org/TR/wasm-core-2/binary/modules.html#custom-section</a>
   </dl>
 <script>/* Boilerplate: script-dfn-panel */
 "use strict";
