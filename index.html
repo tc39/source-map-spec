@@ -1488,9 +1488,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 5dc73194b, updated Mon Dec 11 17:50:16 2023 -0800" name="generator">
+  <meta content="Bikeshed version 4416b18d5, updated Tue Jan 2 15:52:39 2024 -0800" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="cbbc0336fa2a54cecf3b6147f9a491dc595f8b25" name="revision">
+  <meta content="fabdabde273eb115a5ea5618f3ff6fe91f1aad1b" name="revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -1562,7 +1562,6 @@ pre .property::before, pre .property::after {
 }
 </style>
 <style>/* Boilerplate: style-colors */
-
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
 :root {
     color-scheme: light dark;
@@ -1968,7 +1967,7 @@ a[href].issue-return {
 }
 
 .ref-hint {
-    display: none;
+    display: inline-block;
     position: absolute;
     z-index: 35;
     width: 20em;
@@ -1984,16 +1983,11 @@ a[href].issue-return {
     white-space: normal; /* in case it's moved into a pre */
 }
 
-.ref-hint.on {
-    display: inline-block;
-}
-
 .ref-hint * { margin: 0; padding: 0; text-indent: 0; }
 
 .ref-hint ul { padding: 0 0 0 1em; list-style: none; }
 </style>
 <style>/* Boilerplate: style-selflinks */
-
 :root {
     --selflink-text: white;
     --selflink-bg: gray;
@@ -2053,7 +2047,6 @@ a.self-link::before            { content: "¶"; }
 dfn > a.self-link::before      { content: "#"; }
 </style>
 <style>/* Boilerplate: style-syntax-highlighting */
-
 code.highlight { padding: .1em; border-radius: .3em; }
 pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
 
@@ -2110,7 +2103,6 @@ c-[vc] { color: #0077aa } /* Name.Variable.Class */
 c-[vg] { color: #0077aa } /* Name.Variable.Global */
 c-[vi] { color: #0077aa } /* Name.Variable.Instance */
 c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
-
 
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -2179,7 +2171,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2023-12-14">14 December 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-01-18">18 January 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2337,7 +2329,7 @@ of source content (that is the <a data-link-type="dfn" href="#original-source" i
 can’t be hosted.  The contents are listed in the same order as the <a data-link-type="dfn" href="#sources" id="ref-for-sources">sources</a>. <code class="highlight"><c- kc>null</c-></code> may be used if some original sources should be retrieved by name.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="names"><code class="highlight">names</code></dfn> a list of symbol names used by the <a data-link-type="dfn" href="#mappings" id="ref-for-mappings">mappings</a> entry.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="mappings"><code class="highlight">mappings</code></dfn> a string with the encoded mapping data (see <a href="#mappings-structure">§ 4.1 Mappings Structure</a>).</p>
-   <p><dfn data-dfn-type="dfn" data-noexport id="ignorelist"><code class="highlight">ignoreList</code><a class="self-link" href="#ignorelist"></a></dfn> an optional list of indices of files that
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ignorelist"><code class="highlight">ignoreList</code></dfn> an optional list of indices of files that
 should be considered third party code, such as framework code or bundler-generated code. This 
 allows developer tools to avoid code that developers likely don’t want to see
 or step through, without requiring developers to configure this beforehand.
@@ -2458,8 +2450,8 @@ is now deprecated; <code class="highlight">SourceMap</code> is now expected.</p>
 <pre class="highlight"><c- c1>//# sourceMappingURL=&lt;url></c->
 </pre>
    <p class="note" role="note"><span class="marker">Note:</span> The prefix for this annotation was initially <code class="highlight"><c- c1>//@</c-></code> however this conflicts with Internet
-Explorer’s Conditional Compilation and was changed to <code class="highlight"><c- c1>//#</c-></code>.  It is reasonable for tools to
-also accept <code class="highlight"><c- c1>//@</c-></code> but <code class="highlight"><c- c1>//#</c-></code> is preferred.</p>
+Explorer’s Conditional Compilation and was changed to <code class="highlight"><c- c1>//#</c-></code>. Source map generators must only emit <code class="highlight"><c- c1>//#</c-></code> while source map consumers must accept both <code class="highlight"><c- c1>//@</c-></code> and <code class="highlight"><c- c1>//#</c-></code>.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> <code class="highlight"><c- c1>//@</c-></code> is needed for compatibility with some existing legacy source maps.</p>
    <p>This recommendation works well for JavaScript, it is expected that other source files will
 have different conventions.  For instance, for CSS <code class="highlight"><c- d>/*# sourceMappingURL=&lt;url> */</c-></code> is proposed.
 On the WebAssembly side, such a URL is encoded using <a data-link-type="biblio" href="#biblio-wasmnamesbinaryformat" title="WebAssembly Names binary format">[WasmNamesBinaryFormat]</a>, and it’s placed as the content of the custom section (<a data-link-type="biblio" href="#biblio-wasmcustomsection" title="WebAssembly custom section">[WasmCustomSection]</a>) named <code class="highlight">sourceMappingURL</code>.</p>
@@ -2688,423 +2680,8 @@ first line.</p>
    <dt id="biblio-wasmnamesbinaryformat">[WasmNamesBinaryFormat]
    <dd><a href="https://www.w3.org/TR/wasm-core-2/binary/values.html#names"><cite>WebAssembly Names binary format</cite></a>. Living Standard. URL: <a href="https://www.w3.org/TR/wasm-core-2/binary/values.html#names">https://www.w3.org/TR/wasm-core-2/binary/values.html#names</a>
   </dl>
-<script>/* Boilerplate: script-dfn-panel */
-"use strict";
-{
-    // Functions, divided by link type, that wrap an autolink's
-    // contents with the appropriate outer syntax.
-    // Alternately, a string naming another type they format
-    // the same as.
-    const typeFormatters = {
-        'dfn': (text) => `[=${text}=]`,
-        'abstract-op': (text) => `[\$${text}\$]`,
-        'value': (text) => `''${text}''`,
-        'http-header': (text) => `[:${text}:]`,
-        'idl': (text) => `{{${text}}}`,
-        'interface': 'idl',
-        'constructor': 'idl',
-        'method': 'idl',
-        'argument': 'idl',
-        'attribute': 'idl',
-        'callback': 'idl',
-        'dictionary': 'idl',
-        'dict-member': 'idl',
-        'enum': 'idl',
-        'enum-value': 'idl',
-        'exception': 'idl',
-        'const': 'idl',
-        'typedef': 'idl',
-        'stringifier': 'idl',
-        'serializer': 'idl',
-        'iterator': 'idl',
-        'maplike': 'idl',
-        'setlike': 'idl',
-        'extended-attribute': 'idl',
-        'event': 'idl',
-        'element': (element) => `<{${element}}>`,
-        'element-state': 'element',
-        'element-attr': 'element',
-        'attr-value': 'element',
-        'scheme': 'dfn',
-        'permission': 'dfn',
-        'grammar': (text) => `${text} (within a <pre class=prod>)`,
-        'type': (text)=> `<<${text}>>`,
-        'property': (text) => `'${text}'`,
-        'descriptor': 'property',
-        'function': 'value',
-        'at-rule': 'value',
-        'selector': 'value',
-    };
-    const typesUsingFor = new Set(
-        [
-            "descriptor",
-            "value",
-            "element-attr",
-            "attr-value",
-            "element-state",
-            "method",
-            "constructor",
-            "argument",
-            "attribute",
-            "const",
-            "dict-member",
-            "event",
-            "enum-value",
-            "stringifier",
-            "serializer",
-            "iterator",
-            "maplike",
-            "setlike",
-            "state",
-            "mode",
-            "context",
-            "facet",
-        ],
-    )
-    const typesNotUsingFor = new Set(
-        [
-            "property",
-            "element",
-            "interface",
-            "namespace",
-            "callback",
-            "dictionary",
-            "enum",
-            "exception",
-            "typedef",
-            "http-header",
-            "permission",
-        ],
-    )
-    function linkFormatterFromType(type) {
-        const fnOrType = typeFormatters[type];
-        if(typeof fnOrType === 'string') {
-            // follow the alias
-            return linkFormatterFromType(fnOrType);
-        }
-        return fnOrType;
-    };
-
-    function genLinkingSyntaxes(dfn) {
-        if(dfn.tagName != "DFN") return;
-
-        const type = dfn.getAttribute('data-dfn-type');
-        if(!type) {
-            console.log(`<dfn> doesn't have a data-dfn-type:`, dfn);
-            return [];
-        }
-
-        // Return a function that wraps link text based on the type
-        const linkFormatter = linkFormatterFromType(type);
-        if(!linkFormatter) {
-            console.log(`<dfn> has an unknown data-dfn-type:`, dfn);
-            return [];
-        }
-
-        let ltAlts;
-        if(dfn.hasAttribute('data-lt')) {
-            ltAlts = dfn.getAttribute('data-lt')
-                .split("|")
-                .map(x=>x.trim());
-        } else {
-            ltAlts = [dfn.textContent.trim()];
-        }
-        if(type == "type") {
-            // lt of "<foo>", but "foo" is the interior;
-            // <<foo/bar>> is how you write it with a for,
-            // not <foo/<bar>> or whatever.
-            for(var i = 0; i < ltAlts.length; i++) {
-                const lt = ltAlts[i];
-                const match = /<(.*)>/.exec(lt);
-                if(match) { ltAlts[i] = match[1]; }
-            }
-        }
-
-        let forAlts;
-        if(dfn.hasAttribute('data-dfn-for')) {
-            forAlts = dfn.getAttribute('data-dfn-for')
-                .split(",")
-                .map(x=>x.trim());
-        } else {
-            forAlts = [''];
-        }
-
-        let linkingSyntaxes = [];
-        if(!typesUsingFor.has(type)) {
-            for(const lt of ltAlts) {
-                linkingSyntaxes.push(linkFormatter(lt));
-            }
-        }
-        if(!typesNotUsingFor.has(type)) {
-            for(const f of forAlts) {
-                linkingSyntaxes.push(linkFormatter(`${f}/${ltAlts[0]}`))
-            }
-        }
-        return [
-            mk.b({}, 'Possible linking syntaxes:'),
-            mk.ul({},
-                ...linkingSyntaxes.map(link => {
-                    const copyLink = async () =>
-                        await navigator.clipboard.writeText(link);
-                    return mk.li({},
-                        mk.div({ class: 'link-item' },
-                            mk.button({
-                                class: 'copy-icon', title: 'Copy',
-                                type: 'button',
-                                _onclick: copyLink,
-                                tabindex: 0,
-                            }, mk.span({ class: 'icon' }) ),
-                            mk.span({}, link)
-                        )
-                    );
-                })
-            )
-        ];
-    }
-
-    function genDfnPanel({ dfn, dfnID, url, dfnText, refSections, external }) {
-        const dfnPanel = mk.aside({
-            class: "dfn-panel",
-            id: `infopanel-for-${dfnID}`,
-            "data-for": dfnID,
-            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
-            },
-            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
-                `Info about the '${dfnText}' ${external?"external":""} reference.`),
-            mk.a({href:url, class:"dfn-link"}, url),
-            mk.b({}, "Referenced in:"),
-            mk.ul({},
-                ...refSections.map(section=>
-                    mk.li({},
-                        ...section.refs.map((ref, refI)=>
-                            [
-                                mk.a({ href: `#${ref.id}` },
-                                    (refI == 0) ? section.title : `(${refI + 1})`
-                                ),
-                                " ",
-                            ]
-                        ),
-                    ),
-                ),
-            ),
-            genLinkingSyntaxes(dfn),
-        );
-        dfnPanel.forDfn = dfn;
-        if(!dfn) { console.log(dfnPanel); }
-        return dfnPanel;
-    }
-
-    function genAllDfnPanels() {
-        for(const panelData of Object.values(window.dfnpanelData)) {
-            const dfnID = panelData.dfnID;
-            const dfn = document.getElementById(dfnID);
-            if(!dfn) {
-                console.log(`Can't find dfn#${dfnID}.`, panelData);
-                continue;
-            }
-            const panel = genDfnPanel({ ...panelData, dfn });
-            append(document.body, panel);
-            insertDfnPopupAction(panel)
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-        genAllDfnPanels();
-
-        document.body.addEventListener("click", (e) => {
-            // If not handled already, just hide all dfn panels.
-            hideAllDfnPanels();
-        });
-    })
-
-    function hideAllDfnPanels() {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
-    }
-
-    function showDfnPanel(dfnPanel) {
-        hideAllDfnPanels(); // Only display one at this time.
-
-        const dfn = dfnPanel.forDfn;
-        dfn.setAttribute("aria-expanded", "true");
-
-        dfnPanel.classList.add("on");
-        positionDfnPanel(dfnPanel);
-
-        let tabIndex = 100;
-        dfn.tabIndex = tabIndex++;
-        // Increment tabindex for each anchor and button tags in panel
-        const tabbable = dfnPanel.querySelectorAll(":is(a, button)");
-        for (const el of tabbable) {
-            el.tabIndex = tabIndex++;
-        }
-    }
-
-    function positionDfnPanel(dfnPanel) {
-        const dfn = dfnPanel.forDfn;
-        const dfnPos = getRootLevelAbsolutePosition(dfn);
-        dfnPanel.style.top = dfnPos.bottom + "px";
-        dfnPanel.style.left = dfnPos.left + "px";
-
-        const panelPos = dfnPanel.getBoundingClientRect();
-        const panelMargin = 8;
-        const maxRight = document.body.parentNode.clientWidth - panelMargin;
-        if (panelPos.right > maxRight) {
-            const overflowAmount = panelPos.right - maxRight;
-            const newLeft = Math.max(panelMargin, dfnPos.left - overflowAmount);
-            dfnPanel.style.left = newLeft + "px";
-        }}
-
-    function pinDfnPanel(dfnPanel) {
-        // Switch it to "activated" state, which pins it.
-        dfnPanel.classList.add("activated");
-        dfnPanel.style.position = "fixed";
-        dfnPanel.style.left = null;
-        dfnPanel.style.top = null;
-    }
-
-    function hideDfnPanel(dfnPanel) {
-        const dfn = dfnPanel.forDfn;
-        dfn.setAttribute("aria-expanded", "false");
-        dfn.tabIndex = undefined;
-        dfnPanel.style.position = "absolute"; // unfix it
-        dfnPanel.classList.remove("on");
-        dfnPanel.classList.remove("activated");
-    }
-
-    function toggleDfnPanel(dfnPanel) {
-        if(dfnPanel.classList.contains("on")) {
-            hideDfnPanel(dfnPanel);
-        } else {
-            showDfnPanel(dfnPanel);
-        }
-    }
-
-    function insertDfnPopupAction(dfnPanel) {
-        const dfn = dfnPanel.forDfn;
-        dfn.setAttribute('role', 'button');
-        dfn.setAttribute('aria-expanded', 'false')
-        dfn.tabIndex = 0;
-        dfn.classList.add('has-dfn-panel');
-        dfn.addEventListener('click', (event) => {
-            showDfnPanel(dfnPanel);
-            event.stopPropagation();
-        });
-        dfn.addEventListener('keypress', (event) => {
-            const kc = event.keyCode;
-            // 32->Space, 13->Enter
-            if(kc == 32 || kc == 13) {
-                toggleDfnPanel(dfnPanel);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        });
-
-        dfnPanel.addEventListener('click', (event) => {
-            if (event.target.nodeName == 'A') {
-                scrollToTargetAndHighlight(event);
-                pinDfnPanel(dfnPanel);
-            }
-            event.stopPropagation();
-            refocusOnTarget(event);
-        });
-
-        dfnPanel.addEventListener('keydown', (event) => {
-            if(event.keyCode == 27) { // Escape key
-                hideDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        })
-    }
-
-    function refocusOnTarget(event) {
-        const target = event.target;
-        setTimeout(() => {
-            // Refocus on the event.target element.
-            // This is needed after browser scrolls to the destination.
-            target.focus();
-        });
-    }
-
-    // Returns the root-level absolute position {left and top} of element.
-    function getRootLevelAbsolutePosition(el) {
-        const boundsRect = el.getBoundingClientRect();
-        let xPos = 0;
-        let yPos = 0;
-
-        while (el) {
-            let xScroll = el.scrollLeft;
-            let yScroll = el.scrollTop;
-
-            // Ignore scrolling of body.
-            if (el.tagName === "BODY") {
-                xScroll = 0;
-                yScroll = 0;
-            }
-            xPos += (el.offsetLeft - xScroll + el.clientLeft);
-            yPos += (el.offsetTop - yScroll + el.clientTop);
-
-            el = el.offsetParent;
-        }
-        return {
-            left: xPos,
-            top: yPos,
-            right: xPos + boundsRect.width,
-            bottom: yPos + boundsRect.height,
-        };
-    }
-
-    function scrolledIntoView(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top > 0 &&
-            rect.bottom < window.innerHeight
-        );
-    }
-
-    function scrollToTargetAndHighlight(event) {
-        let hash = event.target.hash;
-        if (hash) {
-            hash = decodeURIComponent(hash.substring(1));
-            const dest = document.getElementById(hash);
-            if (dest) {
-                // Maybe prevent default scroll.
-                if (scrolledIntoView(dest)) {
-                    event.preventDefault();
-                }
-                dest.classList.add('highlighted');
-                setTimeout(() => dest.classList.remove('highlighted'), 1000);
-            }
-        }
-    }
-
-    window.addEventListener("resize", () => {
-        // Pin any visible dfn panel
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>positionDfnPanel(el));
-    });
-}
-</script>
-<script>/* Boilerplate: script-dfn-panel-json */
-window.dfnpanelData = {};
-window.dfnpanelData['generated-code'] = {"dfnID": "generated-code", "url": "#generated-code", "dfnText": "Generated Code", "refSections": [{"refs": [{"id": "ref-for-generated-code"}], "title": "2. Terminology"}], "external": false};
-window.dfnpanelData['original-source'] = {"dfnID": "original-source", "url": "#original-source", "dfnText": "Original Source", "refSections": [{"refs": [{"id": "ref-for-original-source"}], "title": "4. Source Map Format"}], "external": false};
-window.dfnpanelData['base64-vlq'] = {"dfnID": "base64-vlq", "url": "#base64-vlq", "dfnText": "Base64 VLQ", "refSections": [{"refs": [{"id": "ref-for-base64-vlq"}, {"id": "ref-for-base64-vlq\u2460"}, {"id": "ref-for-base64-vlq\u2461"}, {"id": "ref-for-base64-vlq\u2462"}, {"id": "ref-for-base64-vlq\u2463"}], "title": "4.1. Mappings Structure"}], "external": false};
-window.dfnpanelData['source-mapping-url'] = {"dfnID": "source-mapping-url", "url": "#source-mapping-url", "dfnText": "Source Mapping URL", "refSections": [{"refs": [{"id": "ref-for-source-mapping-url"}, {"id": "ref-for-source-mapping-url\u2460"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
-window.dfnpanelData['column'] = {"dfnID": "column", "url": "#column", "dfnText": "Column", "refSections": [{"refs": [{"id": "ref-for-column"}, {"id": "ref-for-column\u2460"}], "title": "4.1. Mappings Structure"}], "external": false};
-window.dfnpanelData['version'] = {"dfnID": "version", "url": "#version", "dfnText": "version", "refSections": [{"refs": [{"id": "ref-for-version"}], "title": "5. Index Map"}], "external": false};
-window.dfnpanelData['file'] = {"dfnID": "file", "url": "#file", "dfnText": "file", "refSections": [{"refs": [{"id": "ref-for-file"}], "title": "5. Index Map"}], "external": false};
-window.dfnpanelData['sourceroot'] = {"dfnID": "sourceroot", "url": "#sourceroot", "dfnText": "sourceRoot", "refSections": [{"refs": [{"id": "ref-for-sourceroot"}], "title": "4.2. Resolving Sources"}], "external": false};
-window.dfnpanelData['sources'] = {"dfnID": "sources", "url": "#sources", "dfnText": "sources", "refSections": [{"refs": [{"id": "ref-for-sources"}, {"id": "ref-for-sources\u2460"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-sources\u2461"}], "title": "4.1. Mappings Structure"}], "external": false};
-window.dfnpanelData['sourcescontent'] = {"dfnID": "sourcescontent", "url": "#sourcescontent", "dfnText": "sourcesContent", "refSections": [{"refs": [{"id": "ref-for-sourcescontent"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
-window.dfnpanelData['names'] = {"dfnID": "names", "url": "#names", "dfnText": "names", "refSections": [{"refs": [{"id": "ref-for-names"}], "title": "4.1. Mappings Structure"}], "external": false};
-window.dfnpanelData['mappings'] = {"dfnID": "mappings", "url": "#mappings", "dfnText": "mappings", "refSections": [{"refs": [{"id": "ref-for-mappings"}], "title": "4. Source Map Format"}, {"refs": [{"id": "ref-for-mappings\u2460"}], "title": "4.1. Mappings Structure"}], "external": false};
-window.dfnpanelData['sections'] = {"dfnID": "sections", "url": "#sections", "dfnText": "sections", "refSections": [{"refs": [{"id": "ref-for-sections"}], "title": "5. Index Map"}], "external": false};
-window.dfnpanelData['offset'] = {"dfnID": "offset", "url": "#offset", "dfnText": "offset", "refSections": [{"refs": [{"id": "ref-for-offset"}], "title": "5. Index Map"}], "external": false};
-window.dfnpanelData['map'] = {"dfnID": "map", "url": "#map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-map"}], "title": "5. Index Map"}], "external": false};
-window.dfnpanelData['source-origin'] = {"dfnID": "source-origin", "url": "#source-origin", "dfnText": "source origin", "refSections": [{"refs": [{"id": "ref-for-source-origin"}, {"id": "ref-for-source-origin\u2460"}, {"id": "ref-for-source-origin\u2461"}, {"id": "ref-for-source-origin\u2462"}, {"id": "ref-for-source-origin\u2463"}], "title": "6.2. Linking generated code to source maps"}], "external": false};
-</script>
 <script>/* Boilerplate: script-dom-helper */
+"use strict";
 function query(sel) { return document.querySelector(sel); }
 
 function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
@@ -3298,233 +2875,651 @@ function parseHTML(markup) {
 		el.innerHTML = markup;
 		return el.content;
 	}
+}</script>
+<script>/* Boilerplate: script-dfn-panel */
+"use strict";
+{
+let dfnPanelData = {
+"base64-vlq": {"dfnID":"base64-vlq","dfnText":"Base64 VLQ","external":false,"refSections":[{"refs":[{"id":"ref-for-base64-vlq"},{"id":"ref-for-base64-vlq\u2460"},{"id":"ref-for-base64-vlq\u2461"},{"id":"ref-for-base64-vlq\u2462"},{"id":"ref-for-base64-vlq\u2463"}],"title":"4.1. Mappings Structure"}],"url":"#base64-vlq"},
+"column": {"dfnID":"column","dfnText":"Column","external":false,"refSections":[{"refs":[{"id":"ref-for-column"},{"id":"ref-for-column\u2460"}],"title":"4.1. Mappings Structure"}],"url":"#column"},
+"file": {"dfnID":"file","dfnText":"file","external":false,"refSections":[{"refs":[{"id":"ref-for-file"}],"title":"5. Index Map"}],"url":"#file"},
+"generated-code": {"dfnID":"generated-code","dfnText":"Generated Code","external":false,"refSections":[{"refs":[{"id":"ref-for-generated-code"}],"title":"2. Terminology"}],"url":"#generated-code"},
+"ignorelist": {"dfnID":"ignorelist","dfnText":"ignoreList","external":false,"refSections":[],"url":"#ignorelist"},
+"map": {"dfnID":"map","dfnText":"map","external":false,"refSections":[{"refs":[{"id":"ref-for-map"}],"title":"5. Index Map"}],"url":"#map"},
+"mappings": {"dfnID":"mappings","dfnText":"mappings","external":false,"refSections":[{"refs":[{"id":"ref-for-mappings"}],"title":"4. Source Map Format"},{"refs":[{"id":"ref-for-mappings\u2460"}],"title":"4.1. Mappings Structure"}],"url":"#mappings"},
+"names": {"dfnID":"names","dfnText":"names","external":false,"refSections":[{"refs":[{"id":"ref-for-names"}],"title":"4.1. Mappings Structure"}],"url":"#names"},
+"offset": {"dfnID":"offset","dfnText":"offset","external":false,"refSections":[{"refs":[{"id":"ref-for-offset"}],"title":"5. Index Map"}],"url":"#offset"},
+"original-source": {"dfnID":"original-source","dfnText":"Original Source","external":false,"refSections":[{"refs":[{"id":"ref-for-original-source"}],"title":"4. Source Map Format"}],"url":"#original-source"},
+"sections": {"dfnID":"sections","dfnText":"sections","external":false,"refSections":[{"refs":[{"id":"ref-for-sections"}],"title":"5. Index Map"}],"url":"#sections"},
+"source-mapping-url": {"dfnID":"source-mapping-url","dfnText":"Source Mapping URL","external":false,"refSections":[{"refs":[{"id":"ref-for-source-mapping-url"},{"id":"ref-for-source-mapping-url\u2460"}],"title":"6.2. Linking generated code to source maps"}],"url":"#source-mapping-url"},
+"source-origin": {"dfnID":"source-origin","dfnText":"source origin","external":false,"refSections":[{"refs":[{"id":"ref-for-source-origin"},{"id":"ref-for-source-origin\u2460"},{"id":"ref-for-source-origin\u2461"},{"id":"ref-for-source-origin\u2462"},{"id":"ref-for-source-origin\u2463"}],"title":"6.2. Linking generated code to source maps"}],"url":"#source-origin"},
+"sourceroot": {"dfnID":"sourceroot","dfnText":"sourceRoot","external":false,"refSections":[{"refs":[{"id":"ref-for-sourceroot"}],"title":"4.2. Resolving Sources"}],"url":"#sourceroot"},
+"sources": {"dfnID":"sources","dfnText":"sources","external":false,"refSections":[{"refs":[{"id":"ref-for-sources"},{"id":"ref-for-sources\u2460"}],"title":"4. Source Map Format"},{"refs":[{"id":"ref-for-sources\u2461"}],"title":"4.1. Mappings Structure"}],"url":"#sources"},
+"sourcescontent": {"dfnID":"sourcescontent","dfnText":"sourcesContent","external":false,"refSections":[{"refs":[{"id":"ref-for-sourcescontent"}],"title":"6.2. Linking generated code to source maps"}],"url":"#sourcescontent"},
+"version": {"dfnID":"version","dfnText":"version","external":false,"refSections":[{"refs":[{"id":"ref-for-version"}],"title":"5. Index Map"}],"url":"#version"},
+};
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    genAllDfnPanels();
+
+    document.body.addEventListener("click", (e) => {
+        // If not handled already, just hide all dfn panels.
+        hideAllDfnPanels();
+    });
+});
+
+window.addEventListener("resize", () => {
+    // Pin any visible dfn panel
+    queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>positionDfnPanel(el));
+});
+
+function genAllDfnPanels() {
+    for(const panelData of Object.values(dfnPanelData)) {
+        const dfnID = panelData.dfnID;
+        const dfn = document.getElementById(dfnID);
+        if(!dfn) {
+            console.log(`Can't find dfn#${dfnID}.`, panelData);
+            continue;
+        }
+        dfn.panelData = panelData;
+        insertDfnPopupAction(dfn);
+    }
+}
+
+function genDfnPanel(dfn, { dfnID, url, dfnText, refSections, external }) {
+    const dfnPanel = mk.aside({
+        class: "dfn-panel on",
+        id: `infopanel-for-${dfnID}`,
+        "data-for": dfnID,
+        "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+        },
+        mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+            `Info about the '${dfnText}' ${external?"external":""} reference.`),
+        mk.a({href:url, class:"dfn-link"}, url),
+        refSections.length == 0 ? [] :
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({ href: `#${ref.id}` },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        genLinkingSyntaxes(dfn),
+    );
+
+    dfnPanel.addEventListener('click', (event) => {
+        if (event.target.nodeName == 'A') {
+            scrollToTargetAndHighlight(event);
+            pinDfnPanel(dfnPanel);
+        }
+        event.stopPropagation();
+        refocusOnTarget(event);
+    });
+    dfnPanel.addEventListener('keydown', (event) => {
+        if(event.keyCode == 27) { // Escape key
+            hideDfnPanel({dfnPanel});
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
+
+    dfnPanel.dfn = dfn;
+    dfn.dfnPanel = dfnPanel;
+    return dfnPanel;
+}
+
+
+
+function hideAllDfnPanels() {
+    // Delete the currently-active dfn panel.
+    queryAll(".dfn-panel").forEach(dfnPanel=>hideDfnPanel({dfnPanel}));
+}
+
+function showDfnPanel(dfn) {
+    hideAllDfnPanels(); // Only display one at a time.
+
+    dfn.setAttribute("aria-expanded", "true");
+
+    const dfnPanel = genDfnPanel(dfn, dfn.panelData);
+
+    // Give the dfn a unique tabindex, and then
+    // give all the tabbable panel bits successive indexes.
+    let tabIndex = 100;
+    dfn.tabIndex = tabIndex++;
+    const tabbable = dfnPanel.querySelectorAll(":is(a, button)");
+    for (const el of tabbable) {
+        el.tabIndex = tabIndex++;
+    }
+
+    append(document.body, dfnPanel);
+    positionDfnPanel(dfnPanel);
+}
+
+function positionDfnPanel(dfnPanel) {
+    const dfn = dfnPanel.dfn;
+    const dfnPos = getRootLevelAbsolutePosition(dfn);
+    dfnPanel.style.top = dfnPos.bottom + "px";
+    dfnPanel.style.left = dfnPos.left + "px";
+
+    const panelPos = dfnPanel.getBoundingClientRect();
+    const panelMargin = 8;
+    const maxRight = document.body.parentNode.clientWidth - panelMargin;
+    if (panelPos.right > maxRight) {
+        const overflowAmount = panelPos.right - maxRight;
+        const newLeft = Math.max(panelMargin, dfnPos.left - overflowAmount);
+        dfnPanel.style.left = newLeft + "px";
+    }
+}
+
+function pinDfnPanel(dfnPanel) {
+    // Switch it to "activated" state, which pins it.
+    dfnPanel.classList.add("activated");
+    dfnPanel.style.position = "fixed";
+    dfnPanel.style.left = null;
+    dfnPanel.style.top = null;
+}
+
+function hideDfnPanel({dfn, dfnPanel}) {
+    if(!dfnPanel) dfnPanel = dfn.dfnPanel;
+    if(!dfn) dfn = dfnPanel.dfn;
+    dfn.dfnPanel = undefined;
+    dfnPanel.dfn = undefined;
+    dfn.setAttribute("aria-expanded", "false");
+    dfn.tabIndex = undefined;
+    dfnPanel.remove()
+}
+
+function toggleDfnPanel(dfn) {
+    if(dfn.dfnPanel) {
+        hideDfnPanel(dfn);
+    } else {
+        showDfnPanel(dfn);
+    }
+}
+
+function insertDfnPopupAction(dfn) {
+    dfn.setAttribute('role', 'button');
+    dfn.setAttribute('aria-expanded', 'false')
+    dfn.tabIndex = 0;
+    dfn.classList.add('has-dfn-panel');
+    dfn.addEventListener('click', (event) => {
+        toggleDfnPanel(dfn);
+        event.stopPropagation();
+    });
+    dfn.addEventListener('keypress', (event) => {
+        const kc = event.keyCode;
+        // 32->Space, 13->Enter
+        if(kc == 32 || kc == 13) {
+            toggleDfnPanel(dfn);
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
+}
+
+function refocusOnTarget(event) {
+    const target = event.target;
+    setTimeout(() => {
+        // Refocus on the event.target element.
+        // This is needed after browser scrolls to the destination.
+        target.focus();
+    });
+}
+
+// Returns the root-level absolute position {left and top} of element.
+function getRootLevelAbsolutePosition(el) {
+    const boundsRect = el.getBoundingClientRect();
+    let xPos = 0;
+    let yPos = 0;
+
+    while (el) {
+        let xScroll = el.scrollLeft;
+        let yScroll = el.scrollTop;
+
+        // Ignore scrolling of body.
+        if (el.tagName === "BODY") {
+            xScroll = 0;
+            yScroll = 0;
+        }
+        xPos += (el.offsetLeft - xScroll + el.clientLeft);
+        yPos += (el.offsetTop - yScroll + el.clientTop);
+
+        el = el.offsetParent;
+    }
+    return {
+        left: xPos,
+        top: yPos,
+        right: xPos + boundsRect.width,
+        bottom: yPos + boundsRect.height,
+    };
+}
+
+function scrolledIntoView(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top > 0 &&
+        rect.bottom < window.innerHeight
+    );
+}
+
+function scrollToTargetAndHighlight(event) {
+    let hash = event.target.hash;
+    if (hash) {
+        hash = decodeURIComponent(hash.substring(1));
+        const dest = document.getElementById(hash);
+        if (dest) {
+            // Maybe prevent default scroll.
+            if (scrolledIntoView(dest)) {
+                event.preventDefault();
+            }
+            dest.classList.add('highlighted');
+            setTimeout(() => dest.classList.remove('highlighted'), 1000);
+        }
+    }
+}
+
+// Functions, divided by link type, that wrap an autolink's
+// contents with the appropriate outer syntax.
+// Alternately, a string naming another type they format
+// the same as.
+function needsFor(type) {
+    switch(type) {
+        case "descriptor":
+        case "value":
+        case "element-attr":
+        case "attr-value":
+        case "element-state":
+        case "method":
+        case "constructor":
+        case "argument":
+        case "attribute":
+        case "const":
+        case "dict-member":
+        case "event":
+        case "enum-value":
+        case "stringifier":
+        case "serializer":
+        case "iterator":
+        case "maplike":
+        case "setlike":
+        case "state":
+        case "mode":
+        case "context":
+        case "facet": return true;
+
+        default: return false;
+    }
+}
+function refusesFor(type) {
+    switch(type) {
+        case "property":
+        case "element":
+        case "interface":
+        case "namespace":
+        case "callback":
+        case "dictionary":
+        case "enum":
+        case "exception":
+        case "typedef":
+        case "http-header":
+        case "permission": return true;
+
+        default: return false;
+    }
+}
+function linkFormatterFromType(type) {
+    switch(type) {
+        case 'scheme':
+        case 'permission':
+        case 'dfn': return (text) => `[=${text}=]`;
+
+        case 'abstract-op': return (text) => `[\$${text}\$]`;
+
+        case 'function':
+        case 'at-rule':
+        case 'selector':
+        case 'value': return (text) => `''${text}''`;
+
+        case 'http-header': return (text) => `[:${text}:]`;
+
+        case 'interface':
+        case 'constructor':
+        case 'method':
+        case 'argument':
+        case 'attribute':
+        case 'callback':
+        case 'dictionary':
+        case 'dict-member':
+        case 'enum':
+        case 'enum-value':
+        case 'exception':
+        case 'const':
+        case 'typedef':
+        case 'stringifier':
+        case 'serializer':
+        case 'iterator':
+        case 'maplike':
+        case 'setlike':
+        case 'extended-attribute':
+        case 'event':
+        case 'idl': return (text) => `{{${text}}}`;
+
+        case 'element-state':
+        case 'element-attr':
+        case 'attr-value':
+        case 'element': return (element) => `<{${element}}>`;
+
+        case 'grammar': return (text) => `${text} (within a <pre class=prod>)`;
+
+        case 'type': return (text)=> `<<${text}>>`;
+
+        case 'descriptor':
+        case 'property': return (text) => `'${text}'`;
+
+        default: return;
+    };
+};
+
+function genLinkingSyntaxes(dfn) {
+    if(dfn.tagName != "DFN") return;
+
+    const type = dfn.getAttribute('data-dfn-type');
+    if(!type) {
+        console.log(`<dfn> doesn't have a data-dfn-type:`, dfn);
+        return [];
+    }
+
+    // Return a function that wraps link text based on the type
+    const linkFormatter = linkFormatterFromType(type);
+    if(!linkFormatter) {
+        console.log(`<dfn> has an unknown data-dfn-type:`, dfn);
+        return [];
+    }
+
+    let ltAlts;
+    if(dfn.hasAttribute('data-lt')) {
+        ltAlts = dfn.getAttribute('data-lt')
+            .split("|")
+            .map(x=>x.trim());
+    } else {
+        ltAlts = [dfn.textContent.trim()];
+    }
+    if(type == "type") {
+        // lt of "<foo>", but "foo" is the interior;
+        // <<foo/bar>> is how you write it with a for,
+        // not <foo/<bar>> or whatever.
+        for(var i = 0; i < ltAlts.length; i++) {
+            const lt = ltAlts[i];
+            const match = /<(.*)>/.exec(lt);
+            if(match) { ltAlts[i] = match[1]; }
+        }
+    }
+
+    let forAlts;
+    if(dfn.hasAttribute('data-dfn-for')) {
+        forAlts = dfn.getAttribute('data-dfn-for')
+            .split(",")
+            .map(x=>x.trim());
+    } else {
+        forAlts = [''];
+    }
+
+    let linkingSyntaxes = [];
+    if(!needsFor(type)) {
+        for(const lt of ltAlts) {
+            linkingSyntaxes.push(linkFormatter(lt));
+        }
+    }
+    if(!refusesFor(type)) {
+        for(const f of forAlts) {
+            linkingSyntaxes.push(linkFormatter(`${f}/${ltAlts[0]}`))
+        }
+    }
+    return [
+        mk.b({}, 'Possible linking syntaxes:'),
+        mk.ul({},
+            ...linkingSyntaxes.map(link => {
+                const copyLink = async () =>
+                    await navigator.clipboard.writeText(link);
+                return mk.li({},
+                    mk.div({ class: 'link-item' },
+                        mk.button({
+                            class: 'copy-icon', title: 'Copy',
+                            type: 'button',
+                            _onclick: copyLink,
+                            tabindex: 0,
+                        }, mk.span({ class: 'icon' }) ),
+                        mk.span({}, link)
+                    )
+                );
+            })
+        )
+    ];
+}
 }
 </script>
 <script>/* Boilerplate: script-ref-hints */
 "use strict";
 {
-    function genRefHint(link, ref) {
-        const linkText = link.textContent;
-        let dfnTextElements = '';
-        if (ref.text != linkText) {
-            dfnTextElements =
-                mk.li({},
-                    mk.b({}, "DFN: "),
-                    mk.code({ class: "dfn-text" }, ref.text)
-                );
-        }
-        const forList = ref.for_;
-        const forListElements = forList.length === 0 ? '' : mk.li({},
+let refsData = {
+"#base64-vlq": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"base64 vlq","type":"dfn","url":"#base64-vlq"},
+"#column": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"column","type":"dfn","url":"#column"},
+"#file": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"file","type":"dfn","url":"#file"},
+"#generated-code": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"generated code","type":"dfn","url":"#generated-code"},
+"#map": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"map","type":"dfn","url":"#map"},
+"#mappings": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"mappings","type":"dfn","url":"#mappings"},
+"#names": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"names","type":"dfn","url":"#names"},
+"#offset": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"offset","type":"dfn","url":"#offset"},
+"#original-source": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"original source","type":"dfn","url":"#original-source"},
+"#sections": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"sections","type":"dfn","url":"#sections"},
+"#source-mapping-url": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"source mapping url","type":"dfn","url":"#source-mapping-url"},
+"#source-origin": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"source origin","type":"dfn","url":"#source-origin"},
+"#sourceroot": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"sourceroot","type":"dfn","url":"#sourceroot"},
+"#sources": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"sources","type":"dfn","url":"#sources"},
+"#sourcescontent": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"sourcescontent","type":"dfn","url":"#sourcescontent"},
+"#version": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"version","type":"dfn","url":"#version"},
+};
+
+function mkRefHint(link, ref) {
+    const linkText = link.textContent;
+    let dfnTextElements = '';
+    if (ref.text != linkText) {
+        dfnTextElements =
+            mk.li({},
+                mk.b({}, "Term: "),
+                mk.span({}, ref.text)
+            );
+    }
+    const forList = ref.for_;
+    let forListElements;
+    if(forList.length == 0) {
+        forListElements = [];
+    } else if(forList.length == 1) {
+        forListElements = mk.li({},
+            mk.b({}, "For: "),
+            mk.span({}, forList[0]),
+        );
+    } else {
+        forListElements = mk.li({},
             mk.b({}, "For: "),
             mk.ul({},
                 ...forList.map(forItem =>
                     mk.li({},
-                        mk.span({}, `${forItem}`)
+                        mk.span({}, forItem)
                     ),
                 ),
             ),
         );
-        const url = ref.url;
-        const safeUrl = encodeURIComponent(url);
-        const hintPanel = mk.aside({
-            class: "ref-hint",
-            id: `ref-hint-for-${safeUrl}`,
-            "data-for": url,
-            "aria-labelled-by": `ref-hint-for-${safeUrl}`,
-        },
-            mk.ul({},
-                dfnTextElements,
-                mk.li({},
-                    mk.b({}, "URL: "),
-                    mk.a({ href: url, class: "ref" }, url),
-                ),
-                mk.li({},
-                    mk.b({}, "Type: "),
-                    mk.span({}, `${ref.type}`),
-                ),
-                mk.li({},
-                    mk.b({}, "Spec: "),
-                    mk.span({}, `${ref.spec ? ref.spec : ''}`),
-                ),
-                forListElements
+    }
+    const url = ref.url;
+    const safeUrl = encodeURIComponent(url);
+    const hintPanel = mk.aside({
+        class: "ref-hint",
+        id: `ref-hint-for-${safeUrl}`,
+        "data-for": url,
+        "aria-labelled-by": `ref-hint-for-${safeUrl}`,
+    },
+        mk.ul({},
+            dfnTextElements,
+            mk.li({},
+                mk.b({}, "URL: "),
+                mk.a({ href: url, class: "ref" }, url),
             ),
-        );
-        hintPanel.forLink = link;
-        return hintPanel;
+            mk.li({},
+                mk.b({}, "Type: "),
+                mk.span({}, `${ref.type}`),
+            ),
+            mk.li({},
+                mk.b({}, "Spec: "),
+                mk.span({}, `${ref.spec ? ref.spec : ''}`),
+            ),
+            forListElements
+        ),
+    );
+    hintPanel.forLink = link;
+    setupRefHintEventListeners(link, hintPanel);
+    return hintPanel;
+}
+
+function hideAllRefHints() {
+    queryAll(".ref-hint").forEach(el=>hideRefHint(el));
+}
+
+function hideRefHint(refHint) {
+    const link = refHint.forLink;
+    link.setAttribute("aria-expanded", "false");
+    if(refHint.teardownEventListeners) {
+        refHint.teardownEventListeners();
     }
-    function genAllRefHints() {
-        for(const refData of Object.values(window.refsData)) {
-            const refUrl = refData.url;
-            const links = document.querySelectorAll(`a[href="${refUrl}"]`);
-            if (links.length == 0) {
-                console.log(`Can't find link href="${refUrl}".`, refData);
-                continue;
-            }
-            for (let i = 0; i < links.length; i++) {
-                const link = links[i];
-                const hint = genRefHint(link, refData);
-                append(document.body, hint);
-                insertLinkPopupAction(hint)
-            }
+    refHint.remove();
+}
+
+function showRefHint(link) {
+    if(link.classList.contains("dfn-link")) return;
+    const url = link.getAttribute("href");
+    const ref = refsData[url];
+    if(!ref) return;
+
+    hideAllRefHints(); // Only display one at this time.
+
+    const refHint = mkRefHint(link, ref);
+    append(document.body, refHint);
+    link.setAttribute("aria-expanded", "true");
+    positionRefHint(refHint);
+}
+
+function setupRefHintEventListeners(link, refHint) {
+    if (refHint.teardownEventListeners) return;
+    // Add event handlers to hide the refHint after the user moves away
+    // from both the link and refHint, if not hovering either within one second.
+    let timeout = null;
+    const startHidingRefHint = (event) => {
+        if (timeout) {
+            clearTimeout(timeout);
         }
+        timeout = setTimeout(() => {
+            hideRefHint(refHint);
+        }, 1000);
     }
+    const resetHidingRefHint = (event) => {
+        if (timeout) clearTimeout(timeout);
+        timeout = null;
+    };
+    link.addEventListener("mouseleave", startHidingRefHint);
+    link.addEventListener("mouseenter", resetHidingRefHint);
+    link.addEventListener("blur", startHidingRefHint);
+    link.addEventListener("focus", resetHidingRefHint);
+    refHint.addEventListener("mouseleave", startHidingRefHint);
+    refHint.addEventListener("mouseenter", resetHidingRefHint);
+    refHint.addEventListener("blur", startHidingRefHint);
+    refHint.addEventListener("focus", resetHidingRefHint);
 
-    function hideAllRefHints() {
-        queryAll(".ref-hint.on").forEach(el=>hideRefHint(el));
+    refHint.teardownEventListeners = () => {
+        // remove event listeners
+        resetHidingRefHint();
+        link.removeEventListener("mouseleave", startHidingRefHint);
+        link.removeEventListener("mouseenter", resetHidingRefHint);
+        link.removeEventListener("blur", startHidingRefHint);
+        link.removeEventListener("focus", resetHidingRefHint);
+        refHint.removeEventListener("mouseleave", startHidingRefHint);
+        refHint.removeEventListener("mouseenter", resetHidingRefHint);
+        refHint.removeEventListener("blur", startHidingRefHint);
+        refHint.removeEventListener("focus", resetHidingRefHint);
+    };
+}
+
+function positionRefHint(refHint) {
+    const link = refHint.forLink;
+    const linkPos = getRootLevelAbsolutePosition(link);
+    refHint.style.top = linkPos.bottom + "px";
+    refHint.style.left = linkPos.left + "px";
+
+    const panelPos = refHint.getBoundingClientRect();
+    const panelMargin = 8;
+    const maxRight = document.body.parentNode.clientWidth - panelMargin;
+    if (panelPos.right > maxRight) {
+        const overflowAmount = panelPos.right - maxRight;
+        const newLeft = Math.max(panelMargin, linkPos.left - overflowAmount);
+        refHint.style.left = newLeft + "px";
     }
+}
 
-    function hideRefHint(refHint) {
-        const link = refHint.forLink;
-        link.setAttribute("aria-expanded", "false");
-        refHint.style.position = "absolute"; // unfix it
-        refHint.classList.remove("on");
-        const teardown = refHint.teardownEventListeners;
-        if (teardown) {
-            refHint.teardownEventListeners = undefined;
-            teardown();
+// TODO: shared util
+// Returns the root-level absolute position {left and top} of element.
+function getRootLevelAbsolutePosition(el) {
+    const boundsRect = el.getBoundingClientRect();
+    let xPos = 0;
+    let yPos = 0;
+
+    while (el) {
+        let xScroll = el.scrollLeft;
+        let yScroll = el.scrollTop;
+
+        // Ignore scrolling of body.
+        if (el.tagName === "BODY") {
+            xScroll = 0;
+            yScroll = 0;
         }
+        xPos += (el.offsetLeft - xScroll + el.clientLeft);
+        yPos += (el.offsetTop - yScroll + el.clientTop);
+
+        el = el.offsetParent;
     }
+    return {
+        left: xPos,
+        top: yPos,
+        right: xPos + boundsRect.width,
+        bottom: yPos + boundsRect.height,
+    };
+}
 
-    function showRefHint(refHint) {
-        hideAllRefHints(); // Only display one at this time.
-
-        const link = refHint.forLink;
-        link.setAttribute("aria-expanded", "true");
-        refHint.classList.add("on");
-        positionRefHint(refHint);
-        setupRefHintEventListeners(refHint);
-    }
-
-    function setupRefHintEventListeners(refHint) {
-        if (refHint.teardownEventListeners) return;
-        const link = refHint.forLink;
-        // Add event handlers to hide the refHint after the user moves away
-        // from both the link and refHint, if not hovering either within one second.
-        let timeout = null;
-        const startHidingRefHint = (event) => {
-            if (timeout) {
-                clearTimeout(timeout);
-            }
-            timeout = setTimeout(() => {
-                hideRefHint(refHint);
-            }, 1000);
-        }
-        const resetHidingRefHint = (event) => {
-            if (timeout) clearTimeout(timeout);
-            timeout = null;
-        };
-        link.addEventListener("mouseleave", startHidingRefHint);
-        link.addEventListener("mouseenter", resetHidingRefHint);
-        link.addEventListener("blur", startHidingRefHint);
-        link.addEventListener("focus", resetHidingRefHint);
-        refHint.addEventListener("mouseleave", startHidingRefHint);
-        refHint.addEventListener("mouseenter", resetHidingRefHint);
-        refHint.addEventListener("blur", startHidingRefHint);
-        refHint.addEventListener("focus", resetHidingRefHint);
-
-        refHint.teardownEventListeners = () => {
-            // remove event listeners
-            resetHidingRefHint();
-            link.removeEventListener("mouseleave", startHidingRefHint);
-            link.removeEventListener("mouseenter", resetHidingRefHint);
-            link.removeEventListener("blur", startHidingRefHint);
-            link.removeEventListener("focus", resetHidingRefHint);
-            refHint.removeEventListener("mouseleave", startHidingRefHint);
-            refHint.removeEventListener("mouseenter", resetHidingRefHint);
-            refHint.removeEventListener("blur", startHidingRefHint);
-            refHint.removeEventListener("focus", resetHidingRefHint);
-        };
-    }
-
-    function positionRefHint(refHint) {
-        const link = refHint.forLink;
-        const linkPos = getRootLevelAbsolutePosition(link);
-        refHint.style.top = linkPos.bottom + "px";
-        refHint.style.left = linkPos.left + "px";
-
-        const panelPos = refHint.getBoundingClientRect();
-        const panelMargin = 8;
-        const maxRight = document.body.parentNode.clientWidth - panelMargin;
-        if (panelPos.right > maxRight) {
-            const overflowAmount = panelPos.right - maxRight;
-            const newLeft = Math.max(panelMargin, linkPos.left - overflowAmount);
-            refHint.style.left = newLeft + "px";
-        }
-    }
-
-    // TODO: shared util
-    // Returns the root-level absolute position {left and top} of element.
-    function getRootLevelAbsolutePosition(el) {
-        const boundsRect = el.getBoundingClientRect();
-        let xPos = 0;
-        let yPos = 0;
-
-        while (el) {
-            let xScroll = el.scrollLeft;
-            let yScroll = el.scrollTop;
-
-            // Ignore scrolling of body.
-            if (el.tagName === "BODY") {
-                xScroll = 0;
-                yScroll = 0;
-            }
-            xPos += (el.offsetLeft - xScroll + el.clientLeft);
-            yPos += (el.offsetTop - yScroll + el.clientTop);
-
-            el = el.offsetParent;
-        }
-        return {
-            left: xPos,
-            top: yPos,
-            right: xPos + boundsRect.width,
-            bottom: yPos + boundsRect.height,
-        };
-    }
-
-    function insertLinkPopupAction(refHint) {
-        const link = refHint.forLink;
-        // link.setAttribute('role', 'button');
-        link.setAttribute('aria-expanded', 'false')
-        link.classList.add('has-ref-hint');
-        link.addEventListener('mouseover', (event) => {
-            showRefHint(refHint);
-        });
-        link.addEventListener('focus', (event) => {
-            showRefHint(refHint);
-        })
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        genAllRefHints();
-
-        document.body.addEventListener("click", (e) => {
-            // If not handled already, just hide all link panels.
-            hideAllRefHints();
-        });
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("mouseover", e=>{
+        let link = e.target.closest("a");
+        if(link) showRefHint(link);
+    });
+    document.body.addEventListener("focus", e=>{
+        let link = e.target.closest("a");
+        if(link) showRefHint(link);
     });
 
-    window.addEventListener("resize", () => {
-        // Hide any open ref hint.
+    document.body.addEventListener("click", (e) => {
+        // If not handled already, just hide all link panels.
         hideAllRefHints();
     });
+});
+
+window.addEventListener("resize", () => {
+    // Hide any open ref hint.
+    hideAllRefHints();
+});
 }
-</script>
-<script>/* Boilerplate: script-ref-hints-json */
-window.refsData = {};
-window.refsData['#generated-code'] = {"text": "generated code", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#generated-code", "export": true, "normative": true, "for_": []};
-window.refsData['#original-source'] = {"text": "original source", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#original-source", "export": true, "normative": true, "for_": []};
-window.refsData['#sources'] = {"text": "sources", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#sources", "export": true, "normative": true, "for_": []};
-window.refsData['#mappings'] = {"text": "mappings", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#mappings", "export": true, "normative": true, "for_": []};
-window.refsData['#column'] = {"text": "column", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#column", "export": true, "normative": true, "for_": []};
-window.refsData['#base64-vlq'] = {"text": "base64 vlq", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#base64-vlq", "export": true, "normative": true, "for_": []};
-window.refsData['#names'] = {"text": "names", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#names", "export": true, "normative": true, "for_": []};
-window.refsData['#sourceroot'] = {"text": "sourceroot", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#sourceroot", "export": true, "normative": true, "for_": []};
-window.refsData['#version'] = {"text": "version", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#version", "export": true, "normative": true, "for_": []};
-window.refsData['#file'] = {"text": "file", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#file", "export": true, "normative": true, "for_": []};
-window.refsData['#sections'] = {"text": "sections", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#sections", "export": true, "normative": true, "for_": []};
-window.refsData['#offset'] = {"text": "offset", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#offset", "export": true, "normative": true, "for_": []};
-window.refsData['#map'] = {"text": "map", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#map", "export": true, "normative": true, "for_": []};
-window.refsData['#sourcescontent'] = {"text": "sourcescontent", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#sourcescontent", "export": true, "normative": true, "for_": []};
-window.refsData['#source-mapping-url'] = {"text": "source mapping url", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#source-mapping-url", "export": true, "normative": true, "for_": []};
-window.refsData['#source-origin'] = {"text": "source origin", "type": "dfn", "spec": "source-map-1", "shortname": "source-map", "level": "1", "status": "local", "url": "#source-origin", "export": true, "normative": true, "for_": []};
 </script>
