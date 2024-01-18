@@ -436,12 +436,12 @@ To fetch a source map given a [=URL=] |url|, run the following steps:
 1. Let |request| be a new [=request=] whose [=request/URL=] is |url|.
 1. [=Fetch=] |request| with [=processResponseConsumeBody=] set to the following steps given [=response=] <var ignore>response</var> and null, failure, or a [=byte sequence=] |bodyBytes|:
     1. If |bodyBytes| is null or failure, [=reject=] |promise| with a {{TypeError}} and abort these steps.
-    1. If |url|'s [=url/scheme=] is "<code>http</code>" and |bodyBytes| [=byte sequence/starts with=] \`<code>)]}'</code>\`, then:
+    1. If |url|'s [=url/scheme=] is an [=HTTP(S) scheme=] and |bodyBytes| [=byte sequence/starts with=] \`<code>)]}'</code>\`, then:
         1. [=While=] |bodyBytes|'s [=byte sequence/length=] is not 0 and |bodyBytes|'s 0th byte is not 0x0A (LF) or 0x0D (CR):
             1. remove the 0th byte from |bodyBytes|.
 
             <div class="note">
-            <span class="marker">Note:</span> For historic reasons, when delivering source maps over HTTP, servers may prepend a line
+            <span class="marker">Note:</span> For historic reasons, when delivering source maps over HTTP(S), servers may prepend a line
             starting with the string `)]}'` to the source map.
 
             ```
