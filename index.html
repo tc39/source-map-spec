@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 4416b18d5, updated Tue Jan 2 15:52:39 2024 -0800" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="fabdabde273eb115a5ea5618f3ff6fe91f1aad1b" name="revision">
+  <meta content="87667e274d7bfdb82fecce2f430d3f43c7374602" name="revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2315,28 +2315,28 @@ has never been enforced.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code class="highlight">version</code></dfn> is the version field which is always the number <code class="highlight"><c- mf>3</c-></code> as an integer.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="file"><code class="highlight">file</code></dfn> an optional name of the generated code
 that this source map is associated with. <mark>It’s not specified if this can
-be a URL, relative path name, or just a base name. As such has a mostly informal
+be a URL, relative path name, or just a base name. As such it has a mostly informal
 character.</mark></p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sourceroot"><code class="highlight">sourceRoot</code></dfn> an optional source root,
 useful for relocating source files on a server or removing repeated values in
-the "sources" entry.  This value is prepended to the individual entries in the
+the <a data-link-type="dfn" href="#sources" id="ref-for-sources">sources</a> entry.  This value is prepended to the individual entries in the
 "source" field.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sources"><code class="highlight">sources</code></dfn> is a list of original sources
-used by the "mappings" entry.  Each entry is either a string that is a
+used by the <a data-link-type="dfn" href="#mappings" id="ref-for-mappings">mappings</a> entry.  Each entry is either a string that is a
 (potentially relative) URL or <code class="highlight"><c- kc>null</c-></code> if the source name is not known.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sourcescontent"><code class="highlight">sourcesContent</code></dfn> an optional list
 of source content (that is the <a data-link-type="dfn" href="#original-source" id="ref-for-original-source">Original Source</a>), useful when the "source"
-can’t be hosted.  The contents are listed in the same order as the <a data-link-type="dfn" href="#sources" id="ref-for-sources">sources</a>. <code class="highlight"><c- kc>null</c-></code> may be used if some original sources should be retrieved by name.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="names"><code class="highlight">names</code></dfn> a list of symbol names used by the <a data-link-type="dfn" href="#mappings" id="ref-for-mappings">mappings</a> entry.</p>
+can’t be hosted.  The contents are listed in the same order as the <a data-link-type="dfn" href="#sources" id="ref-for-sources①">sources</a>. <code class="highlight"><c- kc>null</c-></code> may be used if some original sources should be retrieved by name.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="names"><code class="highlight">names</code></dfn> a list of symbol names used by the <a data-link-type="dfn" href="#mappings" id="ref-for-mappings①">mappings</a> entry.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="mappings"><code class="highlight">mappings</code></dfn> a string with the encoded mapping data (see <a href="#mappings-structure">§ 4.1 Mappings Structure</a>).</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ignorelist"><code class="highlight">ignoreList</code></dfn> an optional list of indices of files that
 should be considered third party code, such as framework code or bundler-generated code. This 
 allows developer tools to avoid code that developers likely don’t want to see
 or step through, without requiring developers to configure this beforehand.
-It refers to the <a data-link-type="dfn" href="#sources" id="ref-for-sources①">sources</a> array and lists the indices of all the known third-party sources
+It refers to the <a data-link-type="dfn" href="#sources" id="ref-for-sources②">sources</a> array and lists the indices of all the known third-party sources
 in the source map. Some browsers may also use the deprecated <code class="highlight">x_google_ignoreList</code> field if <code class="highlight">ignoreList</code> is not present.</p>
    <h3 class="heading settled" data-level="4.1" id="mappings-structure"><span class="secno">4.1. </span><span class="content">Mappings Structure</span><a class="self-link" href="#mappings-structure"></a></h3>
-   <p>The <a data-link-type="dfn" href="#mappings" id="ref-for-mappings①">mappings</a> data is broken down as follows:</p>
+   <p>The <a data-link-type="dfn" href="#mappings" id="ref-for-mappings②">mappings</a> data is broken down as follows:</p>
    <ul>
     <li data-md>
      <p>each group representing a line in the generated file is separated by a semicolon (<code class="highlight"><c- p>;</c-></code>)</p>
@@ -2351,10 +2351,10 @@ in the source map. Some browsers may also use the deprecated <code class="highli
      <p>The zero-based starting <a data-link-type="dfn" href="#column" id="ref-for-column">column</a> of the line in the generated code that the segment represents.
 If this is the first field of the first segment, or the first segment following a new generated
 line (<code class="highlight"><c- p>;</c-></code>), then this field holds the whole <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq">Base64 VLQ</a>.  Otherwise, this field contains
-a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq①">Base64 VLQ</a> that is relative to the previous occurrence of this field.  _Note that this
-is different than the fields below because the previous value is reset after every generated line._</p>
+a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq①">Base64 VLQ</a> that is relative to the previous occurrence of this field. <em>Note that this
+is different than the fields below because the previous value is reset after every generated line.</em></p>
     <li data-md>
-     <p>If present, a zero-based index into the <a data-link-type="dfn" href="#sources" id="ref-for-sources②">sources</a> list. This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq②">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first occurrence of this
+     <p>If present, a zero-based index into the <a data-link-type="dfn" href="#sources" id="ref-for-sources③">sources</a> list. This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq②">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first occurrence of this
 field, in which case the whole value is represented.</p>
     <li data-md>
      <p>If present, the zero-based starting line in the original source is represented.  This field is a <a data-link-type="dfn" href="#base64-vlq" id="ref-for-base64-vlq③">Base64 VLQ</a> relative to the previous occurrence of this field, unless this is the first
@@ -2438,13 +2438,13 @@ when generating them.</p>
    <p>Optionally, a source map will have the same name as the generated file but with a <code class="highlight"><c- p>.</c->map</code> extension.  For example, for <code class="highlight">page<c- p>.</c->js</code> a source map named <code class="highlight">page<c- p>.</c->js<c- p>.</c->map</code> would be generated.</p>
    <h3 class="heading settled" data-level="6.2" id="linking-generated-code"><span class="secno">6.2. </span><span class="content">Linking generated code to source maps</span><a class="self-link" href="#linking-generated-code"></a></h3>
    <p>While the source map format is intended to be language and platform agnostic, it is useful
-to have some conventions for the expected use-case of web server-hosted javascript.</p>
-   <p>There are two suggested ways to link source maps to the output.  The first requires a server
-support to add a HTTP header and the second requires an annotation in the source.</p>
+to have some conventions for the expected use-case of web server-hosted JavaScript.</p>
+   <p>There are two suggested ways to link source maps to the output.  The first requires server
+support in order to add an HTTP header and the second requires an annotation in the source.</p>
    <p>The HTTP header should supply the source map URL reference as:</p>
 <pre class="highlight">SourceMap<c- o>:</c-> <c- o>&lt;</c->url<c- o>></c->
 </pre>
-   <p class="note" role="note"><span class="marker">Note:</span> previous revisions of this document recommended a header name of <code class="highlight">X<c- o>-</c->SourceMap</code>.  This
+   <p class="note" role="note"><span class="marker">Note:</span> Previous revisions of this document recommended a header name of <code class="highlight">X<c- o>-</c->SourceMap</code>.  This
 is now deprecated; <code class="highlight">SourceMap</code> is now expected.</p>
    <p>The generated code should include a line at the end of the source, with the following form:</p>
 <pre class="highlight"><c- c1>//# sourceMappingURL=&lt;url></c->
@@ -2452,15 +2452,15 @@ is now deprecated; <code class="highlight">SourceMap</code> is now expected.</p>
    <p class="note" role="note"><span class="marker">Note:</span> The prefix for this annotation was initially <code class="highlight"><c- c1>//@</c-></code> however this conflicts with Internet
 Explorer’s Conditional Compilation and was changed to <code class="highlight"><c- c1>//#</c-></code>. Source map generators must only emit <code class="highlight"><c- c1>//#</c-></code> while source map consumers must accept both <code class="highlight"><c- c1>//@</c-></code> and <code class="highlight"><c- c1>//#</c-></code>.</p>
    <p class="note" role="note"><span class="marker">Note:</span> <code class="highlight"><c- c1>//@</c-></code> is needed for compatibility with some existing legacy source maps.</p>
-   <p>This recommendation works well for JavaScript, it is expected that other source files will
+   <p>This recommendation works well for JavaScript, but it is expected that other source files will
 have different conventions.  For instance, for CSS <code class="highlight"><c- d>/*# sourceMappingURL=&lt;url> */</c-></code> is proposed.
 On the WebAssembly side, such a URL is encoded using <a data-link-type="biblio" href="#biblio-wasmnamesbinaryformat" title="WebAssembly Names binary format">[WasmNamesBinaryFormat]</a>, and it’s placed as the content of the custom section (<a data-link-type="biblio" href="#biblio-wasmcustomsection" title="WebAssembly custom section">[WasmCustomSection]</a>) named <code class="highlight">sourceMappingURL</code>.</p>
    <p><code class="highlight"><c- o>&lt;</c->url<c- o>></c-></code> is a URL as defined in <a data-link-type="biblio" href="#biblio-url" title="URL Standard">[URL]</a>; in particular,
 characters outside the set permitted to appear in URIs must be percent-encoded
 and it may be a data URI.  Using a data URI along with <a data-link-type="dfn" href="#sourcescontent" id="ref-for-sourcescontent">sourcesContent</a> allows
 for a completely self-contained source map.</p>
-   <ins>The HTTP <code class="highlight">SourceMap</code> header has precedence over source annotation, and if both are present,
-header URL should be used to resolve the source map file.</ins>
+   <ins>The HTTP <code class="highlight">SourceMap</code> header has precedence over a source annotation, and if both are present,
+the header URL should be used to resolve the source map file.</ins>
    <p>Regardless of the method used to retrieve the <a data-link-type="dfn" href="#source-mapping-url" id="ref-for-source-mapping-url">Source Mapping URL</a> the same
 process is used to resolve it, which is as follows:</p>
    <p>When the <a data-link-type="dfn" href="#source-mapping-url" id="ref-for-source-mapping-url①">Source Mapping URL</a> is not absolute, then it is relative to the generated code’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="source-origin">source origin</dfn>. The <a data-link-type="dfn" href="#source-origin" id="ref-for-source-origin">source origin</a> is determined by one of the following cases:</p>
@@ -2886,7 +2886,7 @@ let dfnPanelData = {
 "generated-code": {"dfnID":"generated-code","dfnText":"Generated Code","external":false,"refSections":[{"refs":[{"id":"ref-for-generated-code"}],"title":"2. Terminology"}],"url":"#generated-code"},
 "ignorelist": {"dfnID":"ignorelist","dfnText":"ignoreList","external":false,"refSections":[],"url":"#ignorelist"},
 "map": {"dfnID":"map","dfnText":"map","external":false,"refSections":[{"refs":[{"id":"ref-for-map"}],"title":"5. Index Map"}],"url":"#map"},
-"mappings": {"dfnID":"mappings","dfnText":"mappings","external":false,"refSections":[{"refs":[{"id":"ref-for-mappings"}],"title":"4. Source Map Format"},{"refs":[{"id":"ref-for-mappings\u2460"}],"title":"4.1. Mappings Structure"}],"url":"#mappings"},
+"mappings": {"dfnID":"mappings","dfnText":"mappings","external":false,"refSections":[{"refs":[{"id":"ref-for-mappings"},{"id":"ref-for-mappings\u2460"}],"title":"4. Source Map Format"},{"refs":[{"id":"ref-for-mappings\u2461"}],"title":"4.1. Mappings Structure"}],"url":"#mappings"},
 "names": {"dfnID":"names","dfnText":"names","external":false,"refSections":[{"refs":[{"id":"ref-for-names"}],"title":"4.1. Mappings Structure"}],"url":"#names"},
 "offset": {"dfnID":"offset","dfnText":"offset","external":false,"refSections":[{"refs":[{"id":"ref-for-offset"}],"title":"5. Index Map"}],"url":"#offset"},
 "original-source": {"dfnID":"original-source","dfnText":"Original Source","external":false,"refSections":[{"refs":[{"id":"ref-for-original-source"}],"title":"4. Source Map Format"}],"url":"#original-source"},
@@ -2894,7 +2894,7 @@ let dfnPanelData = {
 "source-mapping-url": {"dfnID":"source-mapping-url","dfnText":"Source Mapping URL","external":false,"refSections":[{"refs":[{"id":"ref-for-source-mapping-url"},{"id":"ref-for-source-mapping-url\u2460"}],"title":"6.2. Linking generated code to source maps"}],"url":"#source-mapping-url"},
 "source-origin": {"dfnID":"source-origin","dfnText":"source origin","external":false,"refSections":[{"refs":[{"id":"ref-for-source-origin"},{"id":"ref-for-source-origin\u2460"},{"id":"ref-for-source-origin\u2461"},{"id":"ref-for-source-origin\u2462"},{"id":"ref-for-source-origin\u2463"}],"title":"6.2. Linking generated code to source maps"}],"url":"#source-origin"},
 "sourceroot": {"dfnID":"sourceroot","dfnText":"sourceRoot","external":false,"refSections":[{"refs":[{"id":"ref-for-sourceroot"}],"title":"4.2. Resolving Sources"}],"url":"#sourceroot"},
-"sources": {"dfnID":"sources","dfnText":"sources","external":false,"refSections":[{"refs":[{"id":"ref-for-sources"},{"id":"ref-for-sources\u2460"}],"title":"4. Source Map Format"},{"refs":[{"id":"ref-for-sources\u2461"}],"title":"4.1. Mappings Structure"}],"url":"#sources"},
+"sources": {"dfnID":"sources","dfnText":"sources","external":false,"refSections":[{"refs":[{"id":"ref-for-sources"},{"id":"ref-for-sources\u2460"},{"id":"ref-for-sources\u2461"}],"title":"4. Source Map Format"},{"refs":[{"id":"ref-for-sources\u2462"}],"title":"4.1. Mappings Structure"}],"url":"#sources"},
 "sourcescontent": {"dfnID":"sourcescontent","dfnText":"sourcesContent","external":false,"refSections":[{"refs":[{"id":"ref-for-sourcescontent"}],"title":"6.2. Linking generated code to source maps"}],"url":"#sourcescontent"},
 "version": {"dfnID":"version","dfnText":"version","external":false,"refSections":[{"refs":[{"id":"ref-for-version"}],"title":"5. Index Map"}],"url":"#version"},
 };
