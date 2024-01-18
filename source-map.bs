@@ -23,7 +23,13 @@ spec:html; type:element;
     text:style
     text:title
     text:link
+
 spec:bikeshed-1; type:dfn; for:railroad; text:optional
+
+spec:fetch; type:dfn; for:/; text:request
+spec:fetch; type:dfn; for:/; text:response
+
+spec:url; type:dfn; for:/; text:url
 </pre>
 
 <pre class="biblio">
@@ -245,17 +251,19 @@ Resolving Sources {#resolving-sources}
 If the sources are not absolute URLs after prepending the [=sourceRoot=], the sources are
 resolved relative to the SourceMap (like resolving the script `src` attribute in an HTML document).
 
-Encoding {#encoding}
---------------------
+Fetching Source Maps {#fetching-source-maps}
+--------------------------------------------
 
-For simplicity, the character set encoding is always UTF-8.
+To fetch a source map, given a [=URL=] |url|, run the following steps:
 
-Compression {#compression}
---------------------------
-
-The file is allowed to be GZIP compressed.   It is not expected that in-browser consumers of
-the source map will support GZIP compression directly but that they will consume an
-uncompressed map that may be GZIP'd for transport.
+1. Let |promise| be [=a new promise=].
+1. Let |request| be a new [=request=] whose [=request/URL=] is |url|.
+1. [=Fetch=] |request| with [=processResponseConsumeBody=] set to the following steps given [=response=] <var ignore>response</var> and null, failure, or a [=byte sequence=] |bodyBytes|:
+    1. If |bodyBytes| is null or failure, [=reject=] |promise| with a {{TypeError}} and abort these steps.
+    1. Let |sourceMap| be the result of [=parsing JSON bytes to a JavaScript value=] given |bodyBytes|.
+    1. If the previous step threw an error, [=reject=] |promise| with that error.
+    1. Otherwise, [=resolve=] |promise| with |sourceMap|.
+1. Return |promise|.
 
 Extensions {#extensions}
 ------------------------
