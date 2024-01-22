@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 4416b18d5, updated Tue Jan 2 15:52:39 2024 -0800" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="87667e274d7bfdb82fecce2f430d3f43c7374602" name="revision">
+  <meta content="185988c4b7f7cb8410744795c63de1f0669fb363" name="revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2171,7 +2171,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-01-18">18 January 2024</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-01-22">22 January 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2382,10 +2382,9 @@ resolved relative to the SourceMap (like resolving the script <code class="highl
 the source map will support GZIP compression directly but that they will consume an
 uncompressed map that may be GZIP’d for transport.</p>
    <h3 class="heading settled" data-level="4.5" id="extensions"><span class="secno">4.5. </span><span class="content">Extensions</span><a class="self-link" href="#extensions"></a></h3>
-   <p>Additional fields may be added to the top-level source map provided the fields begin with the <code class="highlight">x_</code> naming convention.  It is expected that the extensions would be classified by the
-organization providing the extension, such as <code class="highlight">x_google_linecount</code>.    Field names outside
-the <code class="highlight">x_</code> namespace are reserved for future revisions.  It is recommended that fields be
-namespaced by domain, i.e. <code class="highlight">x_com_google_gwt_linecount</code>.</p>
+   <p>Source map consumers must ignore any additional unrecognized properties, rather than causing the
+source map to be rejected, so that additional features can be added to this format without
+breaking existing users.</p>
    <h3 class="heading settled" data-level="4.6" id="notes-on-file-offsets"><span class="secno">4.6. </span><span class="content">Notes on File Offsets</span><a class="self-link" href="#notes-on-file-offsets"></a></h3>
    <p>Using file offsets was considered but rejected in favor of using line/column data to avoid becoming
 misaligned with the original due to platform-specific line endings.</p>
