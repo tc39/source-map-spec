@@ -1488,9 +1488,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 4416b18d5, updated Tue Jan 2 15:52:39 2024 -0800" name="generator">
+  <meta content="Bikeshed version 86799f960, updated Thu Jan 25 15:11:40 2024 -0800" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="185988c4b7f7cb8410744795c63de1f0669fb363" name="revision">
+  <meta content="9cec4a83ec06661ef67edb73a9efb8fa81db2467" name="revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2171,7 +2171,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-01-22">22 January 2024</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-01-25">25 January 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2204,10 +2204,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <ol class="toc">
       <li><a href="#mappings-structure"><span class="secno">4.1</span> <span class="content">Mappings Structure</span></a>
       <li><a href="#resolving-sources"><span class="secno">4.2</span> <span class="content">Resolving Sources</span></a>
-      <li><a href="#encoding"><span class="secno">4.3</span> <span class="content">Encoding</span></a>
-      <li><a href="#compression"><span class="secno">4.4</span> <span class="content">Compression</span></a>
-      <li><a href="#extensions"><span class="secno">4.5</span> <span class="content">Extensions</span></a>
-      <li><a href="#notes-on-file-offsets"><span class="secno">4.6</span> <span class="content">Notes on File Offsets</span></a>
+      <li><a href="#extensions"><span class="secno">4.3</span> <span class="content">Extensions</span></a>
+      <li><a href="#notes-on-file-offsets"><span class="secno">4.4</span> <span class="content">Notes on File Offsets</span></a>
      </ol>
     <li>
      <a href="#index-map"><span class="secno">5</span> <span class="content">Index Map</span></a>
@@ -2223,15 +2221,17 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      </ol>
     <li><a href="#language-neutral-stack-mapping-notes"><span class="secno">7</span> <span class="content">Language Neutral Stack Mapping Notes</span></a>
     <li><a href="#multi-level-mapping-notes"><span class="secno">8</span> <span class="content">Multi-level Mapping Notes</span></a>
-    <li><a href="#json-over-http-transport"><span class="secno">9</span> <span class="content">JSON over HTTP Transport</span></a>
+    <li><a href="#fetching-source-maps"><span class="secno">9</span> <span class="content">Fetching Source Maps</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
      </ol>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
+      <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
       <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
      </ol>
    </ol>
@@ -2375,17 +2375,11 @@ using Google Calendar.</p>
    <h3 class="heading settled" data-level="4.2" id="resolving-sources"><span class="secno">4.2. </span><span class="content">Resolving Sources</span><a class="self-link" href="#resolving-sources"></a></h3>
    <p>If the sources are not absolute URLs after prepending the <a data-link-type="dfn" href="#sourceroot" id="ref-for-sourceroot">sourceRoot</a>, the sources are
 resolved relative to the SourceMap (like resolving the script <code class="highlight">src</code> attribute in an HTML document).</p>
-   <h3 class="heading settled" data-level="4.3" id="encoding"><span class="secno">4.3. </span><span class="content">Encoding</span><a class="self-link" href="#encoding"></a></h3>
-   <p>For simplicity, the character set encoding is always UTF-8.</p>
-   <h3 class="heading settled" data-level="4.4" id="compression"><span class="secno">4.4. </span><span class="content">Compression</span><a class="self-link" href="#compression"></a></h3>
-   <p>The file is allowed to be GZIP compressed.   It is not expected that in-browser consumers of
-the source map will support GZIP compression directly but that they will consume an
-uncompressed map that may be GZIP’d for transport.</p>
-   <h3 class="heading settled" data-level="4.5" id="extensions"><span class="secno">4.5. </span><span class="content">Extensions</span><a class="self-link" href="#extensions"></a></h3>
+   <h3 class="heading settled" data-level="4.3" id="extensions"><span class="secno">4.3. </span><span class="content">Extensions</span><a class="self-link" href="#extensions"></a></h3>
    <p>Source map consumers must ignore any additional unrecognized properties, rather than causing the
 source map to be rejected, so that additional features can be added to this format without
 breaking existing users.</p>
-   <h3 class="heading settled" data-level="4.6" id="notes-on-file-offsets"><span class="secno">4.6. </span><span class="content">Notes on File Offsets</span><a class="self-link" href="#notes-on-file-offsets"></a></h3>
+   <h3 class="heading settled" data-level="4.4" id="notes-on-file-offsets"><span class="secno">4.4. </span><span class="content">Notes on File Offsets</span><a class="self-link" href="#notes-on-file-offsets"></a></h3>
    <p>Using file offsets was considered but rejected in favor of using line/column data to avoid becoming
 misaligned with the original due to platform-specific line endings.</p>
    <h2 class="heading settled" data-level="5" id="index-map"><span class="secno">5. </span><span class="content">Index Map</span><a class="self-link" href="#index-map"></a></h2>
@@ -2499,17 +2493,48 @@ the choice of using that as well.</p>
    <p>However, It is unclear what a "source map reference" looks like in anything other than JavaScript.
 More specifically, what a source map reference looks like in a language that doesn’t support
 JavaScript-style single-line comments.</p>
-   <h2 class="heading settled" data-level="9" id="json-over-http-transport"><span class="secno">9. </span><span class="content">JSON over HTTP Transport</span><a class="self-link" href="#json-over-http-transport"></a></h2>
-   <p>For historic reasons, when delivering source maps over HTTP, servers may prepend a line
-starting with the string <code class="highlight"><c- p>)]}</c->'</code> to the source map.  A client fetching a source map via
-HTTP thus should check if the response starts with this string and then ignore the
-first line.</p>
+   <h2 class="heading settled" data-level="9" id="fetching-source-maps"><span class="secno">9. </span><span class="content">Fetching Source Maps</span><a class="self-link" href="#fetching-source-maps"></a></h2>
+   <p>To fetch a source map given a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL</a> <var>url</var>, run the following steps:</p>
+   <ol>
+    <li data-md>
+     <p>Let <var>promise</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#a-new-promise" id="ref-for-a-new-promise">a new promise</a>.</p>
+    <li data-md>
+     <p>Let <var>request</var> be a new <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request">request</a> whose <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-url" id="ref-for-concept-request-url">URL</a> is <var>url</var>.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch">Fetch</a> <var>request</var> with <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#process-response-end-of-body" id="ref-for-process-response-end-of-body">processResponseConsumeBody</a> set to the following steps given <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response" id="ref-for-concept-response">response</a> <var>response</var> and null, failure, or a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence" id="ref-for-byte-sequence">byte sequence</a> <var>bodyBytes</var>:</p>
+     <ol>
+      <li data-md>
+       <p>If <var>bodyBytes</var> is null or failure, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#reject" id="ref-for-reject">reject</a> <var>promise</var> with a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror">TypeError</a></code> and abort these steps.</p>
+      <li data-md>
+       <p>If <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme">scheme</a> is an <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#http-scheme" id="ref-for-http-scheme">HTTP(S) scheme</a> and <var>bodyBytes</var> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence-starts-with" id="ref-for-byte-sequence-starts-with">starts with</a> `<code class="highlight"><c- p>)]}</c->'</code>`, then:</p>
+       <ol>
+        <li data-md>
+         <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-while" id="ref-for-iteration-while">While</a> <var>bodyBytes</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence-length" id="ref-for-byte-sequence-length">length</a> is not 0 and <var>bodyBytes</var>’s 0th byte is not an <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#http-newline-byte" id="ref-for-http-newline-byte">HTTP newline byte</a>:</p>
+         <ol>
+          <li data-md>
+           <p>remove the 0th byte from <var>bodyBytes</var>.</p>
+         </ol>
+         <div class="note" role="note">
+           <span class="marker">Note:</span> For historic reasons, when delivering source maps over HTTP(S), servers may prepend a line
+starting with the string <code class="highlight"><c- p>)]}</c->'</code> to the source map. 
 <pre class="highlight"><c- p>)]}</c->'garbage here
 <c- p>{</c-><c- u>"version"</c-><c- o>:</c-> <c- mf>3</c-><c- p>,</c-> <c- p>...}</c->
 </pre>
-   <p>Is to be interpreted as</p>
+          <p>is interpreted as</p>
 <pre class="highlight"><c- p>{</c-><c- u>"version"</c-><c- o>:</c-> <c- mf>3</c-><c- p>,</c-> <c- p>...}</c->
 </pre>
+         </div>
+       </ol>
+      <li data-md>
+       <p>Let <var>sourceMap</var> be the result of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#parse-json-bytes-to-a-javascript-value" id="ref-for-parse-json-bytes-to-a-javascript-value">parsing JSON bytes to a JavaScript value</a> given <var>bodyBytes</var>.</p>
+      <li data-md>
+       <p>If the previous step threw an error, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#reject" id="ref-for-reject①">reject</a> <var>promise</var> with that error.</p>
+      <li data-md>
+       <p>Otherwise, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#resolve" id="ref-for-resolve">resolve</a> <var>promise</var> with <var>sourceMap</var>.</p>
+     </ol>
+    <li data-md>
+     <p>Return <var>promise</var>.</p>
+   </ol>
   </main>
 <script>
 (function() {
@@ -2661,15 +2686,61 @@ first line.</p>
    <li><a href="#sourcescontent">sourcesContent</a><span>, in § 4</span>
    <li><a href="#version">version</a><span>, in § 4</span>
   </ul>
+  <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="index">
+   <li>
+    <a data-link-type="biblio">[FETCH]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="a33db89a">fetch</span>
+     <li><span class="dfn-paneled" id="35d99fe8">http newline byte</span>
+     <li><span class="dfn-paneled" id="eb62573b">http(s) scheme</span>
+     <li><span class="dfn-paneled" id="08b51e40">processresponseconsumebody</span>
+     <li><span class="dfn-paneled" id="55213b5b">request</span>
+     <li><span class="dfn-paneled" id="ee7bba09">response</span>
+     <li><span class="dfn-paneled" id="dc1cd39b">url</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[INFRA]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="3de9e659">byte sequence</span>
+     <li><span class="dfn-paneled" id="36333997">length</span>
+     <li><span class="dfn-paneled" id="6a24df10">parsing json bytes to a javascript value</span>
+     <li><span class="dfn-paneled" id="904cdc91">starts with</span>
+     <li><span class="dfn-paneled" id="cbdc89b4">while</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[URL]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="3a711be7">scheme</span>
+     <li><span class="dfn-paneled" id="dcffbccd">url</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="82ca3efc">TypeError</span>
+     <li><span class="dfn-paneled" id="dacde8b5">a new promise</span>
+     <li><span class="dfn-paneled" id="b262501e">reject</span>
+     <li><span class="dfn-paneled" id="3b90bdcd">resolve</span>
+    </ul>
+  </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
+  <dl>
+   <dt id="biblio-fetch">[FETCH]
+   <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
+   <dt id="biblio-infra">[INFRA]
+   <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
+   <dt id="biblio-url">[URL]
+   <dd><a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
+   <dt id="biblio-webidl">[WEBIDL]
+   <dd>Edgar Chen; Timothy Gu. <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
+  </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-base64">[BASE64]
    <dd><a href="https://www.ietf.org/rfc/rfc4648.txt"><cite>The Base16, Base32, and Base64 Data Encodings</cite></a>. Standards Track. URL: <a href="https://www.ietf.org/rfc/rfc4648.txt">https://www.ietf.org/rfc/rfc4648.txt</a>
    <dt id="biblio-evalsourceurl">[EvalSourceURL]
    <dd><a href="https://web.archive.org/web/20120814122523/http://blog.getfirebug.com/2009/08/11/give-your-eval-a-name-with-sourceurl/"><cite>Give your eval a name with //@ sourceURL</cite></a>. archive. URL: <a href="https://web.archive.org/web/20120814122523/http://blog.getfirebug.com/2009/08/11/give-your-eval-a-name-with-sourceurl/">https://web.archive.org/web/20120814122523/http://blog.getfirebug.com/2009/08/11/give-your-eval-a-name-with-sourceurl/</a>
-   <dt id="biblio-url">[URL]
-   <dd><a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
    <dt id="biblio-v2format">[V2Format]
    <dd><a href="https://docs.google.com/document/d/1xi12LrcqjqIHTtZzrzZKmQ3lbTv9mKrN076UB-j3UZQ/edit?hl=en_US"><cite>Source Map Revision 2 Proposal</cite></a>. URL: <a href="https://docs.google.com/document/d/1xi12LrcqjqIHTtZzrzZKmQ3lbTv9mKrN076UB-j3UZQ/edit?hl=en_US">https://docs.google.com/document/d/1xi12LrcqjqIHTtZzrzZKmQ3lbTv9mKrN076UB-j3UZQ/edit?hl=en_US</a>
    <dt id="biblio-vlq">[VLQ]
@@ -2879,8 +2950,26 @@ function parseHTML(markup) {
 "use strict";
 {
 let dfnPanelData = {
+"08b51e40": {"dfnID":"08b51e40","dfnText":"processresponseconsumebody","external":true,"refSections":[{"refs":[{"id":"ref-for-process-response-end-of-body"}],"title":"9. Fetching Source Maps"}],"url":"https://fetch.spec.whatwg.org/#process-response-end-of-body"},
+"35d99fe8": {"dfnID":"35d99fe8","dfnText":"http newline byte","external":true,"refSections":[{"refs":[{"id":"ref-for-http-newline-byte"}],"title":"9. Fetching Source Maps"}],"url":"https://fetch.spec.whatwg.org/#http-newline-byte"},
+"36333997": {"dfnID":"36333997","dfnText":"length","external":true,"refSections":[{"refs":[{"id":"ref-for-byte-sequence-length"}],"title":"9. Fetching Source Maps"}],"url":"https://infra.spec.whatwg.org/#byte-sequence-length"},
+"3a711be7": {"dfnID":"3a711be7","dfnText":"scheme","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-url-scheme"}],"title":"9. Fetching Source Maps"}],"url":"https://url.spec.whatwg.org/#concept-url-scheme"},
+"3b90bdcd": {"dfnID":"3b90bdcd","dfnText":"resolve","external":true,"refSections":[{"refs":[{"id":"ref-for-resolve"}],"title":"9. Fetching Source Maps"}],"url":"https://webidl.spec.whatwg.org/#resolve"},
+"3de9e659": {"dfnID":"3de9e659","dfnText":"byte sequence","external":true,"refSections":[{"refs":[{"id":"ref-for-byte-sequence"}],"title":"9. Fetching Source Maps"}],"url":"https://infra.spec.whatwg.org/#byte-sequence"},
+"55213b5b": {"dfnID":"55213b5b","dfnText":"request","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request"}],"title":"9. Fetching Source Maps"}],"url":"https://fetch.spec.whatwg.org/#concept-request"},
+"6a24df10": {"dfnID":"6a24df10","dfnText":"parsing json bytes to a javascript value","external":true,"refSections":[{"refs":[{"id":"ref-for-parse-json-bytes-to-a-javascript-value"}],"title":"9. Fetching Source Maps"}],"url":"https://infra.spec.whatwg.org/#parse-json-bytes-to-a-javascript-value"},
+"82ca3efc": {"dfnID":"82ca3efc","dfnText":"TypeError","external":true,"refSections":[{"refs":[{"id":"ref-for-exceptiondef-typeerror"}],"title":"9. Fetching Source Maps"}],"url":"https://webidl.spec.whatwg.org/#exceptiondef-typeerror"},
+"904cdc91": {"dfnID":"904cdc91","dfnText":"starts with","external":true,"refSections":[{"refs":[{"id":"ref-for-byte-sequence-starts-with"}],"title":"9. Fetching Source Maps"}],"url":"https://infra.spec.whatwg.org/#byte-sequence-starts-with"},
+"a33db89a": {"dfnID":"a33db89a","dfnText":"fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-fetch"}],"title":"9. Fetching Source Maps"}],"url":"https://fetch.spec.whatwg.org/#concept-fetch"},
+"b262501e": {"dfnID":"b262501e","dfnText":"reject","external":true,"refSections":[{"refs":[{"id":"ref-for-reject"},{"id":"ref-for-reject\u2460"}],"title":"9. Fetching Source Maps"}],"url":"https://webidl.spec.whatwg.org/#reject"},
 "base64-vlq": {"dfnID":"base64-vlq","dfnText":"Base64 VLQ","external":false,"refSections":[{"refs":[{"id":"ref-for-base64-vlq"},{"id":"ref-for-base64-vlq\u2460"},{"id":"ref-for-base64-vlq\u2461"},{"id":"ref-for-base64-vlq\u2462"},{"id":"ref-for-base64-vlq\u2463"}],"title":"4.1. Mappings Structure"}],"url":"#base64-vlq"},
+"cbdc89b4": {"dfnID":"cbdc89b4","dfnText":"while","external":true,"refSections":[{"refs":[{"id":"ref-for-iteration-while"}],"title":"9. Fetching Source Maps"}],"url":"https://infra.spec.whatwg.org/#iteration-while"},
 "column": {"dfnID":"column","dfnText":"Column","external":false,"refSections":[{"refs":[{"id":"ref-for-column"},{"id":"ref-for-column\u2460"}],"title":"4.1. Mappings Structure"}],"url":"#column"},
+"dacde8b5": {"dfnID":"dacde8b5","dfnText":"a new promise","external":true,"refSections":[{"refs":[{"id":"ref-for-a-new-promise"}],"title":"9. Fetching Source Maps"}],"url":"https://webidl.spec.whatwg.org/#a-new-promise"},
+"dc1cd39b": {"dfnID":"dc1cd39b","dfnText":"url","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request-url"}],"title":"9. Fetching Source Maps"}],"url":"https://fetch.spec.whatwg.org/#concept-request-url"},
+"dcffbccd": {"dfnID":"dcffbccd","dfnText":"url","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-url"}],"title":"9. Fetching Source Maps"}],"url":"https://url.spec.whatwg.org/#concept-url"},
+"eb62573b": {"dfnID":"eb62573b","dfnText":"http(s) scheme","external":true,"refSections":[{"refs":[{"id":"ref-for-http-scheme"}],"title":"9. Fetching Source Maps"}],"url":"https://fetch.spec.whatwg.org/#http-scheme"},
+"ee7bba09": {"dfnID":"ee7bba09","dfnText":"response","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-response"}],"title":"9. Fetching Source Maps"}],"url":"https://fetch.spec.whatwg.org/#concept-response"},
 "file": {"dfnID":"file","dfnText":"file","external":false,"refSections":[{"refs":[{"id":"ref-for-file"}],"title":"5. Index Map"}],"url":"#file"},
 "generated-code": {"dfnID":"generated-code","dfnText":"Generated Code","external":false,"refSections":[{"refs":[{"id":"ref-for-generated-code"}],"title":"2. Terminology"}],"url":"#generated-code"},
 "ignorelist": {"dfnID":"ignorelist","dfnText":"ignoreList","external":false,"refSections":[],"url":"#ignorelist"},
@@ -3004,7 +3093,7 @@ function showDfnPanel(dfn) {
 
 function positionDfnPanel(dfnPanel) {
     const dfn = dfnPanel.dfn;
-    const dfnPos = getRootLevelAbsolutePosition(dfn);
+    const dfnPos = getBounds(dfn);
     dfnPanel.style.top = dfnPos.bottom + "px";
     dfnPanel.style.left = dfnPos.left + "px";
 
@@ -3073,40 +3162,19 @@ function refocusOnTarget(event) {
     });
 }
 
+// TODO: shared util
 // Returns the root-level absolute position {left and top} of element.
-function getRootLevelAbsolutePosition(el) {
-    const boundsRect = el.getBoundingClientRect();
-    let xPos = 0;
-    let yPos = 0;
-
-    while (el) {
-        let xScroll = el.scrollLeft;
-        let yScroll = el.scrollTop;
-
-        // Ignore scrolling of body.
-        if (el.tagName === "BODY") {
-            xScroll = 0;
-            yScroll = 0;
-        }
-        xPos += (el.offsetLeft - xScroll + el.clientLeft);
-        yPos += (el.offsetTop - yScroll + el.clientTop);
-
-        el = el.offsetParent;
-    }
+function getBounds(el, relativeTo=document.body) {
+    const relativeRect = relativeTo.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const top = elRect.top - relativeRect.top;
+    const left = elRect.left - relativeRect.left;
     return {
-        left: xPos,
-        top: yPos,
-        right: xPos + boundsRect.width,
-        bottom: yPos + boundsRect.height,
-    };
-}
-
-function scrolledIntoView(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top > 0 &&
-        rect.bottom < window.innerHeight
-    );
+        top,
+        left,
+        bottom: top + elRect.height,
+        right: left + elRect.width,
+    }
 }
 
 function scrollToTargetAndHighlight(event) {
@@ -3115,10 +3183,6 @@ function scrollToTargetAndHighlight(event) {
         hash = decodeURIComponent(hash.substring(1));
         const dest = document.getElementById(hash);
         if (dest) {
-            // Maybe prevent default scroll.
-            if (scrolledIntoView(dest)) {
-                event.preventDefault();
-            }
             dest.classList.add('highlighted');
             setTimeout(() => dest.classList.remove('highlighted'), 1000);
         }
@@ -3325,6 +3389,24 @@ let refsData = {
 "#sources": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"sources","type":"dfn","url":"#sources"},
 "#sourcescontent": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"sourcescontent","type":"dfn","url":"#sourcescontent"},
 "#version": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"source-map","spec":"source-map-1","status":"local","text":"version","type":"dfn","url":"#version"},
+"https://fetch.spec.whatwg.org/#concept-fetch": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"fetch","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-fetch"},
+"https://fetch.spec.whatwg.org/#concept-request": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"request","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-request"},
+"https://fetch.spec.whatwg.org/#concept-request-url": {"export":true,"for_":["request"],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"url","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-request-url"},
+"https://fetch.spec.whatwg.org/#concept-response": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"response","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-response"},
+"https://fetch.spec.whatwg.org/#http-newline-byte": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"http newline byte","type":"dfn","url":"https://fetch.spec.whatwg.org/#http-newline-byte"},
+"https://fetch.spec.whatwg.org/#http-scheme": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"http(s) scheme","type":"dfn","url":"https://fetch.spec.whatwg.org/#http-scheme"},
+"https://fetch.spec.whatwg.org/#process-response-end-of-body": {"export":true,"for_":["fetch"],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"processresponseconsumebody","type":"dfn","url":"https://fetch.spec.whatwg.org/#process-response-end-of-body"},
+"https://infra.spec.whatwg.org/#byte-sequence": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"byte sequence","type":"dfn","url":"https://infra.spec.whatwg.org/#byte-sequence"},
+"https://infra.spec.whatwg.org/#byte-sequence-length": {"export":true,"for_":["byte sequence"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"length","type":"dfn","url":"https://infra.spec.whatwg.org/#byte-sequence-length"},
+"https://infra.spec.whatwg.org/#byte-sequence-starts-with": {"export":true,"for_":["byte sequence"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"starts with","type":"dfn","url":"https://infra.spec.whatwg.org/#byte-sequence-starts-with"},
+"https://infra.spec.whatwg.org/#iteration-while": {"export":true,"for_":["iteration"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"while","type":"dfn","url":"https://infra.spec.whatwg.org/#iteration-while"},
+"https://infra.spec.whatwg.org/#parse-json-bytes-to-a-javascript-value": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"parsing json bytes to a javascript value","type":"dfn","url":"https://infra.spec.whatwg.org/#parse-json-bytes-to-a-javascript-value"},
+"https://url.spec.whatwg.org/#concept-url": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"url","spec":"url","status":"current","text":"url","type":"dfn","url":"https://url.spec.whatwg.org/#concept-url"},
+"https://url.spec.whatwg.org/#concept-url-scheme": {"export":true,"for_":["url"],"level":"1","normative":true,"shortname":"url","spec":"url","status":"current","text":"scheme","type":"dfn","url":"https://url.spec.whatwg.org/#concept-url-scheme"},
+"https://webidl.spec.whatwg.org/#a-new-promise": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"a new promise","type":"dfn","url":"https://webidl.spec.whatwg.org/#a-new-promise"},
+"https://webidl.spec.whatwg.org/#exceptiondef-typeerror": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"TypeError","type":"exception","url":"https://webidl.spec.whatwg.org/#exceptiondef-typeerror"},
+"https://webidl.spec.whatwg.org/#reject": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"reject","type":"dfn","url":"https://webidl.spec.whatwg.org/#reject"},
+"https://webidl.spec.whatwg.org/#resolve": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"resolve","type":"dfn","url":"https://webidl.spec.whatwg.org/#resolve"},
 };
 
 function mkRefHint(link, ref) {
@@ -3457,7 +3539,7 @@ function setupRefHintEventListeners(link, refHint) {
 
 function positionRefHint(refHint) {
     const link = refHint.forLink;
-    const linkPos = getRootLevelAbsolutePosition(link);
+    const linkPos = getBounds(link);
     refHint.style.top = linkPos.bottom + "px";
     refHint.style.left = linkPos.left + "px";
 
@@ -3473,47 +3555,46 @@ function positionRefHint(refHint) {
 
 // TODO: shared util
 // Returns the root-level absolute position {left and top} of element.
-function getRootLevelAbsolutePosition(el) {
-    const boundsRect = el.getBoundingClientRect();
-    let xPos = 0;
-    let yPos = 0;
-
-    while (el) {
-        let xScroll = el.scrollLeft;
-        let yScroll = el.scrollTop;
-
-        // Ignore scrolling of body.
-        if (el.tagName === "BODY") {
-            xScroll = 0;
-            yScroll = 0;
-        }
-        xPos += (el.offsetLeft - xScroll + el.clientLeft);
-        yPos += (el.offsetTop - yScroll + el.clientTop);
-
-        el = el.offsetParent;
-    }
+function getBounds(el, relativeTo=document.body) {
+    const relativeRect = relativeTo.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const top = elRect.top - relativeRect.top;
+    const left = elRect.left - relativeRect.left;
     return {
-        left: xPos,
-        top: yPos,
-        right: xPos + boundsRect.width,
-        bottom: yPos + boundsRect.height,
-    };
+        top,
+        left,
+        bottom: top + elRect.height,
+        right: left + elRect.width,
+    }
+}
+
+function showRefHintListener(e) {
+    // If the target isn't in a link (or is a link),
+    // just ignore it.
+    let link = e.target.closest("a");
+    if(!link) return;
+
+    // If the target is in a ref-hint panel
+    // (aka a link in the already-open one),
+    // also just ignore it.
+    if(link.closest(".ref-hint")) return;
+
+    // Otherwise, show the panel for the link.
+    showRefHint(link);
+}
+
+function hideAllHintsListener(e) {
+    // If the click is inside a ref-hint panel, ignore it.
+    if(e.target.closest(".ref-hint")) return;
+    // Otherwise, close all the current panels.
+    hideAllRefHints();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener("mouseover", e=>{
-        let link = e.target.closest("a");
-        if(link) showRefHint(link);
-    });
-    document.body.addEventListener("focus", e=>{
-        let link = e.target.closest("a");
-        if(link) showRefHint(link);
-    });
+    document.body.addEventListener("mouseover", showRefHintListener);
+    document.body.addEventListener("focus", showRefHintListener);
 
-    document.body.addEventListener("click", (e) => {
-        // If not handled already, just hide all link panels.
-        hideAllRefHints();
-    });
+    document.body.addEventListener("click", hideAllHintsListener);
 });
 
 window.addEventListener("resize", () => {
