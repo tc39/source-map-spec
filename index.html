@@ -1488,9 +1488,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 86799f960, updated Thu Jan 25 15:11:40 2024 -0800" name="generator">
+  <meta content="Bikeshed version d5d58a306, updated Fri Jan 26 16:12:28 2024 -0800" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="9cec4a83ec06661ef67edb73a9efb8fa81db2467" name="revision">
+  <meta content="fbcf32ff81752a59dc659ba4e65a76f9a5b9d06b" name="revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2171,7 +2171,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-01-25">25 January 2024</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-02-01">1 February 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2435,10 +2435,10 @@ to have some conventions for the expected use-case of web server-hosted JavaScri
    <p>There are two suggested ways to link source maps to the output.  The first requires server
 support in order to add an HTTP header and the second requires an annotation in the source.</p>
    <p>The HTTP header should supply the source map URL reference as:</p>
-<pre class="highlight">SourceMap<c- o>:</c-> <c- o>&lt;</c->url<c- o>></c->
+<pre class="highlight">sourcemap<c- o>:</c-> <c- o>&lt;</c->url<c- o>></c->
 </pre>
-   <p class="note" role="note"><span class="marker">Note:</span> Previous revisions of this document recommended a header name of <code class="highlight">X<c- o>-</c->SourceMap</code>.  This
-is now deprecated; <code class="highlight">SourceMap</code> is now expected.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> Previous revisions of this document recommended a header name of <code class="highlight">x<c- o>-</c->sourcemap</code>.  This
+is now deprecated; <code class="highlight">sourcemap</code> is now expected.</p>
    <p>The generated code should include a line at the end of the source, with the following form:</p>
 <pre class="highlight"><c- c1>//# sourceMappingURL=&lt;url></c->
 </pre>
@@ -3591,7 +3591,7 @@ function hideAllHintsListener(e) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener("mouseover", showRefHintListener);
+    document.body.addEventListener("mousedown", showRefHintListener);
     document.body.addEventListener("focus", showRefHintListener);
 
     document.body.addEventListener("click", hideAllHintsListener);
