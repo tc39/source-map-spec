@@ -121,6 +121,11 @@ Note: This encoding reduces the source map size 50% relative to the V2 format in
 If the sources are not absolute URLs after prepending of the “sourceRoot”, the sources are resolved relative to the SourceMap (like resolving script src in a html document).
 
 
+#### Termination
+
+Since source map mappings only map locations and not ranges, looking up chars in the generated code will usually lead to the previous mapping within that line. If this is not indended for a range in the generated code, it's possible to "terminate" mappings by inserting mappings without original location.
+
+
 #### Encoding
 
 For simplicity, the character set encoding is always UTF-8.
