@@ -184,7 +184,7 @@ character.</mark>
 <dfn><code>sourceRoot</code></dfn> an optional source root,
 useful for relocating source files on a server or removing repeated values in
 the [=sources=] entry.  This value is prepended to the individual entries in the
-"source" field.
+[=sources=] field (see [[#resolving-sources]]).
 
 <dfn><code>sources</code></dfn> is a list of original sources
 used by the [=mappings=] entry.  Each entry is either a string that is a
@@ -192,15 +192,15 @@ used by the [=mappings=] entry.  Each entry is either a string that is a
 
 <dfn><code>sourcesContent</code></dfn> an optional list
 of source content (that is the [=Original Source=]), useful when the "source"
-can't be hosted.  The contents are listed in the same order as the [=sources=].
+can't be hosted.  The contents are listed in the same order as [=sources=].
 `null` may be used if some original sources should be retrieved by name.
 
 <dfn><code>names</code></dfn> a list of symbol names used by the [=mappings=] entry.
 
 <dfn><code>mappings</code></dfn> a string with the encoded mapping data (see [[#mappings-structure]]).
 
-<dfn><code>ignoreList</code></dfn> an optional list of indices of files that
-should be considered third party code, such as framework code or bundler-generated code. This 
+<dfn export><code>ignoreList</code></dfn> an optional list of indices of files that
+should be considered third party code, such as framework code or bundler-generated code. This
 allows developer tools to avoid code that developers likely don't want to see
 or step through, without requiring developers to configure this beforehand.
 It refers to the [=sources=] array and lists the indices of all the known third-party sources
@@ -248,8 +248,20 @@ using Google Calendar.
 Resolving Sources {#resolving-sources}
 --------------------------------------
 
-If the sources are not absolute URLs after prepending the [=sourceRoot=], the sources are
-resolved relative to the SourceMap (like resolving the script `src` attribute in an HTML document).
+To resolve a source given a [=URL=] |sourceMappingUrl|, a string or null |source|, and
+an optional [=sourceRoot=] |sourceRoot|, run the following steps:
+
+1. If |source| is null, then:
+    1. Return null.
+1. If |sourceRoot| is null, then:
+    1. Let |href| be |source|
+1. Otherwise,
+    1. If |sourceRoot| does not end with a U+002F (/) char, then:
+        1. Append U+002f (/) to |sourceRoot|.
+    1. Let |href| be |sourceRoot| and |source| concatenated.
+1. If |sourceMappingUrl|'s [=url/scheme=] is "data", then:
+    1. Return |href|.
+1. Return the result of running [=basic URL parser=] on |href| with |sourceMappingUrl|.
 
 Extensions {#extensions}
 ------------------------
@@ -419,7 +431,7 @@ TypeScript -> JavaScript -> minified JavaScript, resulting in multiple translati
 final source map is created.  This problem can be handled in one of two ways.  The easy but
 lossy way is to ignore the intermediate steps in the process for the purposes of debugging,
 the source location information from the translation is either ignored (the intermediate
-translation is considered the “Original Source”) or the source location information is carried
+translation is considered the "Original Source") or the source location information is carried
 through (the intermediate translation hidden).  The more complete way is to support multiple
 levels of mapping: if the Original Source also has a source map reference, the user is given
 the choice of using that as well.
