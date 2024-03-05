@@ -252,7 +252,7 @@ To resolve a source given a [=URL=] |sourceMappingUrl|, a string or null |source
 an optional [=sourceRoot=] |sourceRoot|, run the following steps:
 
 1. If |source| is null, then:
-    1. Return null.
+    1. Set |source| to "".
 1. If |sourceRoot| is null, then:
     1. Let |href| be |source|
 1. Otherwise,
