@@ -1488,9 +1488,10 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version d5d58a306, updated Fri Jan 26 16:12:28 2024 -0800" name="generator">
+  <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
   <link href="https://source-map.github.io/source-map-spec/" rel="canonical">
-  <meta content="fbcf32ff81752a59dc659ba4e65a76f9a5b9d06b" name="revision">
+  <meta content="695bcf503ed9095a1986ce7dcd8d4c85d36215e8" name="revision">
+  <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2171,7 +2172,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Source Map</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-02-01">1 February 2024</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Stage 0: Strawman, <time class="dt-updated" datetime="2024-03-13">13 March 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2312,7 +2313,7 @@ following structure:</p>
    <p class="note" role="note"><span class="marker">Note:</span> The previous specification suggested an order to the keys in this file, but
 for practical reasons, the order cannot be defined in many JSON generators and
 has never been enforced.</p>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code class="highlight">version</code></dfn> is the version field which is always the number <code class="highlight"><c- mf>3</c-></code> as an integer.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="version"><code class="highlight">version</code></dfn> is the version field which must always be the number <code class="highlight"><c- mf>3</c-></code> as an integer. The source map may be rejected in case of a value different from <code class="highlight"><c- mf>3</c-></code>.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="file"><code class="highlight">file</code></dfn> an optional name of the generated code
 that this source map is associated with. <mark>It’s not specified if this can
 be a URL, relative path name, or just a base name. As such it has a mostly informal
