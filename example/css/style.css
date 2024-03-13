@@ -1,0 +1,14 @@
+body .test {
+  font-size: 14px;
+  line-height: 28px; }
+
+body .text {
+  color: green; }
+  body .test::after {
+    content: "";
+    background-color: white; }
+
+body .test {
+  padding: 5px; }
+
+a::before { content: ""; /*# sourceMappingURL=sourcemap-css-absolute.map */ }
