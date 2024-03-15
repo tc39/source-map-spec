@@ -115,6 +115,8 @@ The fields in each segment are:
 
 Note: This encoding reduces the source map size 50% relative to the V2 format in tests performed using Google Calendar.
 
+Note: Since source map mappings only map locations and not ranges, looking up chars in the generated code will usually lead to the previous mapping within that line. If this is not indended for a range in the generated code, it's possible to "terminate" mappings by inserting mappings without original location.
+
 
 #### Resolving Sources
 
